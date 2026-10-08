@@ -10,15 +10,14 @@
     },
     "defaultArtCost": 0,
     "facebookAds": {
-      "connected": false,
+      "connected": true,
       "accountId": "2247424592846418",
-      "accessToken": "EAAYQ8b4neSYBSm5qPGmMkA9m79P28rykq5e2eQ29EC437JkoEVaoTq9eRgfS7qBSspPzLBVuUkqqdyonCiQLBzNGHohN1oKr9Fnd1oIG1qJml1wfSqZAbRO1zLdnENmDZCsSTbWzGnkEk5CvHkZASnwU5z92mOLH5ZCRO53lwvHRW5bmgJfPOAdsaqc1VnSWB93pKfKSwEsTW8arZAfQ7uEsXpAcZCEHOevhbLobTxFWGV8eYzTAzlcnZBqSOoZB9dcThUpzyC7asNdX8ZBN1rZBvSxuBaJAZDZD",
+      "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-08T16:59:58.816Z",
-      "lastSpend": 824.13,
-      "todaySpend": 70.78,
-      "lastError": "Error validating access token: Session has expired on Thursday, 08-Oct-26 10:00:00 PDT. The current time is Thursday, 08-Oct-26 12:10:31 PDT.",
+      "lastSync": "2026-10-08T20:23:58.991Z",
+      "lastSpend": 99.46,
+      "todaySpend": 98.79,
       "yesterdaySpend": 132.52
     }
   },
@@ -4883,10 +4882,10 @@
     {
       "id": "spend-2026-10-08",
       "date": "2026-10-08",
-      "amount": 70.78,
+      "amount": 98.79,
       "source": "facebook_api",
       "createdAt": "2026-10-08T04:25:33.095Z",
-      "updatedAt": "2026-10-08T16:42:33.524Z"
+      "updatedAt": "2026-10-08T20:23:58.992Z"
     },
     {
       "id": "spend-2026-10-07",

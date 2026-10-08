@@ -608,7 +608,7 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
 
   const cacheKey = `${period}_${startDate || ''}_${endDate || ''}`;
   const cached = metaApiCache.get(cacheKey);
-  if (!forceRefresh && cached && (Date.now() - cached.timestamp < 30000)) {
+  if (!forceRefresh && cached && (Date.now() - cached.timestamp < 10000)) {
     return cached.data;
   }
 
