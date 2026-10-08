@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+:root {
+  --brand-color: #f5b800;
+  --brand-hover: #e0a700;
+  --brand-rgb: 245, 184, 0;
+  --brand-text: #000000;
+}
+
+[data-accent="amarelo"] {
+  --brand-color: #f5b800;
+  --brand-hover: #e0a700;
+  --brand-rgb: 245, 184, 0;
+  --brand-text: #000000;
+}
+
+[data-accent="azul"] {
+  --brand-color: #3b82f6;
+  --brand-hover: #2563eb;
+  --brand-rgb: 59, 130, 246;
+  --brand-text: #ffffff;
+}
+
+[data-accent="verde"] {
+  --brand-color: #10b981;
+  --brand-hover: #059669;
+  --brand-rgb: 16, 185, 129;
+  --brand-text: #ffffff;
+}
+
+[data-accent="rosa"] {
+  --brand-color: #ec4899;
+  --brand-hover: #db2777;
+  --brand-rgb: 236, 72, 153;
+  --brand-text: #ffffff;
+}
+
+/* Classes dinâmicas de acento de marca */
+.bg-brand {
+  background-color: var(--brand-color) !important;
+  color: var(--brand-text) !important;
+}
+.bg-brand:hover {
+  background-color: var(--brand-hover) !important;
+}
+.text-brand {
+  color: var(--brand-color) !important;
+}
+.border-brand {
+  border-color: var(--brand-color) !important;
+}
+.ring-brand {
+  --tw-ring-color: var(--brand-color) !important;
+}
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Modo Escuro Padrão */
+html.dark, html:not(.light) {
+  background-color: #0c0d12;
+  color: #f3f4f6;
+}
+
+/* =========================================================================
+   MODO CLARO COMPLETO & POLIDO
+   ========================================================================= */
+html.light {
+  background-color: #f4f5f8;
+  color: #0f172a;
+}
+
+html.light body {
+  background-color: #f4f5f8;
+  color: #0f172a;
+}
+
+html.light .bg-\[\#0c0d12\] {
+  background-color: #f4f5f8 !important;
+}
+html.light .bg-\[\#111218\] {
+  background-color: #ffffff !important;
+}
+html.light .bg-\[\#151720\] {
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.07), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+}
+html.light .bg-\[\#181a24\] {
+  background-color: #f8fafc !important;
+}
+html.light .bg-\[\#1b1d28\] {
+  background-color: #f1f5f9 !important;
+}
+html.light .bg-\[\#191c27\],
+html.light .bg-\[\#191c28\] {
+  background-color: #f8fafc !important;
+}
+html.light .bg-\[\#12131b\] {
+  background-color: #f1f5f9 !important;
+}
+html.light .bg-\[\#1e202d\],
+html.light .bg-\[\#1e202e\],
+html.light .bg-\[\#20222e\],
+html.light .bg-\[\#20222f\],
+html.light .bg-\[\#212330\],
+html.light .bg-\[\#242738\],
+html.light .bg-\[\#252836\],
+html.light .bg-\[\#252837\] {
+  background-color: #e2e8f0 !important;
+}
+html.light .bg-\[\#101117\] {
+  background-color: #e2e8f0 !important;
+}
+
+html.light .from-\[\#171a27\] {
+  --tw-gradient-from: #ffffff !important;
+}
+html.light .via-\[\#1a1e2f\] {
+  --tw-gradient-stops: var(--tw-gradient-from), #f8fafc, var(--tw-gradient-to) !important;
+}
+html.light .to-\[\#171a27\] {
+  --tw-gradient-to: #ffffff !important;
+}
+html.light .from-\[\#12281e\] {
+  --tw-gradient-from: #ecfdf5 !important;
+}
+
+html.light .border-\[\#272938\],
+html.light .border-\[\#252837\],
+html.light .border-\[\#20222f\],
+html.light .border-\[\#262837\],
+html.light .border-\[\#2c2f42\],
+html.light .border-\[\#2d3148\],
+html.light .border-\[\#32364c\],
+html.light .border-\[\#252736\],
+html.light .border-\[\#20222e\],
+html.light .border-\[\#222432\],
+html.light .border-white\/10 {
+  border-color: #e2e8f0 !important;
+}
+html.light .divide-\[\#212330\] > * + * {
+  border-color: #e2e8f0 !important;
+}
+
+html.light .text-white {
+  color: #0f172a !important;
+}
+html.light .text-gray-100 {
+  color: #0f172a !important;
+}
+html.light .text-gray-200 {
+  color: #1e293b !important;
+}
+html.light .text-gray-300 {
+  color: #334155 !important;
+}
+html.light .text-gray-400 {
+  color: #64748b !important;
+}
+html.light .text-gray-500 {
+  color: #64748b !important;
+}
+
+html.light input, 
+html.light select, 
+html.light textarea {
+  color: #0f172a !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #272938;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-color);
+}

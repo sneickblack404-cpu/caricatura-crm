@@ -1,0 +1,16 @@
+{
+  "name": "caricatura-crm-server",
+  "version": "1.0.0",
+  "description": "Backend API para CRM de Vendas de Caricaturas no WhatsApp",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "localtunnel": "^2.0.2"
+  }
+}
