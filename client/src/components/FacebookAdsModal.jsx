@@ -12,6 +12,7 @@ export default function FacebookAdsModal({ isOpen, onClose, onUpdated }) {
   const [mode, setMode] = useState('manual'); // 'manual' ou 'api'
   const [dailySpend, setDailySpend] = useState('60.00');
   const [todaySpend, setTodaySpend] = useState('0.80');
+  const [yesterdaySpend, setYesterdaySpend] = useState('132.52');
   const [accountId, setAccountId] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [hasToken, setHasToken] = useState(false);
@@ -31,6 +32,7 @@ export default function FacebookAdsModal({ isOpen, onClose, onUpdated }) {
         setAccountId(data.accountId || '2247424592846418');
         setDailySpend(String(data.dailySpendManual || 60));
         setTodaySpend(data.todaySpend !== undefined ? String(data.todaySpend) : '0.80');
+        setYesterdaySpend(data.yesterdaySpend !== undefined ? String(data.yesterdaySpend) : '132.52');
         setMode(data.mode || 'manual');
         setHasToken(Boolean(data.hasToken));
         setLastError(data.lastError || '');
@@ -72,6 +74,7 @@ export default function FacebookAdsModal({ isOpen, onClose, onUpdated }) {
         mode,
         dailySpendManual: parseFloat(dailySpend) || 0,
         todaySpend: parseFloat(todaySpend) || 0,
+        yesterdaySpend: parseFloat(yesterdaySpend) || 0,
         accountId,
         accessToken
       });
@@ -185,7 +188,54 @@ export default function FacebookAdsModal({ isOpen, onClose, onUpdated }) {
               ))}
             </div>
             <p className="text-[11px] text-gray-400">
-              💡 Esse é o valor exato abatido no cálculo de <strong>Hoje</strong> do seu painel e do seu faturamento líquido.
+              💡 Descontado no cálculo de <strong>Hoje</strong> no painel.
+            </p>
+          </div>
+
+          {/* Gasto de Ontem no Meta Ads */}
+          <div className="p-4 bg-[#1b1e2c] border border-amber-500/30 rounded-xl space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold text-amber-300 flex items-center gap-1.5">
+                <TrendingUp className="w-3.5 h-3.5 text-amber-400" />
+                <span>Gasto Real de Ontem no Meta Ads (R$) *</span>
+              </label>
+              <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30">
+                Ontem
+              </span>
+            </div>
+            <div className="relative">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-gray-400 text-lg">R$</span>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                placeholder="Ex: 132.52"
+                value={yesterdaySpend}
+                onChange={(e) => setYesterdaySpend(e.target.value)}
+                required
+                className="w-full bg-[#13141d] border border-[#2c2f42] rounded-xl pl-11 pr-4 py-2.5 text-2xl font-black text-amber-300 focus:outline-none focus:border-brand"
+              />
+            </div>
+            
+            {/* Atalhos Rápidos de Ontem */}
+            <div className="flex gap-1.5 flex-wrap">
+              {['60.00', '100.00', '132.52', '150.00'].map(val => (
+                <button
+                  type="button"
+                  key={val}
+                  onClick={() => setYesterdaySpend(val)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition border ${
+                    yesterdaySpend === val 
+                      ? 'bg-amber-600/30 text-amber-300 border-amber-500/50' 
+                      : 'bg-[#151720] hover:bg-[#20222e] text-gray-300 border-[#252837]'
+                  }`}
+                >
+                  R$ {Number(val).toFixed(2).replace('.', ',')}
+                </button>
+              ))}
+            </div>
+            <p className="text-[11px] text-gray-400">
+              💡 Descontado no cálculo de <strong>Ontem</strong> no painel.
             </p>
           </div>
 

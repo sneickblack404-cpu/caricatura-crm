@@ -18,7 +18,8 @@
       "lastSync": "2026-10-08T16:59:58.816Z",
       "lastSpend": 824.13,
       "todaySpend": 70.78,
-      "lastError": "Error validating access token: Session has expired on Thursday, 08-Oct-26 10:00:00 PDT. The current time is Thursday, 08-Oct-26 11:24:57 PDT."
+      "lastError": "Error validating access token: Session has expired on Thursday, 08-Oct-26 10:00:00 PDT. The current time is Thursday, 08-Oct-26 12:10:31 PDT.",
+      "yesterdaySpend": 132.52
     }
   },
   "whatsapps": [
@@ -113,6 +114,51 @@
     }
   ],
   "sales": [
+    {
+      "id": "sale-muzwerwc-wvm97",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 20,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T18:57:13.325Z"
+    },
+    {
+      "id": "sale-muzwene9-njua5",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 25,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T18:57:07.482Z"
+    },
+    {
+      "id": "sale-muzweh06-3tg8h",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 30,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T18:56:59.206Z"
+    },
     {
       "id": "sale-muztb9kx-h8uw2",
       "attendantId": "user-guilherme",
@@ -4841,6 +4887,13 @@
       "source": "facebook_api",
       "createdAt": "2026-10-08T04:25:33.095Z",
       "updatedAt": "2026-10-08T16:42:33.524Z"
+    },
+    {
+      "id": "spend-2026-10-07",
+      "date": "2026-10-07",
+      "amount": 132.52,
+      "source": "meta_ads",
+      "createdAt": "2026-10-08T19:05:39.352Z"
     }
   ],
   "expenses": [

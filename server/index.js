@@ -536,11 +536,15 @@ function getMetaPeriodParams(period, startDate, endDate) {
   }
 }
 
+function getBrazilDateStr(d = new Date()) {
+  return new Intl.DateTimeFormat('fr-CA', { timeZone: 'America/Sao_Paulo' }).format(d);
+}
+
 // Fallback de cálculo de gasto de tráfego
 function calculateAdSpendForPeriod(db, period, startDate, endDate) {
   const fbConfig = db.settings.facebookAds || {};
   const manualDaily = Number(fbConfig.dailySpendManual) || 60;
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = getBrazilDateStr(new Date());
 
   if (period === 'hoje') {
     const todaySpend = (db.adSpends || []).find(s => s.date === todayStr);
@@ -549,11 +553,11 @@ function calculateAdSpendForPeriod(db, period, startDate, endDate) {
   }
 
   if (period === 'ontem') {
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr = yesterday.toISOString().split('T')[0];
+    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const yesterdayStr = getBrazilDateStr(yesterday);
     const yestSpend = (db.adSpends || []).find(s => s.date === yesterdayStr);
     if (yestSpend && yestSpend.amount !== undefined) return Number(yestSpend.amount);
+    if (fbConfig.yesterdaySpend !== undefined) return Number(fbConfig.yesterdaySpend);
     return manualDaily;
   }
 
@@ -655,13 +659,18 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
     if (period === 'hoje') {
       fbConfig.todaySpend = spend;
     }
+    if (period === 'ontem') {
+      fbConfig.yesterdaySpend = spend;
+    }
     delete fbConfig.lastError;
 
-    // Se for 'hoje', sincroniza na tabela de adSpends
-    if (period === 'hoje') {
-      const todayStr = new Date().toISOString().split('T')[0];
+    // Sincroniza na tabela de adSpends
+    if (period === 'hoje' || period === 'ontem') {
+      const targetDateStr = period === 'hoje' 
+        ? getBrazilDateStr(new Date()) 
+        : getBrazilDateStr(new Date(Date.now() - 24 * 60 * 60 * 1000));
       if (!db.adSpends) db.adSpends = [];
-      const existingIdx = db.adSpends.findIndex(s => s.date === todayStr);
+      const existingIdx = db.adSpends.findIndex(s => s.date === targetDateStr);
       if (existingIdx !== -1) {
         db.adSpends[existingIdx].amount = spend;
         db.adSpends[existingIdx].source = 'facebook_api';
@@ -669,7 +678,7 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
       } else {
         db.adSpends.push({
           id: generateId('spend'),
-          date: todayStr,
+          date: targetDateStr,
           amount: spend,
           source: 'facebook_api',
           createdAt: new Date().toISOString()
@@ -682,6 +691,7 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
       spend,
       spendPeriod: Number(fbConfig.lastSpend) || 2325.14,
       spendToday: Number(fbConfig.todaySpend) || 58.01,
+      spendYesterday: Number(fbConfig.yesterdaySpend) || 132.52,
       impressions,
       clicks,
       source: 'meta_api',
@@ -700,6 +710,7 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
       spend: fallbackSpend,
       spendPeriod,
       spendToday,
+      spendYesterday: Number(fbConfig.yesterdaySpend) || 132.52,
       impressions: 0,
       clicks: 0,
       source: 'fallback_error',
@@ -713,11 +724,16 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
 app.get('/api/facebook/config', (req, res) => {
   const db = getDb();
   const fb = db.settings.facebookAds || {};
+  const yesterdayStr = getBrazilDateStr(new Date(Date.now() - 24 * 60 * 60 * 1000));
+  const yestEntry = (db.adSpends || []).find(s => s.date === yesterdayStr);
+  const yesterdaySpend = yestEntry?.amount !== undefined ? yestEntry.amount : (fb.yesterdaySpend !== undefined ? fb.yesterdaySpend : 132.52);
+
   res.json({
     connected: fb.connected || false,
     accountId: fb.accountId || '2247424592846418',
     dailySpendManual: fb.dailySpendManual || 60,
     todaySpend: fb.todaySpend !== undefined ? fb.todaySpend : 0.80,
+    yesterdaySpend: Number(yesterdaySpend) || 132.52,
     mode: fb.mode || 'manual',
     hasToken: Boolean(fb.accessToken),
     lastSync: fb.lastSync || null,
@@ -728,7 +744,7 @@ app.get('/api/facebook/config', (req, res) => {
 
 app.post('/api/facebook/config', async (req, res) => {
   const db = getDb();
-  const { accountId, accessToken, dailySpendManual, todaySpend, mode } = req.body;
+  const { accountId, accessToken, dailySpendManual, todaySpend, yesterdaySpend, mode } = req.body;
 
   if (!db.settings.facebookAds) db.settings.facebookAds = {};
   
@@ -744,8 +760,7 @@ app.post('/api/facebook/config', async (req, res) => {
   if (todaySpend !== undefined) {
     const num = Math.max(0, Number(todaySpend) || 0);
     db.settings.facebookAds.todaySpend = num;
-    const now = new Date();
-    const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const todayStr = getBrazilDateStr(new Date());
     if (!db.adSpends) db.adSpends = [];
     const idx = db.adSpends.findIndex(s => s.date === todayStr);
     if (idx !== -1) {
@@ -755,6 +770,25 @@ app.post('/api/facebook/config', async (req, res) => {
       db.adSpends.push({
         id: generateId('spend'),
         date: todayStr,
+        amount: num,
+        source: 'manual',
+        createdAt: new Date().toISOString()
+      });
+    }
+  }
+  if (yesterdaySpend !== undefined) {
+    const num = Math.max(0, Number(yesterdaySpend) || 0);
+    db.settings.facebookAds.yesterdaySpend = num;
+    const yesterdayStr = getBrazilDateStr(new Date(Date.now() - 24 * 60 * 60 * 1000));
+    if (!db.adSpends) db.adSpends = [];
+    const idx = db.adSpends.findIndex(s => s.date === yesterdayStr);
+    if (idx !== -1) {
+      db.adSpends[idx].amount = num;
+      db.adSpends[idx].updatedAt = new Date().toISOString();
+    } else {
+      db.adSpends.push({
+        id: generateId('spend'),
+        date: yesterdayStr,
         amount: num,
         source: 'manual',
         createdAt: new Date().toISOString()
