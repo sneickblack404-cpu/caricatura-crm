@@ -501,7 +501,13 @@ function normalizeActId(accountId) {
   return trimmed.startsWith('act_') ? trimmed : `act_${trimmed}`;
 }
 
+function getBrazilDateStr(d = new Date()) {
+  return new Intl.DateTimeFormat('fr-CA', { timeZone: 'America/Sao_Paulo' }).format(d);
+}
+
 function getMetaPeriodParams(period, startDate, endDate) {
+  const todayStr = getBrazilDateStr(new Date());
+
   switch (period) {
     case 'hoje':
       return { date_preset: 'today' };
@@ -509,12 +515,8 @@ function getMetaPeriodParams(period, startDate, endDate) {
       return { date_preset: 'yesterday' };
     case '7d':
       return { date_preset: 'last_7d' };
-    case '15d': {
-      const now = new Date();
-      const start = new Date(now.getTime() - 15 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-      const end = now.toISOString().split('T')[0];
-      return { time_range: JSON.stringify({ since: start, until: end }) };
-    }
+    case '15d':
+      return { date_preset: 'last_14d' };
     case '30d':
       return { date_preset: 'last_30d' };
     case 'este_mes':
@@ -527,17 +529,20 @@ function getMetaPeriodParams(period, startDate, endDate) {
       return { date_preset: 'this_year' };
     case 'personalizado': {
       if (startDate && endDate) {
-        return { time_range: JSON.stringify({ since: startDate, until: endDate }) };
+        let safeStart = startDate > todayStr ? todayStr : startDate;
+        let safeEnd = endDate > todayStr ? todayStr : endDate;
+        if (safeStart > safeEnd) {
+          const tmp = safeStart;
+          safeStart = safeEnd;
+          safeEnd = tmp;
+        }
+        return { time_range: JSON.stringify({ since: safeStart, until: safeEnd }) };
       }
       return { date_preset: 'today' };
     }
     default:
       return { date_preset: 'today' };
   }
-}
-
-function getBrazilDateStr(d = new Date()) {
-  return new Intl.DateTimeFormat('fr-CA', { timeZone: 'America/Sao_Paulo' }).format(d);
 }
 
 // Fallback de cálculo de gasto de tráfego
@@ -629,9 +634,11 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
 
     if (data.error) {
       console.error('Meta Graph API Error:', data.error.message);
-      fbConfig.connected = false;
-      fbConfig.lastError = data.error.message;
-      saveDb(db);
+      if (data.error.code === 190) {
+        fbConfig.connected = false;
+        fbConfig.lastError = data.error.message;
+        saveDb(db);
+      }
       const fallbackSpend = calculateAdSpendForPeriod(db, period, startDate, endDate);
       return {
         spend: fallbackSpend,
@@ -640,7 +647,7 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
         impressions: 0,
         clicks: 0,
         source: 'fallback_error',
-        connected: false,
+        connected: data.error.code === 190 ? false : Boolean(fbConfig.connected),
         error: data.error.message,
         lastSync: fbConfig.lastSync || null
       };

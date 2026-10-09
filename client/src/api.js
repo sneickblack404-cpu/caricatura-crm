@@ -1,12 +1,14 @@
-export const API_BASE = typeof window !== 'undefined' && localStorage.getItem('crm_custom_api_url')
-  ? localStorage.getItem('crm_custom_api_url')
-  : 'https://iciness-suitor-thirsting.ngrok-free.dev/api';
+if (typeof window !== 'undefined') {
+  const custom = localStorage.getItem('crm_custom_api_url');
+  if (custom && custom.includes('ngrok')) {
+    localStorage.removeItem('crm_custom_api_url');
+  }
+}
+
+export const API_BASE = '/api';
 
 export const defaultHeaders = {
-  'Content-Type': 'application/json',
-  'ngrok-skip-browser-warning': 'true',
-  'bypass-tunnel-reminder': 'true',
-  'Bypass-Tunnel-Reminder': 'true'
+  'Content-Type': 'application/json'
 };
 
 export const api = {

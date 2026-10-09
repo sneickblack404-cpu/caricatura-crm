@@ -15,10 +15,10 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-08T20:23:58.991Z",
+      "lastSync": "2026-10-09T03:06:41.526Z",
       "lastSpend": 99.46,
-      "todaySpend": 98.79,
-      "yesterdaySpend": 132.52
+      "todaySpend": 0,
+      "yesterdaySpend": 149.33
     }
   },
   "whatsapps": [
@@ -113,6 +113,156 @@
     }
   ],
   "sales": [
+    {
+      "id": "sale-mv0djlaj-mbmuh",
+      "attendantId": "user-guilherme",
+      "attendantName": "Guilherme",
+      "whatsappId": "wpp-1",
+      "whatsappName": "+55 27 99245-6099",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-09T02:56:51.309Z"
+    },
+    {
+      "id": "sale-mv0cjg8v-6z0nq",
+      "attendantId": "user-guilherme",
+      "attendantName": "Guilherme",
+      "whatsappId": "wpp-1",
+      "whatsappName": "+55 27 99245-6099",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 10,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-09T02:28:45.280Z"
+    },
+    {
+      "id": "sale-mv09xekj-c70sk",
+      "attendantId": "user-guilherme",
+      "attendantName": "Guilherme",
+      "whatsappId": "wpp-1",
+      "whatsappName": "+55 27 99245-6099",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 9.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-09T01:15:37.523Z"
+    },
+    {
+      "id": "sale-mv0735jd-hdaut",
+      "attendantId": "user-guilherme",
+      "attendantName": "Guilherme",
+      "whatsappId": "wpp-1",
+      "whatsappName": "+55 27 99245-6099",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T23:56:06.403Z"
+    },
+    {
+      "id": "sale-mv04ylh0-f7y88",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 10,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T22:56:35.045Z"
+    },
+    {
+      "id": "sale-mv03yqnd-435a7",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 25,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T22:28:42.186Z"
+    },
+    {
+      "id": "sale-mv03ynix-3ajnz",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T22:28:38.081Z"
+    },
+    {
+      "id": "sale-mv03yhmd-ocdgj",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 19.8,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T22:28:30.431Z"
+    },
+    {
+      "id": "sale-mv03yccq-sa8h8",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 10,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T22:28:23.659Z"
+    },
+    {
+      "id": "sale-mv03y8nl-xizxv",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 9.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T22:28:18.809Z"
+    },
     {
       "id": "sale-muzwerwc-wvm97",
       "attendantId": "user-gustavo",
@@ -217,6 +367,21 @@
       "notes": "",
       "status": "pago",
       "createdAt": "2026-10-08T12:44:56.284Z"
+    },
+    {
+      "id": "sale-mv0doiir-x7pw9",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 25,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-08T03:00:40.000Z"
     },
     {
       "id": "sale-muyuuuss-eip1n",
@@ -4882,20 +5047,38 @@
     {
       "id": "spend-2026-10-08",
       "date": "2026-10-08",
-      "amount": 98.79,
+      "amount": 149.33,
       "source": "facebook_api",
       "createdAt": "2026-10-08T04:25:33.095Z",
-      "updatedAt": "2026-10-08T20:23:58.992Z"
+      "updatedAt": "2026-10-09T03:02:00.542Z"
     },
     {
       "id": "spend-2026-10-07",
       "date": "2026-10-07",
-      "amount": 132.52,
-      "source": "meta_ads",
-      "createdAt": "2026-10-08T19:05:39.352Z"
+      "amount": 132.57,
+      "source": "facebook_api",
+      "createdAt": "2026-10-08T19:05:39.352Z",
+      "updatedAt": "2026-10-08T22:28:54.415Z"
+    },
+    {
+      "id": "spend-mv0dovvc-wf266",
+      "date": "2026-10-09",
+      "amount": 0,
+      "source": "facebook_api",
+      "createdAt": "2026-10-09T03:00:58.584Z",
+      "updatedAt": "2026-10-09T03:06:41.526Z"
     }
   ],
   "expenses": [
+    {
+      "id": "exp-mv0dl4x1-8zjk1",
+      "title": "Pagamento Atendente: Guilherme",
+      "amount": 27,
+      "category": "pagamento_atendente",
+      "date": "2026-10-08",
+      "notes": "",
+      "createdAt": "2026-10-09T02:58:03.685Z"
+    },
     {
       "id": "exp-muztaub4-i4pw8",
       "title": "Pagamento Atendente: Guilherme",
