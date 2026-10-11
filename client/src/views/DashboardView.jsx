@@ -30,7 +30,7 @@ export default function DashboardView({
   periodLabel = 'Hoje'
 }) {
   const isAdmin = currentUser?.role === 'admin';
-  const [ceoViewMode, setCeoViewMode] = useState('personal'); // 'personal' (Minhas vendas) ou 'company' (Geral da empresa)
+  const [ceoViewMode, setCeoViewMode] = useState('company'); // 'company' (Geral da empresa) ou 'personal' (Minhas vendas)
 
   // Métricas do usuário logado (Gustavo ou atendente)
   const userMetrics = currentUser?.id && metrics?.commissionsByAttendant

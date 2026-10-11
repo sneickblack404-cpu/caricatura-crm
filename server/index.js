@@ -30,63 +30,70 @@ app.use(express.json());
 const clientDistPath = path.join(__dirname, '../client/dist');
 app.use(express.static(clientDistPath));
 
-// Helper para filtrar por período de datas
+// Helper de fuso horário de Brasília (UTC-3)
+function getBrazilDateStr(d = new Date()) {
+  const dateObj = typeof d === 'string' || typeof d === 'number' ? new Date(d) : d;
+  if (isNaN(dateObj.getTime())) return '';
+  return new Intl.DateTimeFormat('fr-CA', { timeZone: 'America/Sao_Paulo' }).format(dateObj);
+}
+
+// Helper para filtrar por período de datas respeitando o fuso horário de Brasília
 function filterByPeriod(items, period, startDateStr, endDateStr, dateField = 'createdAt') {
-  const now = new Date();
+  const todayStr = getBrazilDateStr(new Date());
+  const yesterdayDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  const yesterdayStr = getBrazilDateStr(yesterdayDate);
   
   return items.filter(item => {
-    const itemDate = new Date(item[dateField] || item.date || item.createdAt);
+    const rawDate = item[dateField] || item.date || item.createdAt;
+    if (!rawDate) return false;
+    const itemBrazilDateStr = getBrazilDateStr(rawDate);
+    const itemTime = new Date(rawDate).getTime();
     
     switch (period) {
       case 'hoje': {
-        const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-        const end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
-        return itemDate >= start && itemDate <= end;
+        return itemBrazilDateStr === todayStr;
       }
       case 'ontem': {
-        const yesterday = new Date(now);
-        yesterday.setDate(now.getDate() - 1);
-        const start = new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate(), 0, 0, 0);
-        const end = new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate(), 23, 59, 59);
-        return itemDate >= start && itemDate <= end;
+        return itemBrazilDateStr === yesterdayStr;
       }
       case '7d': {
-        const start = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-        return itemDate >= start && itemDate <= now;
+        const start = Date.now() - 7 * 24 * 60 * 60 * 1000;
+        return itemTime >= start;
       }
       case '15d': {
-        const start = new Date(now.getTime() - 15 * 24 * 60 * 60 * 1000);
-        return itemDate >= start && itemDate <= now;
+        const start = Date.now() - 15 * 24 * 60 * 60 * 1000;
+        return itemTime >= start;
       }
       case '30d': {
-        const start = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-        return itemDate >= start && itemDate <= now;
+        const start = Date.now() - 30 * 24 * 60 * 60 * 1000;
+        return itemTime >= start;
       }
       case 'este_mes': {
-        const start = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0);
-        return itemDate >= start && itemDate <= now;
+        const currentYearMonth = todayStr.substring(0, 7);
+        return itemBrazilDateStr.startsWith(currentYearMonth);
       }
       case 'mes_passado': {
-        const start = new Date(now.getFullYear(), now.getMonth() - 1, 1, 0, 0, 0);
-        const end = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59);
-        return itemDate >= start && itemDate <= end;
+        const now = new Date();
+        const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 15);
+        const lastMonthStr = getBrazilDateStr(lastMonthDate).substring(0, 7);
+        return itemBrazilDateStr.startsWith(lastMonthStr);
       }
       case '3_meses': {
-        const start = new Date(now.getFullYear(), now.getMonth() - 3, 1, 0, 0, 0);
-        return itemDate >= start && itemDate <= now;
+        const start = Date.now() - 90 * 24 * 60 * 60 * 1000;
+        return itemTime >= start;
       }
       case 'ano': {
-        const start = new Date(now.getFullYear(), 0, 1, 0, 0, 0);
-        return itemDate >= start && itemDate <= now;
+        const currentYear = todayStr.substring(0, 4);
+        return itemBrazilDateStr.startsWith(currentYear);
       }
       case 'personalizado': {
         if (!startDateStr || !endDateStr) return true;
-        const start = new Date(`${startDateStr}T00:00:00`);
-        const end = new Date(`${endDateStr}T23:59:59`);
-        return itemDate >= start && itemDate <= end;
+        return itemBrazilDateStr >= startDateStr && itemBrazilDateStr <= endDateStr;
       }
-      default:
+      case 'all':
         return true;
+      default:
+        return itemBrazilDateStr === todayStr;
     }
   });
 }
@@ -499,10 +506,6 @@ function normalizeActId(accountId) {
   if (!accountId) return '';
   const trimmed = String(accountId).trim();
   return trimmed.startsWith('act_') ? trimmed : `act_${trimmed}`;
-}
-
-function getBrazilDateStr(d = new Date()) {
-  return new Intl.DateTimeFormat('fr-CA', { timeZone: 'America/Sao_Paulo' }).format(d);
 }
 
 function getMetaPeriodParams(period, startDate, endDate) {
