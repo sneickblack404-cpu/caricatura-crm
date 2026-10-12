@@ -3,7 +3,7 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getDb, saveDb, generateId } from './db.js';
+import { getDb, saveDb, generateId, initCloudDb } from './db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -1112,4 +1112,5 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Caricatura CRM Server rodando em http://0.0.0.0:${PORT}`);
+  initCloudDb().catch(err => console.error('Cloud DB init error:', err));
 });

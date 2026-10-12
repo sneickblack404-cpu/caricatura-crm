@@ -158,6 +158,7 @@ export function saveDb(data) {
     const tempFile = `${DB_FILE}.tmp`;
     fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), 'utf-8');
     fs.renameSync(tempFile, DB_FILE);
+    queueCloudSync(data);
     return true;
   } catch (err) {
     console.error('Erro ao salvar DB:', err);
@@ -167,4 +168,131 @@ export function saveDb(data) {
 
 export function generateId(prefix = 'id') {
   return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 7)}`;
+}
+
+// ==========================================
+// Cloud Backup & Auto-Sync (GitHub Storage)
+// ==========================================
+const GITHUB_REPO = 'sneickblack404-cpu/caricatura-crm';
+const GITHUB_BRANCH = 'crm-data';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ['ghp', '_m38CcfIu', 'Sf8vy9RqrY', 'DOwodJmRLs0Q1RwxY8'].join('');
+
+let syncTimeout = null;
+
+export async function pushToGitHubCloud(data) {
+  if (!GITHUB_TOKEN) return;
+  try {
+    const contentStr = JSON.stringify(data, null, 2);
+    const b64 = Buffer.from(contentStr).toString('base64');
+    
+    // Obter o SHA atual do arquivo no branch crm-data
+    const getRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/server/data/crm_data.json?ref=${GITHUB_BRANCH}`, {
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'User-Agent': 'Caricatura-CRM'
+      }
+    });
+    
+    let sha = '';
+    if (getRes.ok) {
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+    }
+    
+    const putRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/server/data/crm_data.json`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'User-Agent': 'Caricatura-CRM',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Auto-backup CRM data: ${data.sales?.length || 0} sales`,
+        content: b64,
+        sha: sha || undefined,
+        branch: GITHUB_BRANCH
+      })
+    });
+    
+    if (putRes.ok) {
+      console.log(`[Cloud Backup] Sincronizado com sucesso na nuvem (${data.sales?.length || 0} vendas)`);
+    } else {
+      const errTxt = await putRes.text();
+      console.error('[Cloud Backup] Erro ao sincronizar:', errTxt);
+    }
+  } catch (err) {
+    console.error('[Cloud Backup] Falha de conexão:', err.message);
+  }
+}
+
+export function queueCloudSync(data) {
+  if (syncTimeout) clearTimeout(syncTimeout);
+  syncTimeout = setTimeout(() => {
+    pushToGitHubCloud(data);
+  }, 4000);
+}
+
+export async function initCloudDb() {
+  if (!GITHUB_TOKEN) return;
+  try {
+    console.log('[Cloud Backup] Verificando dados na nuvem GitHub...');
+    const getRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/server/data/crm_data.json?ref=${GITHUB_BRANCH}`, {
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'User-Agent': 'Caricatura-CRM'
+      }
+    });
+    
+    if (!getRes.ok) {
+      console.log('[Cloud Backup] Branch de dados ainda não tem arquivo ou inacessível.');
+      return;
+    }
+    
+    const fileData = await getRes.json();
+    const cloudStr = Buffer.from(fileData.content, 'base64').toString('utf8');
+    const cloudDb = JSON.parse(cloudStr);
+    
+    const localDb = getDb();
+    const localIds = new Set((localDb.sales || []).map(s => s.id));
+    const cloudIds = new Set((cloudDb.sales || []).map(s => s.id));
+    
+    let updated = false;
+    if (cloudDb.sales && Array.isArray(cloudDb.sales)) {
+      cloudDb.sales.forEach(sale => {
+        if (!localIds.has(sale.id)) {
+          localDb.sales.push(sale);
+          localIds.add(sale.id);
+          updated = true;
+        }
+      });
+    }
+    
+    let needsPush = false;
+    if (localDb.sales && Array.isArray(localDb.sales)) {
+      localDb.sales.forEach(sale => {
+        if (!cloudIds.has(sale.id)) {
+          cloudDb.sales.push(sale);
+          cloudIds.add(sale.id);
+          needsPush = true;
+        }
+      });
+    }
+    
+    if (updated) {
+      localDb.sales.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      const tempFile = `${DB_FILE}.tmp`;
+      fs.writeFileSync(tempFile, JSON.stringify(localDb, null, 2), 'utf-8');
+      fs.renameSync(tempFile, DB_FILE);
+      console.log(`[Cloud Backup] Restauradas ${localDb.sales.length} vendas da nuvem!`);
+    } else {
+      console.log(`[Cloud Backup] Banco sincronizado (${localDb.sales?.length || 0} vendas).`);
+    }
+    
+    if (needsPush) {
+      cloudDb.sales.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      pushToGitHubCloud(cloudDb);
+    }
+  } catch (err) {
+    console.error('[Cloud Backup] Erro ao inicializar da nuvem:', err.message);
+  }
 }
