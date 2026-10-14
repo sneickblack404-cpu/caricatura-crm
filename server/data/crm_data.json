@@ -15,10 +15,10 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-14T23:10:54.476Z",
+      "lastSync": "2026-10-14T23:10:59.666Z",
       "lastSpend": 3211.76,
       "todaySpend": 96.29,
-      "yesterdaySpend": 73.39
+      "yesterdaySpend": 73.42
     }
   },
   "whatsapps": [
@@ -6017,10 +6017,10 @@
     {
       "id": "spend-mv7dk1ti-lycfb",
       "date": "2026-10-13",
-      "amount": 73.39,
+      "amount": 73.42,
       "source": "facebook_api",
       "createdAt": "2026-10-14T00:31:36.246Z",
-      "updatedAt": "2026-10-14T20:57:40.972Z"
+      "updatedAt": "2026-10-14T23:10:59.666Z"
     },
     {
       "id": "spend-mv7ivdjn-o2ma4",
