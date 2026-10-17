@@ -15,7 +15,7 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-17T15:14:52.508Z",
+      "lastSync": "2026-10-17T15:15:03.701Z",
       "lastSpend": 3211.76,
       "todaySpend": 36.29,
       "yesterdaySpend": 113.24
@@ -6479,7 +6479,7 @@
       "amount": 113.24,
       "source": "facebook_api",
       "createdAt": "2026-10-16T13:19:43.031Z",
-      "updatedAt": "2026-10-17T15:14:52.508Z"
+      "updatedAt": "2026-10-17T15:15:03.701Z"
     },
     {
       "id": "spend-mvbt7hbw-avf6n",
@@ -6491,6 +6491,15 @@
     }
   ],
   "expenses": [
+    {
+      "id": "exp-mvcjfpyn-6yfim",
+      "title": "Pagamento Atendente: Guilherme",
+      "amount": 36.9,
+      "category": "pagamento_atendente",
+      "date": "2026-10-17",
+      "notes": "",
+      "createdAt": "2026-10-17T15:15:02.831Z"
+    },
     {
       "id": "exp-mvb1uyvk-6g02i",
       "title": "Pagamento Atendente: Guilherme",
