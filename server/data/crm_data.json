@@ -114,6 +114,21 @@
   ],
   "sales": [
     {
+      "id": "sale-mvcmo36x-1kj3w",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-17T16:45:31.611Z"
+    },
+    {
       "id": "sale-mvcmnz9i-g9n9o",
       "attendantId": "user-gustavo",
       "attendantName": "Gustavo Henrick",
