@@ -15,7 +15,7 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-18T22:45:05.895Z",
+      "lastSync": "2026-10-18T22:45:17.728Z",
       "lastSpend": 1999.54,
       "todaySpend": 84.98,
       "yesterdaySpend": 90.53
@@ -104,7 +104,7 @@
       "role": "attendant",
       "avatar": "G",
       "color": "#EC4899",
-      "themeColor": "rosa",
+      "themeColor": "verde",
       "phone": "",
       "commissionRate": 20,
       "dailyGoal": 160,
@@ -6870,7 +6870,7 @@
       "amount": 84.98,
       "source": "facebook_api",
       "createdAt": "2026-10-18T03:34:09.704Z",
-      "updatedAt": "2026-10-18T22:45:05.895Z"
+      "updatedAt": "2026-10-18T22:45:17.729Z"
     }
   ],
   "expenses": [
