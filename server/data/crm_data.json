@@ -122,11 +122,11 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 9.99,
+      "amount": 9.9,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
-      "createdAt": "2026-10-19T01:46:00.993Z"
+      "createdAt": "2026-10-19T01:46:00.000Z"
     },
     {
       "id": "sale-mveleus2-wk56o",
