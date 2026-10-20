@@ -6,8 +6,7 @@ const CATEGORIES = [
   { id: 'ia', label: '🤖 IA', desc: 'Inteligência Artificial' },
   { id: 'chip', label: '📱 Chip', desc: 'Chip / WhatsApp' },
   { id: 'ferramenta', label: '💻 Ferramenta', desc: 'Ferramentas & Softwares' },
-  { id: 'pagamento_atendente', label: '👤 Pagamento do Atendente', desc: 'Repasse / Pagamento' },
-  { id: 'outro', label: '📦 Outro', desc: 'Outro Custo' }
+  { id: 'outro', label: '📦 Outro', desc: 'Outro Custo Operacional' }
 ];
 
 export default function ExpenseModal({ isOpen, onClose, onExpenseSaved, expenseToEdit = null, users = [] }) {
@@ -203,25 +202,13 @@ export default function ExpenseModal({ isOpen, onClose, onExpenseSaved, expenseT
             </div>
           </div>
 
-          {/* Opção Específica se for Pagamento do Atendente */}
-          {category === 'pagamento_atendente' && (
-            <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl space-y-1.5 animate-fadeIn">
-              <label className="block text-xs font-bold text-amber-300">
-                👤 Qual atendente?
-              </label>
-              <select
-                value={selectedAttendant}
-                onChange={(e) => setSelectedAttendant(e.target.value)}
-                className="w-full bg-[#1b1d28] border border-amber-500/40 rounded-xl px-3 py-2 text-xs font-semibold text-white focus:outline-none focus:border-brand cursor-pointer"
-              >
-                {attendantsList.map(u => (
-                  <option key={u.id || u.name} value={u.name}>
-                    {u.name} {u.role === 'admin' ? '(Admin/Gustavo)' : '(Atendente)'}
-                  </option>
-                ))}
-              </select>
+          {/* Dica amigável sobre comissões automáticas */}
+          <div className="p-3 bg-purple-500/10 border border-purple-500/20 rounded-xl text-xs text-purple-300 flex items-start gap-2">
+            <span className="text-sm">💡</span>
+            <div className="leading-relaxed">
+              <strong>Nota:</strong> As comissões da equipe (20%) já são calculadas e abatidas <strong>100% automaticamente</strong> pelo sistema em cada venda. Use esta tela apenas para gastos à parte como IAs, chips, softwares e outras despesas.
             </div>
-          )}
+          </div>
 
           {/* Opção Específica se for Outro */}
           {category === 'outro' && (

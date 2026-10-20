@@ -993,8 +993,10 @@ app.get('/api/metrics', async (req, res) => {
   const totalArtCosts = totalSalesCount * artCostPerItem;
 
   // Custos Extras & Operacionais (IAs, Softwares, Chips, etc.)
+  // IMPORTANTE: Ignora categoria 'pagamento_atendente' para NUNCA duplicar com teamCommissionsDeduction!
   const filteredExpenses = filterByPeriod(db.expenses || [], period, startDate, endDate, 'date');
-  const totalExpenses = Math.round(filteredExpenses.reduce((acc, e) => acc + (Number(e.amount) || 0), 0) * 100) / 100;
+  const operationalExpenses = filteredExpenses.filter(e => e.category !== 'pagamento_atendente');
+  const totalExpenses = Math.round(operationalExpenses.reduce((acc, e) => acc + (Number(e.amount) || 0), 0) * 100) / 100;
 
   // Dedução da comissão de equipe a abater no lucro do período
   const teamCommissionsDeduction = teamCommissionsPeriod;
@@ -1083,7 +1085,7 @@ app.get('/api/metrics', async (req, res) => {
     facebookAdSpendToday: fbResult.spendToday || Number(db.settings?.facebookAds?.dailySpendManual) || 60,
     facebookAdsMeta: fbResult,
     totalExpenses,
-    expenses: filteredExpenses,
+    expenses: operationalExpenses,
     payouts: (period === 'hoje' || period === 'ontem') ? filteredPayouts : allPayouts,
     roas,
     netProfit,
