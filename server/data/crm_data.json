@@ -15,7 +15,7 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-20T00:59:02.102Z",
+      "lastSync": "2026-10-20T00:59:14.579Z",
       "lastSpend": 3335.7,
       "todaySpend": 107.54,
       "yesterdaySpend": 109.42
@@ -113,6 +113,51 @@
     }
   ],
   "sales": [
+    {
+      "id": "sale-mvfz6rjr-ku8rd",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-20T00:59:16.423Z"
+    },
+    {
+      "id": "sale-mvfz6ooq-29d2s",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-20T00:59:12.709Z"
+    },
+    {
+      "id": "sale-mvfz6lpz-1bjiq",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-20T00:59:08.870Z"
+    },
     {
       "id": "sale-mvfz6emk-biz5u",
       "attendantId": "user-gustavo",
@@ -7058,7 +7103,7 @@
       "amount": 107.54,
       "source": "facebook_api",
       "createdAt": "2026-10-19T12:39:16.816Z",
-      "updatedAt": "2026-10-20T00:59:02.102Z"
+      "updatedAt": "2026-10-20T00:59:14.579Z"
     }
   ],
   "expenses": [
