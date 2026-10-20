@@ -1007,8 +1007,9 @@ app.get('/api/metrics', async (req, res) => {
   const profitMargin = grossRevenue > 0 ? ((netProfit / grossRevenue) * 100) : (netProfit < 0 ? -100 : 0);
 
   // Quanto o Gustavo tirou / fica com ele na operação:
-  // Lucro da Operação + Comissão própria de vendas do Gustavo
-  const gustavoTotalTakeHome = Math.round((netProfit + gustavoCommission) * 100) / 100;
+  // O Lucro Líquido Real da Operação (netProfit) já é 100% o caixa livre final do Gustavo.
+  // A comissão de vendedor (gustavoCommission) já está embutida dentro desse lucro (não foi deduzida como despesa externa).
+  const gustavoTotalTakeHome = netProfit;
 
   // Ranking de Atendentes
   const ranking = Object.values(commissionsByAttendant).sort((a, b) => b.grossAmount - a.grossAmount);

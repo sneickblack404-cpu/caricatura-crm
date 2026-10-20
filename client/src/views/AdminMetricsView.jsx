@@ -124,7 +124,7 @@ export default function AdminMetricsView({
     text += `🤖 *Gastos à Parte / IAs / Chips:* -${formatCurrency(totalExpenses)}\n`;
     text += `👥 *Comissões da Equipe (20%):* -${formatCurrency(teamCommissionsPeriod)}\n`;
     text += `🚀 *LUCRO LÍQUIDO REAL DA OPERAÇÃO:* ${formatCurrency(netProfit)} (${profitMargin.toFixed(1)}% margem)\n`;
-    text += `👑 *Total no Bolso do Dono (Gustavo):* ${formatCurrency(gustavoTotalTakeHome)} (Lucro + Comissão Própria ${formatCurrency(gustavoCommission)})\n\n`;
+    text += `👑 *Total no Bolso do Dono (Gustavo):* ${formatCurrency(gustavoTotalTakeHome)} (Lucro Líquido Real · comissão de vendas próprias de ${formatCurrency(gustavoCommission)} já inclusa)\n\n`;
     text += `*--- DESEMPENHO DOS ATENDENTES ---*\n`;
     (metrics.ranking || []).forEach(r => {
       text += `• *${r.user?.name}*: ${r.salesCount} vendas (${formatCurrency(r.grossAmount)}) | Comissão 20%: *${formatCurrency(r.commissionAmount)}*\n`;
@@ -522,13 +522,13 @@ export default function AdminMetricsView({
 
             <div className="text-[12px] text-gray-300 flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#222432]">
               <div className="flex items-center gap-2">
-                <span className="text-amber-400 font-bold">👑 Reconciliação do Dono (Gustavo):</span>
+                <span className="text-amber-400 font-bold">👑 Caixa do Dono (Gustavo):</span>
                 <span>
-                  Sua comissão (20% vendas próprias): <strong className="text-brand">{formatCurrency(gustavoCommission)}</strong>
+                  Sua comissão (20% vendas próprias): <strong className="text-brand">{formatCurrency(gustavoCommission)}</strong> <span className="text-gray-400 font-medium">(já inclusa no lucro)</span>
                 </span>
               </div>
               <div className="text-sm font-black bg-brand/10 border border-brand/30 px-3 py-1.5 rounded-xl text-brand flex items-center gap-2">
-                <span>💰 Total que você tirou {isDaily ? 'no dia' : 'no período'}:</span>
+                <span>💰 Total livre para você {isDaily ? 'no dia' : 'no período'}:</span>
                 <span className="text-base text-white">{formatCurrency(gustavoTotalTakeHome)}</span>
               </div>
             </div>
