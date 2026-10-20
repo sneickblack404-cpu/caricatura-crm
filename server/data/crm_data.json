@@ -7168,15 +7168,6 @@
   ],
   "expenses": [
     {
-      "id": "exp-mvfz5e6c-ux3h6",
-      "title": "Pagamento Atendente: Guilherme",
-      "amount": 4.98,
-      "category": "pagamento_atendente",
-      "date": "2026-10-20",
-      "notes": "",
-      "createdAt": "2026-10-20T00:58:13.380Z"
-    },
-    {
       "id": "exp-mvcjfpyn-6yfim",
       "title": "Pagamento Atendente: Guilherme",
       "amount": 36.9,
