@@ -93,28 +93,30 @@ export default function DashboardView({
             <span className="w-2.5 h-2.5 rounded-full bg-brand animate-pulse"></span>
             <span className="text-xs font-bold text-gray-200">Painel do CEO · Alternar Modo:</span>
           </div>
-          <div className="flex items-center gap-1.5 bg-[#181a24] p-1 rounded-xl border border-[#272938]">
+          <div className="flex items-center gap-1.5 bg-[#181a24] p-1 rounded-xl border border-[#272938] w-full sm:w-auto">
             <button
               onClick={() => setCeoViewMode('personal')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 ${
                 ceoViewMode === 'personal'
                   ? 'bg-brand text-black shadow-sm font-extrabold'
                   : 'text-gray-400 hover:text-white'
               }`}
             >
-              <UserCheck className="w-3.5 h-3.5" />
-              <span>Minhas Vendas & Comissão (Gustavo)</span>
+              <UserCheck className="w-3.5 h-3.5 shrink-0" />
+              <span className="sm:hidden">Minhas Vendas</span>
+              <span className="hidden sm:inline">Minhas Vendas & Comissão (Gustavo)</span>
             </button>
             <button
               onClick={() => setCeoViewMode('company')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+              className={`flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 ${
                 ceoViewMode === 'company'
                   ? 'bg-brand text-black shadow-sm font-extrabold'
                   : 'text-gray-400 hover:text-white'
               }`}
             >
-              <Building2 className="w-3.5 h-3.5" />
-              <span>Visão Geral da Empresa</span>
+              <Building2 className="w-3.5 h-3.5 shrink-0" />
+              <span className="sm:hidden">Geral Empresa</span>
+              <span className="hidden sm:inline">Visão Geral da Empresa</span>
             </button>
           </div>
         </div>

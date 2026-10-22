@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import MobileBottomNav from './components/MobileBottomNav';
 import SaleModal from './components/SaleModal';
 import ProfileSwitchModal from './components/ProfileSwitchModal';
 import ProfileEditModal from './components/ProfileEditModal';
@@ -61,6 +62,7 @@ export default function App() {
   const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const isCeo = currentUser?.role === 'admin' || currentUser?.username === 'gustavo';
@@ -242,7 +244,7 @@ export default function App() {
           : 'bg-[#f4f5f8] text-gray-900 selection:bg-brand selection:text-black'
       }`}
     >
-      {/* Sidebar Lateral */}
+      {/* Sidebar Lateral (Desktop e Drawer Mobile) */}
       <Sidebar
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
@@ -253,6 +255,8 @@ export default function App() {
         theme={theme}
         onToggleTheme={handleToggleTheme}
         whatsappsCount={whatsapps.length}
+        isOpenMobile={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Conteúdo Principal */}
@@ -275,9 +279,10 @@ export default function App() {
           accentColor={accentColor}
           onSelectAccent={handleSelectAccent}
           onOpenExpenseModal={() => setIsExpenseModalOpen(true)}
+          onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
         />
 
-        <main className="flex-1 p-6 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-3.5 sm:p-6 max-w-7xl w-full mx-auto pb-24 md:pb-6">
           {loading && !metrics ? (
             <div className="flex items-center justify-center py-20 text-gray-400">
               <div className="w-8 h-8 border-2 border-[#f5b800] border-t-transparent rounded-full animate-spin mr-3" />
@@ -404,6 +409,16 @@ export default function App() {
         onClose={() => setIsExpenseModalOpen(false)}
         onExpenseSaved={refreshData}
         users={users}
+      />
+
+      {/* Barra de Navegação Inferior Mobile */}
+      <MobileBottomNav
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+        isCeo={isCeo}
+        onOpenSaleModal={() => setIsSaleModalOpen(true)}
+        onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
+        theme={theme}
       />
     </div>
   );

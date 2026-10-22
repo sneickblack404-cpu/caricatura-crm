@@ -133,12 +133,12 @@ export default function EditSaleModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-[#151720] border border-[#272938] w-full max-w-md rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-[#151720] border border-[#272938] w-full max-w-md max-h-[92dvh] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#252837] flex items-center justify-between bg-[#191c27]">
+        <div className="px-5 sm:px-6 py-4 border-b border-[#252837] flex items-center justify-between bg-[#191c27] shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center font-bold shadow-md shadow-sky-500/10">
+            <div className="w-9 h-9 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center justify-center font-bold shadow-md shadow-sky-500/10 shrink-0">
               <Edit3 className="w-5 h-5" />
             </div>
             <div>
@@ -155,7 +155,7 @@ export default function EditSaleModal({
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
           {error && (
             <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-400 text-xs font-semibold">
               {error}

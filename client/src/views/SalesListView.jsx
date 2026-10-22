@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import { 
   ShoppingBag, 
   Search, 
-  Filter, 
   Phone, 
-  ExternalLink, 
   Trash2, 
   Edit3,
-  Briefcase, 
-  CreditCard,
   Plus
 } from 'lucide-react';
 import { api, formatCurrency, formatPhone } from '../api';
@@ -19,8 +15,8 @@ export default function SalesListView({
   users = [], 
   whatsapps = [], 
   onOpenSaleModal, 
-  onReload,
-  currentUser
+  onReload, 
+  currentUser 
 }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedAttendant, setSelectedAttendant] = useState('all');
@@ -78,25 +74,25 @@ export default function SalesListView({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#151720] border border-[#272938] rounded-2xl p-6 shadow-md">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 bg-[#151720] border border-[#272938] rounded-2xl p-4 sm:p-6 shadow-md">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <ShoppingBag className="w-4 h-4 text-[#f5b800]" />
             <span className="text-xs font-bold text-[#f5b800] uppercase tracking-wider">Histórico Geral</span>
           </div>
-          <h2 className="text-2xl font-black text-white tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Todas as Vendas de Caricaturas
           </h2>
-          <p className="text-sm text-gray-400 mt-1">
-            <strong>{filteredSales.length} vendas</strong> encontradas | Total: <strong className="text-[#f5b800]">{formatCurrency(totalFiltered)}</strong>
+          <p className="text-xs sm:text-sm text-gray-400 mt-1">
+            <strong>{filteredSales.length} vendas</strong> | Total: <strong className="text-[#f5b800]">{formatCurrency(totalFiltered)}</strong>
           </p>
         </div>
 
         <button
           onClick={onOpenSaleModal}
-          className="flex items-center gap-2 bg-[#f5b800] hover:bg-[#e0a700] text-black font-extrabold text-sm px-5 py-3 rounded-xl shadow-lg shadow-yellow-500/20 transition shrink-0 active:scale-95"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#f5b800] hover:bg-[#e0a700] text-black font-extrabold text-sm px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg shadow-yellow-500/20 transition shrink-0 active:scale-95"
         >
           <Plus className="w-4 h-4 stroke-[3]" />
           <span>+ Registrar Venda</span>
@@ -104,13 +100,13 @@ export default function SalesListView({
       </div>
 
       {/* Barra de Filtros e Busca */}
-      <div className="bg-[#151720] border border-[#272938] rounded-2xl p-4 shadow-md grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div className="bg-[#151720] border border-[#272938] rounded-2xl p-3.5 sm:p-4 shadow-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
         {/* Busca por texto */}
-        <div className="relative md:col-span-1">
+        <div className="relative sm:col-span-2 lg:col-span-1">
           <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Buscar por cliente, profissão ou fone..."
+            placeholder="Buscar cliente, profissão, fone..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-[#181a24] border border-[#2c2f42] rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#f5b800]"
@@ -138,7 +134,7 @@ export default function SalesListView({
             onChange={(e) => setSelectedWhatsapp(e.target.value)}
             className="w-full bg-[#181a24] border border-[#2c2f42] rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-[#f5b800]"
           >
-            <option value="all">Todas as Linhas WhatsApp</option>
+            <option value="all">Todas as Linhas Zap</option>
             {whatsapps.map(w => (
               <option key={w.id} value={w.id}>{w.name}</option>
             ))}
@@ -152,7 +148,7 @@ export default function SalesListView({
             onChange={(e) => setSelectedPayment(e.target.value)}
             className="w-full bg-[#181a24] border border-[#2c2f42] rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-[#f5b800]"
           >
-            <option value="all">Todas Formas de Pagamento</option>
+            <option value="all">Todos os Pagamentos</option>
             <option value="pix">PIX</option>
             <option value="cartao_vista">Cartão à Vista</option>
             <option value="cartao_parcelado">Cartão Parcelado</option>
@@ -161,117 +157,212 @@ export default function SalesListView({
         </div>
       </div>
 
-      {/* Tabela de Vendas */}
+      {/* Tabela de Vendas / Cards Mobile */}
       <div className="bg-[#151720] border border-[#272938] rounded-2xl shadow-lg overflow-hidden">
         {filteredSales.length === 0 ? (
-          <div className="py-16 text-center text-gray-500 text-sm">
+          <div className="py-12 sm:py-16 text-center text-gray-500 text-sm">
             Nenhuma venda corresponde aos filtros selecionados.
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-[#181a24] text-xs font-semibold text-gray-400 border-b border-[#272938]">
-                <tr>
-                  <th className="py-3 px-4">Data/Hora</th>
-                  <th className="py-3 px-4">Cliente & WhatsApp</th>
-                  <th className="py-3 px-4">Profissão / Tema</th>
-                  <th className="py-3 px-4">Atendente</th>
-                  <th className="py-3 px-4">Linha Zap</th>
-                  <th className="py-3 px-4">Pagamento</th>
-                  <th className="py-3 px-4">Observação</th>
-                  <th className="py-3 px-4 text-right">Valor</th>
-                  <th className="py-3 px-4 text-center">Ações</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#212330]">
-                {filteredSales.map((sale) => {
-                  const date = new Date(sale.createdAt);
-                  const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-                  const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+          <>
+            {/* 1. VISÃO EM CARDS NO CELULAR (< md) */}
+            <div className="md:hidden divide-y divide-[#212330]">
+              {filteredSales.map((sale) => {
+                const date = new Date(sale.createdAt);
+                const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+                const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-                  return (
-                    <tr key={sale.id} className="hover:bg-[#181a24]/50 transition">
-                      <td className="py-3.5 px-4 text-xs text-gray-400 whitespace-nowrap">
-                        <span className="font-semibold text-gray-200 block">{dateStr}</span>
-                        <span>{timeStr}</span>
-                      </td>
-
-                      <td className="py-3.5 px-4">
-                        <div className="font-bold text-white text-sm">{sale.customerPhone ? formatPhone(sale.customerPhone) : 'Cliente'}</div>
-                        {sale.customerPhone && (
-                          <a
-                            href={`https://wa.me/55${sale.customerPhone}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-xs text-emerald-400 hover:underline flex items-center gap-1 mt-0.5"
-                          >
-                            <Phone className="w-3 h-3" />
-                            <span>Abrir WhatsApp</span>
-                          </a>
-                        )}
-                      </td>
-
-                      <td className="py-3.5 px-4">
-                        <span className="bg-[#242738] text-gray-200 text-xs px-2.5 py-1 rounded-lg border border-[#32364c] font-medium inline-block">
-                          {sale.profession}
+                return (
+                  <div key={sale.id} className="p-3.5 space-y-2.5 hover:bg-[#181a24]/60 transition">
+                    {/* Linha 1: Data + Forma de Pagamento + Valor Grande */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold text-gray-300">
+                          {dateStr} às {timeStr}
                         </span>
-                      </td>
+                        {getPaymentBadge(sale.paymentMethod)}
+                      </div>
+                      <span className="font-black text-lg text-[#f5b800]">
+                        {formatCurrency(sale.amount)}
+                      </span>
+                    </div>
 
-                      <td className="py-3.5 px-4">
-                        <span className="font-semibold text-gray-300 text-xs">{sale.attendantName}</span>
-                      </td>
-
-                      <td className="py-3.5 px-4">
+                    {/* Linha 2: Vendedor + Linha do Zap */}
+                    <div className="flex items-center justify-between gap-2 text-xs">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span className="text-gray-400">Vendedor:</span>
+                        <strong className="text-gray-200 truncate">{sale.attendantName}</strong>
+                      </div>
+                      <div className="shrink-0">
                         {sale.whatsappId === 'wpp-3' || sale.whatsappName?.toLowerCase().includes('direto') ? (
-                          <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md inline-block">
-                            ⚡ Tráfego Direto
+                          <span className="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.5 rounded">
+                            ⚡ Direto
                           </span>
                         ) : (
-                          <span className="text-xs text-gray-300 font-mono font-medium truncate max-w-[140px] block">
+                          <span className="text-[11px] text-gray-300 font-mono">
                             {sale.whatsappName?.replace('WhatsApp ', '')}
                           </span>
                         )}
-                      </td>
+                      </div>
+                    </div>
 
-                      <td className="py-3.5 px-4">
-                        {getPaymentBadge(sale.paymentMethod)}
-                      </td>
+                    {/* Linha 3: Profissão & WhatsApp do Cliente */}
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="bg-[#242738] text-gray-200 text-xs px-2.5 py-0.5 rounded-lg border border-[#32364c] font-medium truncate max-w-[150px]">
+                        {sale.profession || 'Caricatura'}
+                      </span>
 
-                      <td className="py-3.5 px-4 text-xs text-gray-400 max-w-[180px] truncate" title={sale.notes}>
-                        <span>{sale.notes || '—'}</span>
-                      </td>
+                      {sale.customerPhone ? (
+                        <a
+                          href={`https://wa.me/55${sale.customerPhone}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-xs font-bold text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 px-2.5 py-1 rounded-lg flex items-center gap-1 transition active:scale-95 shrink-0"
+                        >
+                          <Phone className="w-3 h-3" />
+                          <span>{formatPhone(sale.customerPhone)}</span>
+                        </a>
+                      ) : (
+                        <span className="text-xs text-gray-500">Cliente Balcão</span>
+                      )}
+                    </div>
 
-                      <td className="py-3.5 px-4 text-right">
-                        <span className="font-black text-base text-[#f5b800]">
-                          {formatCurrency(sale.amount)}
-                        </span>
-                      </td>
+                    {/* Observação (se houver) */}
+                    {sale.notes && (
+                      <p className="text-xs text-gray-400 italic bg-[#181a24] p-2 rounded-lg border border-[#232635]">
+                        "{sale.notes}"
+                      </p>
+                    )}
 
-                      <td className="py-3.5 px-4 text-center">
-                        <div className="flex items-center justify-center gap-1.5">
-                          <button
-                            onClick={() => setEditingSale(sale)}
-                            title="Editar venda"
-                            className="w-7 h-7 rounded-lg bg-[#20222f] hover:bg-sky-500/20 text-gray-400 hover:text-sky-400 flex items-center justify-center transition"
-                          >
-                            <Edit3 className="w-3.5 h-3.5" />
-                          </button>
-                          <button
-                            onClick={() => handleDelete(sale.id)}
-                            disabled={deletingId === sale.id}
-                            title="Excluir venda"
-                            className="w-7 h-7 rounded-lg bg-[#20222f] hover:bg-rose-500/20 text-gray-400 hover:text-rose-400 flex items-center justify-center transition"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                    {/* Ações: Editar e Excluir */}
+                    <div className="flex items-center justify-end gap-2 pt-1 border-t border-[#1c1e2a]">
+                      <button
+                        onClick={() => setEditingSale(sale)}
+                        className="px-3 py-1.5 rounded-lg bg-[#20222f] hover:bg-sky-500/20 text-xs font-semibold text-gray-300 hover:text-sky-300 flex items-center gap-1.5 transition active:scale-95"
+                      >
+                        <Edit3 className="w-3.5 h-3.5 text-sky-400" />
+                        <span>Editar</span>
+                      </button>
+                      <button
+                        onClick={() => handleDelete(sale.id)}
+                        disabled={deletingId === sale.id}
+                        className="px-3 py-1.5 rounded-lg bg-[#20222f] hover:bg-rose-500/20 text-xs font-semibold text-gray-300 hover:text-rose-400 flex items-center gap-1.5 transition active:scale-95 disabled:opacity-50"
+                      >
+                        <Trash2 className="w-3.5 h-3.5 text-rose-400" />
+                        <span>Excluir</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* 2. VISÃO EM TABELA NO COMPUTADOR (md:block) */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-[#181a24] text-xs font-semibold text-gray-400 border-b border-[#272938]">
+                  <tr>
+                    <th className="py-3 px-4">Data/Hora</th>
+                    <th className="py-3 px-4">Cliente & WhatsApp</th>
+                    <th className="py-3 px-4">Profissão / Tema</th>
+                    <th className="py-3 px-4">Atendente</th>
+                    <th className="py-3 px-4">Linha Zap</th>
+                    <th className="py-3 px-4">Pagamento</th>
+                    <th className="py-3 px-4">Observação</th>
+                    <th className="py-3 px-4 text-right">Valor</th>
+                    <th className="py-3 px-4 text-center">Ações</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#212330]">
+                  {filteredSales.map((sale) => {
+                    const date = new Date(sale.createdAt);
+                    const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+                    const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+                    return (
+                      <tr key={sale.id} className="hover:bg-[#181a24]/50 transition">
+                        <td className="py-3.5 px-4 text-xs text-gray-400 whitespace-nowrap">
+                          <span className="font-semibold text-gray-200 block">{dateStr}</span>
+                          <span>{timeStr}</span>
+                        </td>
+
+                        <td className="py-3.5 px-4">
+                          <div className="font-bold text-white text-sm">{sale.customerPhone ? formatPhone(sale.customerPhone) : 'Cliente'}</div>
+                          {sale.customerPhone && (
+                            <a
+                              href={`https://wa.me/55${sale.customerPhone}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-xs text-emerald-400 hover:underline flex items-center gap-1 mt-0.5"
+                            >
+                              <Phone className="w-3 h-3" />
+                              <span>Abrir WhatsApp</span>
+                            </a>
+                          )}
+                        </td>
+
+                        <td className="py-3.5 px-4">
+                          <span className="bg-[#242738] text-gray-200 text-xs px-2.5 py-1 rounded-lg border border-[#32364c] font-medium inline-block">
+                            {sale.profession}
+                          </span>
+                        </td>
+
+                        <td className="py-3.5 px-4">
+                          <span className="font-semibold text-gray-300 text-xs">{sale.attendantName}</span>
+                        </td>
+
+                        <td className="py-3.5 px-4">
+                          {sale.whatsappId === 'wpp-3' || sale.whatsappName?.toLowerCase().includes('direto') ? (
+                            <span className="text-[11px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md inline-block">
+                              ⚡ Tráfego Direto
+                            </span>
+                          ) : (
+                            <span className="text-xs text-gray-300 font-mono font-medium truncate max-w-[140px] block">
+                              {sale.whatsappName?.replace('WhatsApp ', '')}
+                            </span>
+                          )}
+                        </td>
+
+                        <td className="py-3.5 px-4">
+                          {getPaymentBadge(sale.paymentMethod)}
+                        </td>
+
+                        <td className="py-3.5 px-4 text-xs text-gray-400 max-w-[180px] truncate" title={sale.notes}>
+                          <span>{sale.notes || '—'}</span>
+                        </td>
+
+                        <td className="py-3.5 px-4 text-right">
+                          <span className="font-black text-base text-[#f5b800]">
+                            {formatCurrency(sale.amount)}
+                          </span>
+                        </td>
+
+                        <td className="py-3.5 px-4 text-center">
+                          <div className="flex items-center justify-center gap-1.5">
+                            <button
+                              onClick={() => setEditingSale(sale)}
+                              title="Editar venda"
+                              className="w-7 h-7 rounded-lg bg-[#20222f] hover:bg-sky-500/20 text-gray-400 hover:text-sky-400 flex items-center justify-center transition"
+                            >
+                              <Edit3 className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(sale.id)}
+                              disabled={deletingId === sale.id}
+                              title="Excluir venda"
+                              className="w-7 h-7 rounded-lg bg-[#20222f] hover:bg-rose-500/20 text-gray-400 hover:text-rose-400 flex items-center justify-center transition"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
 

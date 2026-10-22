@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Plus, Phone, Palette } from 'lucide-react';
+import { Calendar, Plus, Phone, Palette, Menu, Sparkles } from 'lucide-react';
 
 const ACCENT_COLORS = [
   { id: 'amarelo', name: 'Amarelo', hex: '#f5b800' },
@@ -25,8 +25,11 @@ export default function Header({
   currentUser,
   accentColor = 'amarelo',
   onSelectAccent,
-  onOpenExpenseModal
+  onOpenExpenseModal,
+  onOpenMobileMenu
 }) {
+  const isCeo = currentUser?.role === 'admin' || currentUser?.username === 'gustavo';
+
   const periodOptions = [
     { id: 'hoje', label: 'Hoje' },
     { id: 'ontem', label: 'Ontem' },
@@ -41,39 +44,41 @@ export default function Header({
 
   const now = new Date();
   const dateFormatted = now.toLocaleDateString('pt-BR', {
-    weekday: 'long',
+    weekday: 'short',
     day: 'numeric',
-    month: 'long'
+    month: 'short'
   });
 
   const getTabTitle = () => {
     switch (currentTab) {
       case 'dashboard': return 'Dashboard';
       case 'vendas': return 'Histórico de Vendas';
-      case 'whatsapps': return 'Gestão de Linhas do WhatsApp';
+      case 'whatsapps': return 'Linhas do WhatsApp';
       case 'equipe': return 'Equipe & Atendentes';
-      case 'metricas': return 'Métricas Executivas & Lucro Real';
+      case 'metricas': return 'Métricas Executivas & Lucro';
       case 'followups': return 'Follow-ups & Retornos';
       default: return 'Painel';
     }
   };
 
   return (
-    <header className="bg-[#111218] border-b border-[#20222f] px-6 py-4">
-      {/* Top row */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <header className="bg-[#111218] border-b border-[#20222f] px-3.5 sm:px-6 py-3 sm:py-4">
+      {/* =========================================================================
+          1. HEADER DESKTOP (md:flex)
+          ========================================================================= */}
+      <div className="hidden md:flex md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-xl font-bold text-white tracking-tight">{getTabTitle()}</h1>
             <span className="text-xs text-gray-400 capitalize bg-[#181a24] px-2.5 py-1 rounded-md border border-[#272938]">
-              {dateFormatted}
+              {now.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
             </span>
           </div>
         </div>
 
         {/* Action Button & User Controls */}
         <div className="flex items-center gap-3">
-          {/* Seletor Rápido de Cor de Destaque (Amarelo, Azul, Verde, Rosa) */}
+          {/* Seletor Rápido de Cor de Destaque */}
           <div className="flex items-center gap-1.5 bg-[#181a24] border border-[#272938] rounded-xl px-2.5 py-1.5">
             <Palette className="w-3.5 h-3.5 text-gray-400 mr-0.5" />
             {ACCENT_COLORS.map((col) => (
@@ -109,18 +114,20 @@ export default function Header({
             </select>
           </div>
 
-          <button
-            onClick={onOpenExpenseModal}
-            className="flex items-center gap-1.5 bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 font-bold text-xs px-3.5 py-2 rounded-xl transition active:scale-95 shadow-sm"
-            title="Cadastrar gastos manuais com IAs, chips, softwares e custos operacionais"
-          >
-            <Plus className="w-3.5 h-3.5 text-purple-400 stroke-[3]" />
-            <span>Registrar Gasto à Parte</span>
-          </button>
+          {isCeo && (
+            <button
+              onClick={onOpenExpenseModal}
+              className="flex items-center gap-1.5 bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 font-bold text-xs px-3.5 py-2 rounded-xl transition active:scale-95 shadow-sm"
+              title="Cadastrar gastos manuais com IAs, chips, softwares e custos operacionais"
+            >
+              <Plus className="w-3.5 h-3.5 text-purple-400 stroke-[3]" />
+              <span>Gasto à Parte</span>
+            </button>
+          )}
 
           <button
             onClick={onOpenSaleModal}
-            className="flex items-center gap-2 bg-brand font-black text-sm px-4 py-2 rounded-xl shadow-lg transition active:scale-95"
+            className="flex items-center gap-2 bg-brand font-black text-sm px-4 py-2 rounded-xl shadow-lg transition active:scale-95 text-black"
           >
             <Plus className="w-4 h-4 stroke-[3]" />
             <span>Registrar Venda</span>
@@ -128,17 +135,101 @@ export default function Header({
         </div>
       </div>
 
-      {/* Period Filter Pills */}
-      <div className="flex items-center gap-1.5 mt-4 overflow-x-auto pb-1 scrollbar-none">
+      {/* =========================================================================
+          2. HEADER MOBILE (md:hidden)
+          ========================================================================= */}
+      <div className="md:hidden space-y-2.5">
+        {/* Linha 1 Mobile: Botão Menu + Título + Ação Rápida */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <button
+              onClick={onOpenMobileMenu}
+              className="p-2 rounded-xl bg-[#181a24] border border-[#272938] text-gray-200 active:scale-95 shrink-0"
+              aria-label="Abrir Menu de Navegação"
+            >
+              <Menu className="w-5 h-5 text-brand" />
+            </button>
+            <div className="min-w-0">
+              <h1 className="text-base font-black text-white tracking-tight truncate flex items-center gap-1.5">
+                <span>{getTabTitle()}</span>
+              </h1>
+              <span className="text-[10px] text-gray-400 capitalize block">
+                {dateFormatted}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 shrink-0">
+            {/* Seletor de Cores Rápido no Mobile */}
+            <div className="flex items-center gap-1 bg-[#181a24] border border-[#272938] rounded-xl px-1.5 py-1">
+              {ACCENT_COLORS.map((col) => (
+                <button
+                  key={col.id}
+                  type="button"
+                  onClick={() => onSelectAccent && onSelectAccent(col.id)}
+                  title={`Cor ${col.name}`}
+                  className={`w-3.5 h-3.5 rounded-full transition-transform ${
+                    accentColor === col.id ? 'ring-2 ring-white scale-110' : 'opacity-50'
+                  }`}
+                  style={{ backgroundColor: col.hex }}
+                />
+              ))}
+            </div>
+
+            {/* Botão Registrar Venda Compacto no Celular */}
+            <button
+              onClick={onOpenSaleModal}
+              className="flex items-center gap-1 bg-brand font-black text-xs px-2.5 py-1.5 rounded-xl shadow-md transition active:scale-95 text-black"
+            >
+              <Plus className="w-3.5 h-3.5 stroke-[3]" />
+              <span>Venda</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Linha 2 Mobile: Filtro de WhatsApp + Botão Gasto */}
+        <div className="flex items-center gap-2">
+          <div className="flex-1 flex items-center bg-[#181a24] border border-[#272938] rounded-xl px-2.5 py-1.5 min-w-0">
+            <Phone className="w-3.5 h-3.5 text-[#10B981] mr-1.5 shrink-0" />
+            <select
+              value={whatsappFilter}
+              onChange={(e) => setWhatsappFilter(e.target.value)}
+              className="bg-transparent text-xs focus:outline-none cursor-pointer font-medium text-gray-200 w-full truncate"
+            >
+              <option value="all">Todos os Zaps ({whatsapps.length})</option>
+              {whatsapps.map(w => (
+                <option key={w.id} value={w.id}>
+                  {w.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {isCeo && (
+            <button
+              onClick={onOpenExpenseModal}
+              className="flex items-center gap-1 bg-purple-500/15 text-purple-300 border border-purple-500/30 font-bold text-xs px-2.5 py-1.5 rounded-xl shrink-0 active:scale-95"
+            >
+              <Plus className="w-3 h-3 text-purple-400 stroke-[3]" />
+              <span>Gasto</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* =========================================================================
+          3. SELETOR DE PERÍODOS (ROLAGEM HORIZONTAL SUAVE)
+          ========================================================================= */}
+      <div className="flex items-center gap-1.5 mt-3 overflow-x-auto pb-1 no-scrollbar">
         {periodOptions.map((opt) => {
           const isActive = period === opt.id;
           return (
             <button
               key={opt.id}
               onClick={() => setPeriod(opt.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition active:scale-95 shrink-0 ${
                 isActive
-                  ? 'bg-brand shadow-sm font-black'
+                  ? 'bg-brand shadow-sm font-black text-black'
                   : 'bg-[#181a24] text-gray-400 hover:text-gray-100 hover:bg-[#20222f] border border-[#272938]'
               }`}
             >
@@ -151,7 +242,7 @@ export default function Header({
         <button
           type="button"
           onClick={() => setPeriod('personalizado')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5 ${
+          className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition flex items-center gap-1.5 active:scale-95 shrink-0 ${
             period === 'personalizado'
               ? 'bg-brand shadow-sm font-black text-black'
               : 'bg-[#181a24] text-gray-400 hover:text-gray-100 hover:bg-[#20222f] border border-[#272938]'
@@ -163,21 +254,21 @@ export default function Header({
               ? (customStartDate === customEndDate
                   ? `Dia ${customStartDate.split('-').reverse().slice(0, 2).join('/')}`
                   : `${customStartDate.split('-').reverse().slice(0, 2).join('/')} a ${customEndDate.split('-').reverse().slice(0, 2).join('/')}`)
-              : '📅 Personalizar Data'}
+              : '📅 Data'}
           </span>
         </button>
       </div>
 
       {/* Barra de Data Personalizada (De / Até / Dia Específico) */}
       {period === 'personalizado' && (
-        <div className="mt-3 pt-3 border-t border-[#1e202c] flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-1.5 text-xs text-blue-300 font-bold bg-blue-500/10 px-2.5 py-1.5 rounded-lg border border-blue-500/20">
+        <div className="mt-2.5 pt-2.5 border-t border-[#1e202c] flex items-center gap-2 flex-wrap text-xs">
+          <div className="flex items-center gap-1.5 text-blue-300 font-bold bg-blue-500/10 px-2.5 py-1 rounded-lg border border-blue-500/20">
             <Calendar className="w-3.5 h-3.5 text-blue-400" />
-            <span>Filtrar Período:</span>
+            <span>Período:</span>
           </div>
 
-          <div className="flex items-center gap-1 bg-[#181a24] border border-[#272938] px-2.5 py-1 rounded-lg">
-            <span className="text-[11px] text-gray-400 font-semibold uppercase">De:</span>
+          <div className="flex items-center gap-1 bg-[#181a24] border border-[#272938] px-2 py-1 rounded-lg">
+            <span className="text-[10px] text-gray-400 font-semibold uppercase">De:</span>
             <input
               type="date"
               value={customStartDate || ''}
@@ -194,8 +285,8 @@ export default function Header({
             />
           </div>
 
-          <div className="flex items-center gap-1 bg-[#181a24] border border-[#272938] px-2.5 py-1 rounded-lg">
-            <span className="text-[11px] text-gray-400 font-semibold uppercase">Até:</span>
+          <div className="flex items-center gap-1 bg-[#181a24] border border-[#272938] px-2 py-1 rounded-lg">
+            <span className="text-[10px] text-gray-400 font-semibold uppercase">Até:</span>
             <input
               type="date"
               value={customEndDate || ''}
@@ -212,7 +303,7 @@ export default function Header({
           </div>
 
           {/* Atalhos Rápidos para 1 dia específico ou recente */}
-          <div className="flex items-center gap-1.5 flex-wrap">
+          <div className="flex items-center gap-1 flex-wrap">
             <button
               type="button"
               onClick={() => {
@@ -224,10 +315,10 @@ export default function Header({
                   if (setCustomEndDate) setCustomEndDate(val);
                 }
               }}
-              className="px-2.5 py-1.5 bg-[#202334] hover:bg-[#2b2f46] text-blue-300 rounded-lg text-xs font-semibold transition border border-blue-500/30"
+              className="px-2 py-1 bg-[#202334] hover:bg-[#2b2f46] text-blue-300 rounded-lg text-[11px] font-semibold transition border border-blue-500/30"
               title="Filtrar exatamente apenas a data selecionada no campo 'De'"
             >
-              🎯 Apenas este dia
+              🎯 Este dia
             </button>
 
             <button
@@ -244,7 +335,7 @@ export default function Header({
                   if (setCustomEndDate) setCustomEndDate(yestStr);
                 }
               }}
-              className="px-2.5 py-1.5 bg-[#181a24] hover:bg-[#20222f] text-gray-300 rounded-lg text-xs font-semibold transition border border-[#272938]"
+              className="px-2 py-1 bg-[#181a24] hover:bg-[#20222f] text-gray-300 rounded-lg text-[11px] font-semibold transition border border-[#272938]"
             >
               Ontem
             </button>
@@ -260,15 +351,15 @@ export default function Header({
                   if (setCustomEndDate) setCustomEndDate(todayStr);
                 }
               }}
-              className="px-2.5 py-1.5 bg-[#181a24] hover:bg-[#20222f] text-gray-300 rounded-lg text-xs font-semibold transition border border-[#272938]"
+              className="px-2 py-1 bg-[#181a24] hover:bg-[#20222f] text-gray-300 rounded-lg text-[11px] font-semibold transition border border-[#272938]"
             >
               Hoje
             </button>
 
             {isRefreshing && (
-              <span className="text-[11px] text-amber-400 font-semibold flex items-center gap-1.5 bg-amber-500/10 px-2 py-1 rounded-lg border border-amber-500/20 animate-pulse ml-1">
+              <span className="text-[10px] text-amber-400 font-semibold flex items-center gap-1 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20 animate-pulse">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
-                <span>Buscando dia...</span>
+                <span>Buscando...</span>
               </span>
             )}
           </div>

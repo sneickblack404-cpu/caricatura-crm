@@ -7,13 +7,13 @@ import {
   BarChart3, 
   CalendarClock, 
   ShieldCheck, 
-  Sparkles,
-  ArrowLeftRight,
-  Sun,
-  Moon,
-  LogOut,
-  UserCheck,
-  Edit3
+  Sparkles, 
+  ArrowLeftRight, 
+  Sun, 
+  Moon, 
+  LogOut, 
+  Edit3,
+  X
 } from 'lucide-react';
 
 export default function Sidebar({ 
@@ -21,11 +21,13 @@ export default function Sidebar({
   setCurrentTab, 
   currentUser, 
   onOpenSwitchProfile, 
-  onOpenEditProfile,
-  onLogout,
-  theme = 'dark',
-  onToggleTheme,
-  whatsappsCount = 3 
+  onOpenEditProfile, 
+  onLogout, 
+  theme = 'dark', 
+  onToggleTheme, 
+  whatsappsCount = 3,
+  isOpenMobile = false,
+  onCloseMobile
 }) {
   const isCeo = currentUser?.role === 'admin' || currentUser?.username === 'gustavo';
 
@@ -51,17 +53,20 @@ export default function Sidebar({
 
   const isDark = theme === 'dark';
 
-  return (
-    <aside className={`w-64 border-r flex flex-col justify-between shrink-0 select-none min-h-screen transition-colors ${
-      isDark ? 'bg-[#111218] border-[#20222f] text-gray-100' : 'bg-white border-gray-200 text-gray-800'
-    }`}>
+  const handleSelectTab = (tabId) => {
+    setCurrentTab(tabId);
+    if (onCloseMobile) onCloseMobile();
+  };
+
+  const renderContent = (isMobileView = false) => (
+    <div className="flex flex-col justify-between h-full">
       <div>
         {/* Logo / Header */}
-        <div className={`p-5 border-b flex items-center justify-between ${
+        <div className={`p-4 sm:p-5 border-b flex items-center justify-between ${
           isDark ? 'border-[#20222f]' : 'border-gray-200'
         }`}>
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f5b800] to-[#d49900] flex items-center justify-center shadow-lg shadow-yellow-500/10">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f5b800] to-[#d49900] flex items-center justify-center shadow-lg shadow-yellow-500/10 shrink-0">
               <Sparkles className="w-4 h-4 text-black font-extrabold" />
             </div>
             <div>
@@ -72,15 +77,26 @@ export default function Sidebar({
               <p className="text-[10px] text-gray-400 font-semibold tracking-wider uppercase">Caricaturas Zap</p>
             </div>
           </div>
+
+          {/* Botão de Fechar no Celular */}
+          {isMobileView && (
+            <button
+              onClick={onCloseMobile}
+              className="p-1.5 rounded-xl bg-[#1e202d] text-gray-400 hover:text-white transition"
+              aria-label="Fechar Menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
         {/* User Card */}
-        <div className={`p-4 mx-3 my-3 rounded-2xl border transition ${
+        <div className={`p-3.5 mx-3 my-3 rounded-2xl border transition ${
           isDark ? 'bg-[#181a24] border-[#272938]' : 'bg-gray-50 border-gray-200'
         }`}>
           <div className="flex items-center gap-3">
             <div 
-              className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white shadow-md text-sm border-2 border-white/20"
+              className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white shadow-md text-sm border-2 border-white/20 shrink-0"
               style={{ backgroundColor: currentUser?.color || '#3B82F6' }}
             >
               {currentUser?.avatar || 'U'}
@@ -101,7 +117,10 @@ export default function Sidebar({
           <div className="grid grid-cols-2 gap-1.5 mt-3 pt-2 border-t border-black/10 dark:border-white/10">
             {/* Editar próprio perfil */}
             <button
-              onClick={onOpenEditProfile}
+              onClick={() => {
+                if (onCloseMobile) onCloseMobile();
+                onOpenEditProfile();
+              }}
               className={`py-1.5 px-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition ${
                 isDark ? 'bg-[#20222e] hover:bg-[#282a3c] text-gray-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
               }`}
@@ -114,7 +133,10 @@ export default function Sidebar({
             {/* Alternar Perfil: VISÍVEL SOMENTE PARA O CEO! */}
             {isCeo ? (
               <button
-                onClick={onOpenSwitchProfile}
+                onClick={() => {
+                  if (onCloseMobile) onCloseMobile();
+                  onOpenSwitchProfile();
+                }}
                 className={`py-1.5 px-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1 transition ${
                   isDark ? 'bg-[#20222e] hover:bg-[#282a3c] text-gray-300' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
                 }`}
@@ -140,8 +162,8 @@ export default function Sidebar({
             return (
               <button
                 key={item.id}
-                onClick={() => setCurrentTab(item.id)}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition group ${
+                onClick={() => handleSelectTab(item.id)}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition group active:scale-[0.98] ${
                   isActive
                     ? 'bg-brand font-black shadow-md'
                     : isDark 
@@ -150,7 +172,7 @@ export default function Sidebar({
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 transition ${isActive ? 'text-inherit' : 'text-gray-400 group-hover:text-gray-200'}`} />
+                  <Icon className={`w-4 h-4 transition shrink-0 ${isActive ? 'text-inherit' : 'text-gray-400 group-hover:text-gray-200'}`} />
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
@@ -169,13 +191,13 @@ export default function Sidebar({
       </div>
 
       {/* Footer: Modo Claro/Escuro & Logout */}
-      <div className={`p-4 border-t space-y-2 text-xs ${
+      <div className={`p-4 border-t space-y-2 text-xs safe-area-pb ${
         isDark ? 'border-[#20222f]' : 'border-gray-200'
       }`}>
         {/* Toggle Modo Claro / Escuro */}
         <button
           onClick={onToggleTheme}
-          className={`w-full py-2 px-3 rounded-xl flex items-center justify-center gap-2 font-semibold transition border ${
+          className={`w-full py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 font-semibold transition border active:scale-95 ${
             isDark 
               ? 'bg-[#181a24] hover:bg-[#202330] text-gray-300 border-[#272938]' 
               : 'bg-gray-100 hover:bg-gray-200 text-gray-800 border-gray-300'
@@ -196,13 +218,45 @@ export default function Sidebar({
 
         {/* Botão Sair */}
         <button
-          onClick={onLogout}
-          className="w-full py-1.5 px-3 rounded-xl flex items-center justify-center gap-1.5 text-gray-500 hover:text-rose-400 transition"
+          onClick={() => {
+            if (onCloseMobile) onCloseMobile();
+            onLogout();
+          }}
+          className="w-full py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 text-gray-500 hover:text-rose-400 transition active:scale-95"
         >
           <LogOut className="w-3.5 h-3.5" />
           <span>Sair da conta</span>
         </button>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* 1. SIDEBAR FIXO NO DESKTOP (md:flex) */}
+      <aside className={`hidden md:flex w-64 border-r flex-col justify-between shrink-0 select-none min-h-screen transition-colors ${
+        isDark ? 'bg-[#111218] border-[#20222f] text-gray-100' : 'bg-white border-gray-200 text-gray-800'
+      }`}>
+        {renderContent(false)}
+      </aside>
+
+      {/* 2. DRAWER OVERLAY NO CELULAR (< md) QUANDO ABERTO */}
+      {isOpenMobile && (
+        <div className="fixed inset-0 z-50 flex md:hidden">
+          {/* Backdrop Escuro com Blur */}
+          <div 
+            onClick={onCloseMobile}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity animate-fadeIn" 
+          />
+
+          {/* Painel Lateral Deslizante */}
+          <div className={`relative w-72 max-w-[85vw] h-full shadow-2xl flex flex-col z-10 transition-transform ${
+            isDark ? 'bg-[#111218] text-gray-100' : 'bg-white text-gray-900'
+          }`}>
+            {renderContent(true)}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
