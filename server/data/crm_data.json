@@ -15,10 +15,10 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-22T23:25:35.572Z",
-      "lastSpend": 3553.02,
-      "todaySpend": 142.96,
-      "yesterdaySpend": 205.42
+      "lastSync": "2026-10-20T01:30:58.380Z",
+      "lastSpend": 99.46,
+      "todaySpend": 109.21,
+      "yesterdaySpend": 149.33
     }
   },
   "whatsapps": [
@@ -104,7 +104,7 @@
       "role": "attendant",
       "avatar": "G",
       "color": "#EC4899",
-      "themeColor": "verde",
+      "themeColor": "rosa",
       "phone": "",
       "commissionRate": 20,
       "dailyGoal": 160,
@@ -7904,139 +7904,15 @@
       "updatedAt": "2026-10-09T03:06:41.526Z"
     },
     {
-      "id": "spend-mv5x6g26-hmyv1",
-      "date": "2026-10-12",
-      "amount": 109.47,
-      "source": "facebook_api",
-      "createdAt": "2026-10-13T00:05:21.486Z",
-      "updatedAt": "2026-10-13T01:46:03.923Z"
-    },
-    {
-      "id": "spend-mv5x72ej-y4bxw",
-      "date": "2026-10-11",
-      "amount": 123.15,
-      "source": "facebook_api",
-      "createdAt": "2026-10-13T00:05:50.443Z",
-      "updatedAt": "2026-10-13T01:45:58.409Z"
-    },
-    {
-      "id": "spend-mv7dk1ti-lycfb",
-      "date": "2026-10-13",
-      "amount": 73.42,
-      "source": "facebook_api",
-      "createdAt": "2026-10-14T00:31:36.246Z",
-      "updatedAt": "2026-10-15T01:31:01.531Z"
-    },
-    {
-      "id": "spend-mv7ivdjn-o2ma4",
-      "date": "2026-10-14",
-      "amount": 116.54,
-      "source": "facebook_api",
-      "createdAt": "2026-10-14T03:00:22.739Z",
-      "updatedAt": "2026-10-16T00:09:44.965Z"
-    },
-    {
-      "id": "spend-mv9jd84z-r0tpo",
-      "date": "2026-10-15",
-      "amount": 208.73,
-      "source": "facebook_api",
-      "createdAt": "2026-10-15T12:49:47.891Z",
-      "updatedAt": "2026-10-16T23:42:09.262Z"
-    },
-    {
-      "id": "spend-mvazvjxz-wg6x5",
-      "date": "2026-10-16",
-      "amount": 113.46,
-      "source": "facebook_api",
-      "createdAt": "2026-10-16T13:19:43.031Z",
-      "updatedAt": "2026-10-18T02:04:17.002Z"
-    },
-    {
-      "id": "spend-mvbt7hbw-avf6n",
-      "date": "2026-10-17",
-      "amount": 90.53,
-      "source": "facebook_api",
-      "createdAt": "2026-10-17T03:00:48.380Z",
-      "updatedAt": "2026-10-19T01:52:28.845Z"
-    },
-    {
-      "id": "spend-mvd9u888-ome6s",
-      "date": "2026-10-18",
-      "amount": 109.42,
-      "source": "facebook_api",
-      "createdAt": "2026-10-18T03:34:09.704Z",
-      "updatedAt": "2026-10-20T01:18:49.462Z"
-    },
-    {
-      "id": "spend-mvf8r3v4-jo4rq",
+      "id": "spend-mvg08slr-209am",
       "date": "2026-10-19",
-      "amount": 114.63,
+      "amount": 109.21,
       "source": "facebook_api",
-      "createdAt": "2026-10-19T12:39:16.816Z",
-      "updatedAt": "2026-10-21T01:27:26.420Z"
-    },
-    {
-      "id": "spend-mvgn76f8-u34st",
-      "date": "2026-10-20",
-      "amount": 235.26,
-      "source": "facebook_api",
-      "createdAt": "2026-10-20T12:11:27.428Z",
-      "updatedAt": "2026-10-22T00:45:30.823Z"
-    },
-    {
-      "id": "spend-mvi3zslv-u2l3f",
-      "date": "2026-10-21",
-      "amount": 205.42,
-      "source": "facebook_api",
-      "createdAt": "2026-10-21T12:49:22.579Z",
-      "updatedAt": "2026-10-22T17:25:46.624Z"
-    },
-    {
-      "id": "spend-mvjitpng-fhc5x",
-      "date": "2026-10-22",
-      "amount": 142.96,
-      "source": "facebook_api",
-      "createdAt": "2026-10-22T12:32:19.228Z",
-      "updatedAt": "2026-10-22T23:11:56.536Z"
+      "createdAt": "2026-10-20T01:28:51.663Z",
+      "updatedAt": "2026-10-20T01:30:58.380Z"
     }
   ],
   "expenses": [
-    {
-      "id": "exp-mvcjfpyn-6yfim",
-      "title": "Pagamento Atendente: Guilherme",
-      "amount": 36.9,
-      "category": "pagamento_atendente",
-      "date": "2026-10-17",
-      "notes": "",
-      "createdAt": "2026-10-17T15:15:02.831Z"
-    },
-    {
-      "id": "exp-mvb1uyvk-6g02i",
-      "title": "Pagamento Atendente: Guilherme",
-      "amount": 19,
-      "category": "pagamento_atendente",
-      "date": "2026-10-16",
-      "notes": "",
-      "createdAt": "2026-10-16T14:15:14.960Z"
-    },
-    {
-      "id": "exp-mv8v8tkh-za4x8",
-      "title": "Pagamento Atendente: Guilherme",
-      "amount": 30,
-      "category": "pagamento_atendente",
-      "date": "2026-10-15",
-      "notes": "",
-      "createdAt": "2026-10-15T01:34:31.601Z"
-    },
-    {
-      "id": "exp-mv60em05-qr5lx",
-      "title": "Pagamento Atendente: Guilherme",
-      "amount": 29.92,
-      "category": "pagamento_atendente",
-      "date": "2026-10-13",
-      "notes": "",
-      "createdAt": "2026-10-13T01:35:41.285Z"
-    },
     {
       "id": "exp-mv0dl4x1-8zjk1",
       "title": "Pagamento Atendente: Guilherme",
