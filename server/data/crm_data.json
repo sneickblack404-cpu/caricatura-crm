@@ -15,9 +15,9 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-23T00:54:35.808Z",
+      "lastSync": "2026-10-23T00:55:35.724Z",
       "lastSpend": 99.46,
-      "todaySpend": 169.53,
+      "todaySpend": 171.31,
       "yesterdaySpend": 149.33
     }
   },
@@ -7906,10 +7906,10 @@
     {
       "id": "spend-mvk678xx-5keby",
       "date": "2026-10-22",
-      "amount": 169.53,
+      "amount": 171.31,
       "source": "facebook_api",
       "createdAt": "2026-10-22T23:26:41.925Z",
-      "updatedAt": "2026-10-23T00:54:35.808Z"
+      "updatedAt": "2026-10-23T00:55:35.724Z"
     }
   ],
   "expenses": [
