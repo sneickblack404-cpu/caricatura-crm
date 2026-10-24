@@ -15,7 +15,7 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-24T23:48:36.807Z",
+      "lastSync": "2026-10-24T23:49:37.098Z",
       "lastSpend": 99.46,
       "todaySpend": 155.11,
       "yesterdaySpend": 165.98
@@ -68,7 +68,7 @@
     {
       "id": "user-luis",
       "username": "luis",
-      "password": "20272028",
+      "password": "1234",
       "name": "Luis Henrique",
       "title": "Atendente",
       "role": "attendant",
@@ -83,7 +83,7 @@
     {
       "id": "user-david",
       "username": "david",
-      "password": "12131415",
+      "password": "1234",
       "name": "David Marques",
       "title": "Atendente",
       "role": "attendant",
@@ -98,7 +98,7 @@
     {
       "id": "user-guilherme",
       "username": "guilherme",
-      "password": "01020304",
+      "password": "1234",
       "name": "Guilherme",
       "title": "Atendente",
       "role": "attendant",
@@ -8540,7 +8540,7 @@
       "amount": 155.11,
       "source": "facebook_api",
       "createdAt": "2026-10-24T12:08:48.323Z",
-      "updatedAt": "2026-10-24T23:48:36.807Z"
+      "updatedAt": "2026-10-24T23:49:37.098Z"
     }
   ],
   "expenses": [
