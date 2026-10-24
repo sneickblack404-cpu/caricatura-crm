@@ -78,7 +78,8 @@
       "commissionRate": 20,
       "dailyGoal": 160,
       "monthlyGoal": 15000,
-      "active": true
+      "active": true,
+      "sessionVersion": 2
     },
     {
       "id": "user-david",
@@ -93,7 +94,8 @@
       "commissionRate": 20,
       "dailyGoal": 160,
       "monthlyGoal": 15000,
-      "active": true
+      "active": true,
+      "sessionVersion": 2
     },
     {
       "id": "user-guilherme",
@@ -109,7 +111,8 @@
       "commissionRate": 20,
       "dailyGoal": 160,
       "monthlyGoal": 15000,
-      "active": true
+      "active": true,
+      "sessionVersion": 2
     }
   ],
   "sales": [
