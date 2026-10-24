@@ -15,9 +15,9 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-24T00:47:11.143Z",
+      "lastSync": "2026-10-24T00:47:24.369Z",
       "lastSpend": 99.46,
-      "todaySpend": 149.05,
+      "todaySpend": 149.78,
       "yesterdaySpend": 188.24
     }
   },
@@ -113,6 +113,21 @@
     }
   ],
   "sales": [
+    {
+      "id": "sale-mvloiyqh-s2uny",
+      "attendantId": "user-guilherme",
+      "attendantName": "Guilherme",
+      "whatsappId": "wpp-1",
+      "whatsappName": "+55 27 99245-6099",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 10,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-24T00:47:27.403Z"
+    },
     {
       "id": "sale-mvlhz3xa-pj8zb",
       "attendantId": "user-guilherme",
@@ -8109,10 +8124,10 @@
     {
       "id": "spend-mvkzezm1-n7eff",
       "date": "2026-10-23",
-      "amount": 149.05,
+      "amount": 149.78,
       "source": "facebook_api",
       "createdAt": "2026-10-23T13:04:31.945Z",
-      "updatedAt": "2026-10-24T00:47:11.143Z"
+      "updatedAt": "2026-10-24T00:47:24.369Z"
     }
   ],
   "expenses": [
