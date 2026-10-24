@@ -154,7 +154,10 @@ app.put('/api/users/:id', (req, res) => {
   const index = db.users.findIndex(u => u.id === req.params.id);
   if (index === -1) return res.status(404).json({ error: 'Usuário não encontrado' });
 
-  const { name, phone, avatar, color, themeColor } = req.body;
+  const { name, phone, avatar, color, themeColor, password: newPassword } = req.body;
+  if (newPassword) {
+    db.users[index].password = String(newPassword).trim();
+  }
   if (name) {
     db.users[index].name = name.trim();
     if (!avatar) {

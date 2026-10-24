@@ -81,7 +81,7 @@ export const DEFAULT_DATA = {
     {
       id: 'user-luis',
       username: 'luis',
-      password: '1234',
+      password: '20272028',
       name: 'Luis Henrique',
       title: 'Atendente',
       role: 'attendant',
@@ -97,7 +97,7 @@ export const DEFAULT_DATA = {
     {
       id: 'user-david',
       username: 'david',
-      password: '1234',
+      password: '12131415',
       name: 'David Marques',
       title: 'Atendente',
       role: 'attendant',
@@ -113,7 +113,7 @@ export const DEFAULT_DATA = {
     {
       id: 'user-guilherme',
       username: 'guilherme',
-      password: '1234',
+      password: '01020304',
       name: 'Guilherme',
       title: 'Atendente',
       role: 'attendant',
