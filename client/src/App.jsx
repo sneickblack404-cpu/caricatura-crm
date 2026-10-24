@@ -20,7 +20,16 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('crm_session');
-      return saved ? JSON.parse(saved) : null;
+      if (!saved) return null;
+      const u = JSON.parse(saved);
+      // Se for atendente (não o CEO Gustavo) e a sessão for anterior à versão 2, desconecta na inicialização!
+      if (u.role !== 'admin' && u.username !== 'gustavo') {
+        if (!u.sessionVersion || u.sessionVersion < 2) {
+          localStorage.removeItem('crm_session');
+          return null;
+        }
+      }
+      return u;
     } catch {
       return null;
     }
@@ -118,6 +127,21 @@ export default function App() {
       const data = await api.getBootstrap();
       setUsers(data.users || []);
       setWhatsapps(data.whatsapps || []);
+
+      // Verificação ativa de segurança da sessão:
+      // Se for um atendente (não o CEO Gustavo) e a versão da sessão não bater, desconecta imediatamente!
+      if (currentUser && currentUser.role !== 'admin' && currentUser.username !== 'gustavo') {
+        const serverUser = (data.users || []).find(u => u.id === currentUser.id);
+        const serverSessionVersion = serverUser?.sessionVersion || 1;
+        const localSessionVersion = currentUser.sessionVersion || 0;
+
+        if (!serverUser || !serverUser.active || localSessionVersion !== serverSessionVersion) {
+          console.warn('[Segurança] Sessão de atendente revogada. Desconectando...');
+          localStorage.removeItem('crm_session');
+          setCurrentUser(null);
+          return;
+        }
+      }
     } catch (err) {
       console.error('Erro ao carregar bootstrap:', err);
     }

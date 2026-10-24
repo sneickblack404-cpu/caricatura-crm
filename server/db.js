@@ -92,6 +92,7 @@ export const DEFAULT_DATA = {
       commissionRate: 20,
       dailyGoal: 160.00, // Meta diária de R$ 160,00!
       monthlyGoal: 4800.00,
+      sessionVersion: 2,
       active: true
     },
     {
@@ -108,6 +109,7 @@ export const DEFAULT_DATA = {
       commissionRate: 20,
       dailyGoal: 160.00, // Meta diária de R$ 160,00!
       monthlyGoal: 4800.00,
+      sessionVersion: 2,
       active: true
     },
     {
@@ -124,6 +126,7 @@ export const DEFAULT_DATA = {
       commissionRate: 20,
       dailyGoal: 160.00, // Meta diária de R$ 160,00!
       monthlyGoal: 4800.00,
+      sessionVersion: 2,
       active: true
     }
   ],
