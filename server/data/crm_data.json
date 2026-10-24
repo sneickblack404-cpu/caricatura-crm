@@ -15,10 +15,10 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-20T01:30:58.380Z",
+      "lastSync": "2026-10-24T23:50:36.587Z",
       "lastSpend": 99.46,
-      "todaySpend": 109.21,
-      "yesterdaySpend": 149.33
+      "todaySpend": 155.11,
+      "yesterdaySpend": 165.98
     }
   },
   "whatsapps": [
@@ -68,7 +68,7 @@
     {
       "id": "user-luis",
       "username": "luis",
-      "password": "20272028",
+      "password": "1234",
       "name": "Luis Henrique",
       "title": "Atendente",
       "role": "attendant",
@@ -83,7 +83,7 @@
     {
       "id": "user-david",
       "username": "david",
-      "password": "12131415",
+      "password": "1234",
       "name": "David Marques",
       "title": "Atendente",
       "role": "attendant",
@@ -98,7 +98,7 @@
     {
       "id": "user-guilherme",
       "username": "guilherme",
-      "password": "01020304",
+      "password": "1234",
       "name": "Guilherme",
       "title": "Atendente",
       "role": "attendant",
@@ -8519,12 +8519,28 @@
       "updatedAt": "2026-10-09T03:06:41.526Z"
     },
     {
-      "id": "spend-mvg08slr-209am",
-      "date": "2026-10-19",
-      "amount": 109.21,
+      "id": "spend-mvk678xx-5keby",
+      "date": "2026-10-22",
+      "amount": 188.32,
       "source": "facebook_api",
-      "createdAt": "2026-10-20T01:28:51.663Z",
-      "updatedAt": "2026-10-20T01:30:58.380Z"
+      "createdAt": "2026-10-22T23:26:41.925Z",
+      "updatedAt": "2026-10-24T02:35:29.511Z"
+    },
+    {
+      "id": "spend-mvkzezm1-n7eff",
+      "date": "2026-10-23",
+      "amount": 165.98,
+      "source": "facebook_api",
+      "createdAt": "2026-10-23T13:04:31.945Z",
+      "updatedAt": "2026-10-24T17:22:07.453Z"
+    },
+    {
+      "id": "spend-mvmcv6bn-aya6s",
+      "date": "2026-10-24",
+      "amount": 155.11,
+      "source": "facebook_api",
+      "createdAt": "2026-10-24T12:08:48.323Z",
+      "updatedAt": "2026-10-24T23:50:36.587Z"
     }
   ],
   "expenses": [
