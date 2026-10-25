@@ -203,7 +203,7 @@ export default function AdminMetricsView({
             }`}
           >
             <CalendarIcon className="w-3.5 h-3.5" />
-            <span>📅 Calendário Mensal (Dia a Dia)</span>
+            <span>📅 Lucro por Dia (Calendário)</span>
           </button>
         </div>
       </div>

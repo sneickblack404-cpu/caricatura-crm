@@ -885,10 +885,10 @@ app.post('/api/facebook/spend', (req, res) => {
   res.json({ success: true, date: targetDate, amount: numericAmount });
 });
 
-// 8.1. Calendário Mensal de Vendas (Dia a Dia)
+// 8.1. Calendário Mensal de Vendas & Lucro Líquido (Dia a Dia)
 app.get('/api/metrics/calendar', (req, res) => {
   const db = getDb();
-  const { month, attendantId = 'all', whatsappId = 'all' } = req.query;
+  const { month } = req.query;
 
   // Se não passar month, pega o mês atual em horário de Brasília (ex: '2026-10')
   const targetMonth = month && /^\d{4}-\d{2}$/.test(month) ? month : getBrazilDateStr(new Date()).substring(0, 7);
@@ -899,6 +899,11 @@ app.get('/api/metrics/calendar', (req, res) => {
   // Total de dias no mês
   const daysInMonth = new Date(year, monthNum, 0).getDate();
   const todayStr = getBrazilDateStr(new Date());
+
+  // Configurações de Gateway e Tráfego
+  const feesConfig = db.settings?.gatewayFees || { pix: 0.99, cartao_vista: 3.49, cartao_parcelado: 6.99, boleto: 2.50 };
+  const manualDailySpend = Number(db.settings?.facebookAds?.dailySpendManual) || 60;
+  const artCostPerItem = Number(db.settings?.defaultArtCost) || 0;
 
   // Mapa de dias do mês 01 a 31
   const daysMap = {};
@@ -915,19 +920,18 @@ app.get('/api/metrics/calendar', (req, res) => {
       isToday: dateStr === todayStr,
       grossAmount: 0,
       salesCount: 0,
-      gustavoGross: 0,
-      gustavoCount: 0,
+      gatewayFees: 0,
+      teamCommissions: 0,
+      adSpend: 0,
+      expenses: 0,
+      artCost: 0,
+      netProfit: 0,
       sales: []
     };
   }
 
-  // Filtrar vendas pagas do mês
+  // 1. Processar Vendas Pagas do Mês
   const paidSales = (db.sales || []).filter(s => s.status === 'pago');
-
-  let monthGross = 0;
-  let monthCount = 0;
-  let monthGustavoGross = 0;
-  let monthGustavoCount = 0;
 
   paidSales.forEach(s => {
     const rawDate = s.createdAt || s.date;
@@ -939,28 +943,29 @@ app.get('/api/metrics/calendar', (req, res) => {
       const amt = Number(s.amount) || 0;
       const isGustavo = s.attendantId === 'user-gustavo';
 
-      // Acumula Gustavo separadamente
-      if (isGustavo) {
-        daysMap[brazilDateStr].gustavoGross = Math.round((daysMap[brazilDateStr].gustavoGross + amt) * 100) / 100;
-        daysMap[brazilDateStr].gustavoCount += 1;
-        monthGustavoGross = Math.round((monthGustavoGross + amt) * 100) / 100;
-        monthGustavoCount += 1;
+      // Taxas de Gateway
+      let fee = 0;
+      if (s.paymentMethod === 'pix') {
+        fee = amt * ((feesConfig.pix || 0.99) / 100);
+      } else if (s.paymentMethod === 'cartao_vista') {
+        fee = amt * ((feesConfig.cartao_vista || 3.49) / 100);
+      } else if (s.paymentMethod === 'cartao_parcelado') {
+        fee = amt * ((feesConfig.cartao_parcelado || 6.99) / 100);
+      } else if (s.paymentMethod === 'boleto') {
+        fee = feesConfig.boleto || 2.50;
       }
 
-      // Aplica filtro de atendente se solicitado
-      if (attendantId !== 'all') {
-        if (attendantId === 'gustavo' || attendantId === 'user-gustavo') {
-          if (!isGustavo) return;
-        } else if (s.attendantId !== attendantId) {
-          return;
-        }
-      }
-      if (whatsappId !== 'all' && s.whatsappId !== whatsappId) {
-        return;
+      // Comissão de Equipe (20% fixo para atendentes externos)
+      let comm = 0;
+      if (!isGustavo) {
+        comm = amt * 0.20;
       }
 
       daysMap[brazilDateStr].grossAmount = Math.round((daysMap[brazilDateStr].grossAmount + amt) * 100) / 100;
+      daysMap[brazilDateStr].gatewayFees = Math.round((daysMap[brazilDateStr].gatewayFees + fee) * 100) / 100;
+      daysMap[brazilDateStr].teamCommissions = Math.round((daysMap[brazilDateStr].teamCommissions + comm) * 100) / 100;
       daysMap[brazilDateStr].salesCount += 1;
+
       daysMap[brazilDateStr].sales.push({
         id: s.id,
         amount: amt,
@@ -974,26 +979,80 @@ app.get('/api/metrics/calendar', (req, res) => {
         whatsappName: s.whatsappName,
         paymentMethod: s.paymentMethod
       });
-
-      monthGross = Math.round((monthGross + amt) * 100) / 100;
-      monthCount += 1;
     }
   });
 
-  // Melhores dias e métricas
+  // 2. Processar Gastos Extras / Operacionais do Mês (excluindo repasses de comissão para não duplicar)
+  (db.expenses || []).forEach(e => {
+    if (e.category === 'pagamento_atendente') return;
+    const expDate = e.date || (e.createdAt ? getBrazilDateStr(e.createdAt) : null);
+    if (!expDate || !expDate.startsWith(targetMonth)) return;
+
+    if (daysMap[expDate]) {
+      const expAmt = Number(e.amount) || 0;
+      daysMap[expDate].expenses = Math.round((daysMap[expDate].expenses + expAmt) * 100) / 100;
+    }
+  });
+
+  // 3. Processar Gastos com Meta Ads & Calcular Lucro Líquido Real por Dia
   const daysArray = Object.values(daysMap);
+  let totalGross = 0;
+  let totalNetProfit = 0;
+  let totalAds = 0;
+  let totalTeamCommissions = 0;
+  let totalGatewayFees = 0;
+  let totalExpenses = 0;
+  let totalSales = 0;
+
   let bestDay = null;
   let daysWithSales = 0;
-  let goalHitDays = 0;
+  let profitableDays = 0;
+  let lossDays = 0;
 
   daysArray.forEach(d => {
+    // Determina o gasto com Meta Ads do dia
+    const recordedSpend = (db.adSpends || []).find(s => s.date === d.date);
+    if (recordedSpend && recordedSpend.amount !== undefined) {
+      d.adSpend = Number(recordedSpend.amount) || 0;
+    } else if (d.grossAmount > 0) {
+      // Se vendeu no dia e não tem registro específico, aplica o gasto diário padrão de anúncios
+      d.adSpend = manualDailySpend;
+    } else {
+      d.adSpend = 0;
+    }
+
+    d.artCost = Math.round((d.salesCount * artCostPerItem) * 100) / 100;
+
+    // FÓRMULA OFICIAL DO LUCRO LÍQUIDO REAL DO DIA:
+    // Lucro = Faturamento Bruto - Taxas Gateway - Comissões Equipe - Meta Ads - Gastos Extras - Custo Artes
+    d.netProfit = Math.round((d.grossAmount - d.gatewayFees - d.teamCommissions - d.adSpend - d.expenses - d.artCost) * 100) / 100;
+
+    // Acumuladores mensais
+    totalGross = Math.round((totalGross + d.grossAmount) * 100) / 100;
+    totalNetProfit = Math.round((totalNetProfit + d.netProfit) * 100) / 100;
+    totalAds = Math.round((totalAds + d.adSpend) * 100) / 100;
+    totalTeamCommissions = Math.round((totalTeamCommissions + d.teamCommissions) * 100) / 100;
+    totalGatewayFees = Math.round((totalGatewayFees + d.gatewayFees) * 100) / 100;
+    totalExpenses = Math.round((totalExpenses + d.expenses) * 100) / 100;
+    totalSales += d.salesCount;
+
     if (d.grossAmount > 0) {
       daysWithSales += 1;
-      if (d.grossAmount >= 160) goalHitDays += 1;
-      if (!bestDay || d.grossAmount > bestDay.grossAmount) {
+    }
+
+    if (d.netProfit > 0) {
+      profitableDays += 1;
+    } else if (d.netProfit < 0) {
+      lossDays += 1;
+    }
+
+    // Melhor dia por Lucro Líquido Real
+    if (d.grossAmount > 0 || d.netProfit > 0) {
+      if (!bestDay || d.netProfit > bestDay.netProfit) {
         bestDay = {
           date: d.date,
           day: d.day,
+          netProfit: d.netProfit,
           grossAmount: d.grossAmount,
           salesCount: d.salesCount
         };
@@ -1001,21 +1060,25 @@ app.get('/api/metrics/calendar', (req, res) => {
     }
   });
 
-  const dailyAverage = daysWithSales > 0 ? Math.round((monthGross / daysWithSales) * 100) / 100 : 0;
+  const dailyAverage = daysWithSales > 0 ? Math.round((totalNetProfit / daysWithSales) * 100) / 100 : 0;
 
   res.json({
     month: targetMonth,
     daysInMonth,
     days: daysArray,
     summary: {
-      totalGross: monthGross,
-      totalSales: monthCount,
-      gustavoGross: monthGustavoGross,
-      gustavoSales: monthGustavoCount,
+      totalNetProfit,
+      totalGross,
+      totalAds,
+      totalTeamCommissions,
+      totalGatewayFees,
+      totalExpenses,
+      totalSales,
       dailyAverage,
-      bestDay: bestDay || { date: '', day: 0, grossAmount: 0, salesCount: 0 },
+      bestDay: bestDay || { date: '', day: 0, netProfit: 0, grossAmount: 0, salesCount: 0 },
       daysWithSales,
-      goalHitDays
+      profitableDays,
+      lossDays
     }
   });
 });
