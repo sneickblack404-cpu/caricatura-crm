@@ -140,7 +140,7 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 25,
+      "amount": 24.9,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
