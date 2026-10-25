@@ -1061,6 +1061,7 @@ app.get('/api/metrics/calendar', (req, res) => {
   });
 
   const dailyAverage = daysWithSales > 0 ? Math.round((totalNetProfit / daysWithSales) * 100) / 100 : 0;
+  const dailyGrossAverage = daysWithSales > 0 ? Math.round((totalGross / daysWithSales) * 100) / 100 : 0;
 
   res.json({
     month: targetMonth,
@@ -1075,6 +1076,7 @@ app.get('/api/metrics/calendar', (req, res) => {
       totalExpenses,
       totalSales,
       dailyAverage,
+      dailyGrossAverage,
       bestDay: bestDay || { date: '', day: 0, netProfit: 0, grossAmount: 0, salesCount: 0 },
       daysWithSales,
       profitableDays,

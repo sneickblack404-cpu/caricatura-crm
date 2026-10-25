@@ -13,7 +13,8 @@ import {
   UserCheck,
   Building2,
   Trash2,
-  Check
+  Check,
+  TrendingUp
 } from 'lucide-react';
 import RankingBoard from '../components/RankingBoard';
 import { formatCurrency, formatPhone, api } from '../api';
@@ -121,14 +122,14 @@ export default function DashboardView({
           </div>
         </div>
       )}
-      {/* 5 Cards Superiores no estilo exato do X1 CRM */}
+      {/* 5 Cards Superiores */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
         {/* Card 1: Faturamento */}
         <div className="bg-[#151720] border border-[#272938] rounded-2xl p-4 shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">
               <DollarSign className="w-3.5 h-3.5 text-brand" />
-              <span>{isAdmin ? 'FATURAMENTO TOTAL' : 'FATURAMENTO'}</span>
+              <span>{isAdmin && ceoViewMode === 'company' ? 'FATURAMENTO TOTAL' : 'FATURAMENTO'}</span>
             </div>
             <div className="text-2xl font-black text-white tracking-tight">
               {formatCurrency(myGross)}
@@ -140,71 +141,129 @@ export default function DashboardView({
           </div>
         </div>
 
-        {/* Card 2: Meta Diária de R$ 160,00 */}
-        <div className="bg-[#151720] border border-[#272938] rounded-2xl p-4 shadow-sm flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">
-              <Target className="w-3.5 h-3.5 text-rose-500" />
-              <span>META DIÁRIA (R$ 160)</span>
+        {/* Card 2: Para o Dono na visão Empresa = LUCRO LÍQUIDO REAL DO DIA / Para Atendente = Meta Diária */}
+        {isAdmin && ceoViewMode === 'company' ? (
+          <div className="bg-[#151720] border border-emerald-500/30 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-emerald-500/20 bg-gradient-to-br from-[#151720] to-[#12241c]/40">
+            <div>
+              <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                <TrendingUp className="w-3.5 h-3.5" />
+                <span>LUCRO LÍQUIDO ({periodLabel.toUpperCase()})</span>
+              </div>
+              <div className={`text-2xl font-black tracking-tight ${
+                (metrics?.netProfit ?? 0) >= 0 ? 'text-emerald-400' : 'text-rose-400'
+              }`}>
+                {(metrics?.netProfit ?? 0) >= 0 ? '+' : ''}{formatCurrency(metrics?.netProfit ?? 0)}
+              </div>
             </div>
-            <div className="text-2xl font-black text-white tracking-tight flex items-baseline gap-2">
-              <span>{goalProgress}%</span>
-              {goalProgress >= 100 && (
-                <span className="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">
-                  Batida! 🎉
-                </span>
+            <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-[#20222f] flex items-center justify-between">
+              <span>Livre após taxas e equipe</span>
+              <span className="text-emerald-400 font-bold">
+                {metrics?.profitMargin !== undefined ? `${metrics.profitMargin.toFixed(1)}% margem` : 'Líquido'}
+              </span>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-[#151720] border border-[#272938] rounded-2xl p-4 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                <Target className="w-3.5 h-3.5 text-rose-500" />
+                <span>META DIÁRIA (R$ 160)</span>
+              </div>
+              <div className="text-2xl font-black text-white tracking-tight flex items-baseline gap-2">
+                <span>{goalProgress}%</span>
+                {goalProgress >= 100 && (
+                  <span className="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                    Batida! 🎉
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="mt-3 pt-2 border-t border-[#20222f]">
+              <div className="w-full bg-[#0c0d12] h-1.5 rounded-full overflow-hidden mb-1">
+                <div 
+                  className="h-full bg-rose-500 transition-all duration-700" 
+                  style={{ width: `${goalProgress}%` }}
+                />
+              </div>
+              <div className="text-[11px] text-gray-400 flex items-center justify-between">
+                <span>{formatCurrency(myGross)}</span>
+                <span>/ R$ 160,00 no dia</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Card 3: Para o Dono na visão Empresa = TRÁFEGO META ADS / Para Atendente = Sua Comissão */}
+        {isAdmin && ceoViewMode === 'company' ? (
+          <div className="bg-[#151720] border border-[#1877F2]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-[#1877F2]/20">
+            <div>
+              <div className="flex items-center gap-2 text-[#93c5fd] text-xs font-semibold uppercase tracking-wider mb-2">
+                <DollarSign className="w-3.5 h-3.5 text-[#1877F2]" />
+                <span>TRÁFEGO (META ADS)</span>
+              </div>
+              <div className="text-2xl font-black text-[#60a5fa] tracking-tight">
+                -{formatCurrency(metrics?.facebookAdSpend ?? 0)}
+              </div>
+            </div>
+            <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-[#20222f] flex items-center justify-between">
+              <span>Investimento em anúncios</span>
+              <span className="text-blue-300 font-medium">{periodLabel}</span>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-[#151720] border border-[#8B5CF6]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between relative ring-1 ring-[#8B5CF6]/20">
+            <div>
+              <div className="flex items-center gap-2 text-[#a78bfa] text-xs font-semibold uppercase tracking-wider mb-2">
+                <Percent className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                <span>SUA COMISSÃO ({myCommissionRate}%)</span>
+              </div>
+              <div className="text-2xl font-black text-[#8B5CF6] tracking-tight">
+                {formatCurrency(myCommission)}
+              </div>
+            </div>
+            <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-[#20222f]">
+              <span>sobre {formatCurrency(myGross)}</span>
+            </div>
+          </div>
+        )}
+
+        {/* Card 4: Para o Dono na visão Empresa = COMISSÕES EQUIPE / Para Atendente = Bônus Meta */}
+        {isAdmin && ceoViewMode === 'company' ? (
+          <div className="bg-[#151720] border border-[#8B5CF6]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-[#8B5CF6]/20">
+            <div>
+              <div className="flex items-center gap-2 text-[#c4b5fd] text-xs font-semibold uppercase tracking-wider mb-2">
+                <Percent className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                <span>COMISSÕES DA EQUIPE</span>
+              </div>
+              <div className="text-2xl font-black text-[#a78bfa] tracking-tight">
+                -{formatCurrency(metrics?.teamCommissionsPeriod ?? 0)}
+              </div>
+            </div>
+            <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-[#20222f] flex items-center justify-between">
+              <span>20% pago aos atendentes</span>
+              <span className="text-purple-300 font-medium">Equipe</span>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-[#151720] border border-[#10B981]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-[#10B981]/20">
+            <div>
+              <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                <Gift className="w-3.5 h-3.5 text-emerald-400" />
+                <span>BÔNUS META</span>
+              </div>
+              <div className="text-2xl font-black text-emerald-400 tracking-tight">
+                {goalProgress >= 100 ? 'R$ 150,00' : 'R$ 0,00'}
+              </div>
+            </div>
+            <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-[#20222f]">
+              {remainingForGoal > 0 ? (
+                <span>Faltam {formatCurrency(remainingForGoal)} p/ meta de R$ 160</span>
+              ) : (
+                <span className="text-emerald-400 font-bold">Bônus liberado!</span>
               )}
             </div>
           </div>
-          <div className="mt-3 pt-2 border-t border-[#20222f]">
-            <div className="w-full bg-[#0c0d12] h-1.5 rounded-full overflow-hidden mb-1">
-              <div 
-                className="h-full bg-rose-500 transition-all duration-700" 
-                style={{ width: `${goalProgress}%` }}
-              />
-            </div>
-            <div className="text-[11px] text-gray-400 flex items-center justify-between">
-              <span>{formatCurrency(myGross)}</span>
-              <span>/ R$ 160,00 no dia</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3: Comissão */}
-        <div className="bg-[#151720] border border-[#8B5CF6]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between relative ring-1 ring-[#8B5CF6]/20">
-          <div>
-            <div className="flex items-center gap-2 text-[#a78bfa] text-xs font-semibold uppercase tracking-wider mb-2">
-              <Percent className="w-3.5 h-3.5 text-[#8B5CF6]" />
-              <span>{isAdmin ? 'COMISSÕES A PAGAR' : `SUA COMISSÃO (${myCommissionRate}%)`}</span>
-            </div>
-            <div className="text-2xl font-black text-[#8B5CF6] tracking-tight">
-              {formatCurrency(myCommission)}
-            </div>
-          </div>
-          <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-[#20222f]">
-            <span>sobre {formatCurrency(myGross)}</span>
-          </div>
-        </div>
-
-        {/* Card 4: Bônus Meta */}
-        <div className="bg-[#151720] border border-[#10B981]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-[#10B981]/20">
-          <div>
-            <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-2">
-              <Gift className="w-3.5 h-3.5 text-emerald-400" />
-              <span>BÔNUS META</span>
-            </div>
-            <div className="text-2xl font-black text-emerald-400 tracking-tight">
-              {goalProgress >= 100 ? 'R$ 150,00' : 'R$ 0,00'}
-            </div>
-          </div>
-          <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-[#20222f]">
-            {remainingForGoal > 0 ? (
-              <span>Faltam {formatCurrency(remainingForGoal)} p/ meta de R$ 160</span>
-            ) : (
-              <span className="text-emerald-400 font-bold">Bônus liberado!</span>
-            )}
-          </div>
-        </div>
+        )}
 
         {/* Card 5: Follow-ups Pendentes */}
         <div className="bg-[#151720] border border-[#272938] rounded-2xl p-4 shadow-sm flex flex-col justify-between">
