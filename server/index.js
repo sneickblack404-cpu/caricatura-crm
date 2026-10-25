@@ -885,6 +885,141 @@ app.post('/api/facebook/spend', (req, res) => {
   res.json({ success: true, date: targetDate, amount: numericAmount });
 });
 
+// 8.1. Calendário Mensal de Vendas (Dia a Dia)
+app.get('/api/metrics/calendar', (req, res) => {
+  const db = getDb();
+  const { month, attendantId = 'all', whatsappId = 'all' } = req.query;
+
+  // Se não passar month, pega o mês atual em horário de Brasília (ex: '2026-10')
+  const targetMonth = month && /^\d{4}-\d{2}$/.test(month) ? month : getBrazilDateStr(new Date()).substring(0, 7);
+  const [yearStr, monthStr] = targetMonth.split('-');
+  const year = parseInt(yearStr, 10);
+  const monthNum = parseInt(monthStr, 10);
+
+  // Total de dias no mês
+  const daysInMonth = new Date(year, monthNum, 0).getDate();
+  const todayStr = getBrazilDateStr(new Date());
+
+  // Mapa de dias do mês 01 a 31
+  const daysMap = {};
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dayPadded = String(d).padStart(2, '0');
+    const dateStr = `${targetMonth}-${dayPadded}`;
+    const dateObj = new Date(`${dateStr}T12:00:00Z`);
+    const weekday = dateObj.getDay(); // 0 = Dom, 1 = Seg ... 6 = Sab
+
+    daysMap[dateStr] = {
+      date: dateStr,
+      day: d,
+      weekday,
+      isToday: dateStr === todayStr,
+      grossAmount: 0,
+      salesCount: 0,
+      gustavoGross: 0,
+      gustavoCount: 0,
+      sales: []
+    };
+  }
+
+  // Filtrar vendas pagas do mês
+  const paidSales = (db.sales || []).filter(s => s.status === 'pago');
+
+  let monthGross = 0;
+  let monthCount = 0;
+  let monthGustavoGross = 0;
+  let monthGustavoCount = 0;
+
+  paidSales.forEach(s => {
+    const rawDate = s.createdAt || s.date;
+    if (!rawDate) return;
+    const brazilDateStr = getBrazilDateStr(rawDate);
+    if (!brazilDateStr.startsWith(targetMonth)) return;
+
+    if (daysMap[brazilDateStr]) {
+      const amt = Number(s.amount) || 0;
+      const isGustavo = s.attendantId === 'user-gustavo';
+
+      // Acumula Gustavo separadamente
+      if (isGustavo) {
+        daysMap[brazilDateStr].gustavoGross = Math.round((daysMap[brazilDateStr].gustavoGross + amt) * 100) / 100;
+        daysMap[brazilDateStr].gustavoCount += 1;
+        monthGustavoGross = Math.round((monthGustavoGross + amt) * 100) / 100;
+        monthGustavoCount += 1;
+      }
+
+      // Aplica filtro de atendente se solicitado
+      if (attendantId !== 'all') {
+        if (attendantId === 'gustavo' || attendantId === 'user-gustavo') {
+          if (!isGustavo) return;
+        } else if (s.attendantId !== attendantId) {
+          return;
+        }
+      }
+      if (whatsappId !== 'all' && s.whatsappId !== whatsappId) {
+        return;
+      }
+
+      daysMap[brazilDateStr].grossAmount = Math.round((daysMap[brazilDateStr].grossAmount + amt) * 100) / 100;
+      daysMap[brazilDateStr].salesCount += 1;
+      daysMap[brazilDateStr].sales.push({
+        id: s.id,
+        amount: amt,
+        time: rawDate,
+        customerName: s.customerName,
+        customerPhone: s.customerPhone,
+        profession: s.profession,
+        attendantId: s.attendantId,
+        attendantName: s.attendantName,
+        whatsappId: s.whatsappId,
+        whatsappName: s.whatsappName,
+        paymentMethod: s.paymentMethod
+      });
+
+      monthGross = Math.round((monthGross + amt) * 100) / 100;
+      monthCount += 1;
+    }
+  });
+
+  // Melhores dias e métricas
+  const daysArray = Object.values(daysMap);
+  let bestDay = null;
+  let daysWithSales = 0;
+  let goalHitDays = 0;
+
+  daysArray.forEach(d => {
+    if (d.grossAmount > 0) {
+      daysWithSales += 1;
+      if (d.grossAmount >= 160) goalHitDays += 1;
+      if (!bestDay || d.grossAmount > bestDay.grossAmount) {
+        bestDay = {
+          date: d.date,
+          day: d.day,
+          grossAmount: d.grossAmount,
+          salesCount: d.salesCount
+        };
+      }
+    }
+  });
+
+  const dailyAverage = daysWithSales > 0 ? Math.round((monthGross / daysWithSales) * 100) / 100 : 0;
+
+  res.json({
+    month: targetMonth,
+    daysInMonth,
+    days: daysArray,
+    summary: {
+      totalGross: monthGross,
+      totalSales: monthCount,
+      gustavoGross: monthGustavoGross,
+      gustavoSales: monthGustavoCount,
+      dailyAverage,
+      bestDay: bestDay || { date: '', day: 0, grossAmount: 0, salesCount: 0 },
+      daysWithSales,
+      goalHitDays
+    }
+  });
+});
+
 // 8. Métricas Executivas
 app.get('/api/metrics', async (req, res) => {
   const db = getDb();

@@ -244,6 +244,13 @@ export const api = {
       headers: defaultHeaders
     });
     return res.json();
+  },
+
+  // Calendário Mensal de Vendas
+  async getMonthlyCalendar(month, attendantId = 'all', whatsappId = 'all') {
+    const params = new URLSearchParams({ month, attendantId, whatsappId }).toString();
+    const res = await fetch(`${API_BASE}/metrics/calendar?${params}`, { headers: defaultHeaders });
+    return res.json();
   }
 };
 

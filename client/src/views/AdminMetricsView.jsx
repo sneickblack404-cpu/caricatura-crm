@@ -24,11 +24,13 @@ import {
   Clock,
   Smartphone,
   Layers,
-  Wallet
+  Wallet,
+  Calendar as CalendarIcon
 } from 'lucide-react';
 import { formatCurrency, api } from '../api';
 import FacebookAdsModal from '../components/FacebookAdsModal';
 import ExpenseModal from '../components/ExpenseModal';
+import SalesCalendar from '../components/SalesCalendar';
 
 const FacebookIcon = ({ className = "w-4 h-4" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -57,6 +59,7 @@ export default function AdminMetricsView({
   const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
   const [expenseToEdit, setExpenseToEdit] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+  const [activeSubTab, setActiveSubTab] = useState('overview'); // 'overview' ou 'calendar'
 
   const handleSyncFb = async () => {
     try {
@@ -173,8 +176,57 @@ export default function AdminMetricsView({
 
   return (
     <div className="space-y-6">
-      {/* Top Banner de Resumo do Dono */}
-      <div className="bg-gradient-to-r from-[#171a27] via-[#1a1e2f] to-[#171a27] border border-[#2d3148] rounded-2xl p-6 shadow-xl relative overflow-hidden">
+      {/* Seletor de Modo: Visão Geral / Lucro vs Calendário Mensal Dia a Dia */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#151720] border border-[#272938] rounded-2xl p-3 px-4 shadow-sm">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-brand animate-pulse"></span>
+          <span className="text-xs font-bold text-gray-200">Painel do CEO · Modo de Exibição:</span>
+        </div>
+        <div className="flex items-center gap-1.5 bg-[#181a24] p-1 rounded-xl border border-[#272938] w-full sm:w-auto">
+          <button
+            onClick={() => setActiveSubTab('overview')}
+            className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+              activeSubTab === 'overview'
+                ? 'bg-brand text-black shadow-sm font-extrabold'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <TrendingUp className="w-3.5 h-3.5" />
+            <span>📊 Visão Geral & Lucro</span>
+          </button>
+          <button
+            onClick={() => setActiveSubTab('calendar')}
+            className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+              activeSubTab === 'calendar'
+                ? 'bg-brand text-black shadow-sm font-extrabold'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            <CalendarIcon className="w-3.5 h-3.5" />
+            <span>📅 Calendário Mensal (Dia a Dia)</span>
+          </button>
+        </div>
+      </div>
+
+      {activeSubTab === 'calendar' ? (
+        <SalesCalendar
+          users={users}
+          whatsapps={whatsapps}
+          onSelectDayForFilter={(dayDate) => {
+            if (onSetCustomDates) {
+              onSetCustomDates(dayDate, dayDate);
+            } else if (setPeriod) {
+              setPeriod('personalizado');
+              if (setCustomStartDate) setCustomStartDate(dayDate);
+              if (setCustomEndDate) setCustomEndDate(dayDate);
+            }
+            setActiveSubTab('overview');
+          }}
+        />
+      ) : (
+        <>
+          {/* Top Banner de Resumo do Dono */}
+          <div className="bg-gradient-to-r from-[#171a27] via-[#1a1e2f] to-[#171a27] border border-[#2d3148] rounded-2xl p-6 shadow-xl relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -291,6 +343,16 @@ export default function AdminMetricsView({
           </div>
 
           <div className="flex items-center gap-2.5 flex-wrap self-start md:self-auto">
+            <button
+              type="button"
+              onClick={() => setActiveSubTab('calendar')}
+              className="flex items-center gap-1.5 bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 font-bold text-xs px-3.5 py-2.5 rounded-xl border border-yellow-500/40 transition shadow-md"
+              title="Ver calendário do mês todo com vendas dia a dia"
+            >
+              <CalendarIcon className="w-4 h-4 text-brand" />
+              <span>📅 Calendário Mensal</span>
+            </button>
+
             <button
               onClick={() => {
                 setExpenseToEdit(null);
@@ -840,6 +902,8 @@ export default function AdminMetricsView({
           </div>
         )}
       </div>
+      </>
+      )}
 
 
 
