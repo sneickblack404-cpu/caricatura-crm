@@ -155,7 +155,7 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 20,
+      "amount": 19.9,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
