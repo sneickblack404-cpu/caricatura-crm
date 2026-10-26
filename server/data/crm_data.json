@@ -15,9 +15,9 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-26T15:51:11.001Z",
+      "lastSync": "2026-10-26T15:51:21.546Z",
       "lastSpend": 99.46,
-      "todaySpend": 86.57,
+      "todaySpend": 85.83,
       "yesterdaySpend": 261.08
     }
   },
@@ -116,6 +116,51 @@
     }
   ],
   "sales": [
+    {
+      "id": "sale-mvpfp3cj-je7xg",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 25,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-26T15:51:21.742Z"
+    },
+    {
+      "id": "sale-mvpfp1t3-kfl21",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-26T15:51:19.743Z"
+    },
+    {
+      "id": "sale-mvpfoz4a-62z34",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-26T15:51:16.251Z"
+    },
     {
       "id": "sale-mvpfotye-qs13a",
       "attendantId": "user-gustavo",
@@ -9118,10 +9163,10 @@
     {
       "id": "spend-mvp7tld0-qcej7",
       "date": "2026-10-26",
-      "amount": 86.57,
+      "amount": 85.83,
       "source": "facebook_api",
       "createdAt": "2026-10-26T12:10:54.948Z",
-      "updatedAt": "2026-10-26T15:51:11.002Z"
+      "updatedAt": "2026-10-26T15:51:21.546Z"
     }
   ],
   "expenses": [
