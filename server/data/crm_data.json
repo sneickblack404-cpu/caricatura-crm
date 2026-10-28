@@ -15,7 +15,7 @@
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "dailySpendManual": 60,
       "mode": "api",
-      "lastSync": "2026-10-28T22:53:41.567Z",
+      "lastSync": "2026-10-28T22:53:52.323Z",
       "lastSpend": 99.46,
       "todaySpend": 150.65,
       "yesterdaySpend": 149.33
@@ -116,6 +116,66 @@
     }
   ],
   "sales": [
+    {
+      "id": "sale-mvspo8xw-8vw7e",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-28T22:53:57.057Z"
+    },
+    {
+      "id": "sale-mvspo5wm-s33cd",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 20,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-28T22:53:53.119Z"
+    },
+    {
+      "id": "sale-mvspo48e-0xrft",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 10,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-28T22:53:50.946Z"
+    },
+    {
+      "id": "sale-mvspo1md-ue93e",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 20,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-28T22:53:47.553Z"
+    },
     {
       "id": "sale-mvspnxb3-q3wga",
       "attendantId": "user-gustavo",
@@ -9720,7 +9780,7 @@
       "amount": 150.65,
       "source": "facebook_api",
       "createdAt": "2026-10-28T18:47:39.297Z",
-      "updatedAt": "2026-10-28T22:53:41.567Z"
+      "updatedAt": "2026-10-28T22:53:52.323Z"
     }
   ],
   "expenses": [
