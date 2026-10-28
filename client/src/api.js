@@ -8,7 +8,8 @@ if (typeof window !== 'undefined') {
 export const API_BASE = '/api';
 
 export const defaultHeaders = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'ngrok-skip-browser-warning': 'true'
 };
 
 export const api = {
