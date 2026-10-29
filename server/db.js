@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { saveNeonDb, loadNeonDb, initNeonDb } from './neon_db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -161,7 +162,8 @@ export function saveDb(data) {
     const tempFile = `${DB_FILE}.tmp`;
     fs.writeFileSync(tempFile, JSON.stringify(data, null, 2), 'utf-8');
     fs.renameSync(tempFile, DB_FILE);
-    queueCloudSync(data);
+    saveNeonDb(data); // Salva no Neon PostgreSQL imediatamente
+    queueCloudSync(data); // Mantém backup secundário no GitHub
     return true;
   } catch (err) {
     console.error('Erro ao salvar DB:', err);
@@ -236,6 +238,38 @@ export function queueCloudSync(data) {
 }
 
 export async function initCloudDb() {
+  // 1. Inicializar e sincronizar com o Neon PostgreSQL (Banco Primário na Nuvem)
+  try {
+    await initNeonDb();
+    const neonDb = await loadNeonDb();
+    if (neonDb && neonDb.sales && Array.isArray(neonDb.sales) && neonDb.sales.length > 0) {
+      const localDb = getDb();
+      const localIds = new Set((localDb.sales || []).map(s => s.id));
+      let updated = false;
+
+      neonDb.sales.forEach(sale => {
+        if (!localIds.has(sale.id)) {
+          localDb.sales.push(sale);
+          localIds.add(sale.id);
+          updated = true;
+        }
+      });
+
+      if (updated || (localDb.sales && localDb.sales.length < neonDb.sales.length)) {
+        neonDb.sales.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const tempFile = `${DB_FILE}.tmp`;
+        fs.writeFileSync(tempFile, JSON.stringify(neonDb, null, 2), 'utf-8');
+        fs.renameSync(tempFile, DB_FILE);
+        console.log(`[Neon PostgreSQL] Banco restaurado com ${neonDb.sales.length} vendas do Neon!`);
+      } else {
+        console.log(`[Neon PostgreSQL] Banco sincronizado com o Neon (${localDb.sales?.length || 0} vendas).`);
+      }
+    }
+  } catch (err) {
+    console.error('[Neon PostgreSQL] Erro ao sincronizar com Neon:', err.message);
+  }
+
+  // 2. Backup Secundário no GitHub
   if (!GITHUB_TOKEN) return;
   try {
     console.log('[Cloud Backup] Verificando dados na nuvem GitHub...');
