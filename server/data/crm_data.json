@@ -1,6 +1,36 @@
 {
   "sales": [
     {
+      "id": "sale-mvva4hc6-39rr9",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 25,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-30T18:01:58.562Z"
+    },
+    {
+      "id": "sale-mvva4fgu-x8xza",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-30T18:01:56.135Z"
+    },
+    {
       "id": "sale-mvva4b98-dvf9e",
       "attendantId": "user-gustavo",
       "attendantName": "Gustavo Henrick",
