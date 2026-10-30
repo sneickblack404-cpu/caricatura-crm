@@ -9,11 +9,11 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 25,
+      "amount": 19.9,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
-      "createdAt": "2026-10-30T22:57:15.787Z"
+      "createdAt": "2026-10-30T22:57:15.000Z"
     },
     {
       "id": "sale-mvvke4e6-immcb",
@@ -24,11 +24,11 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 25,
+      "amount": 24.9,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
-      "createdAt": "2026-10-30T22:49:24.353Z"
+      "createdAt": "2026-10-30T22:49:24.000Z"
     },
     {
       "id": "sale-mvva4l6k-qfyg5",
@@ -10133,7 +10133,7 @@
       "amount": 158.6,
       "source": "facebook_api",
       "createdAt": "2026-10-30T11:58:25.814Z",
-      "updatedAt": "2026-10-30T23:41:19.438Z"
+      "updatedAt": "2026-10-30T23:41:33.914Z"
     }
   ],
   "expenses": [
@@ -10177,7 +10177,7 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-10-30T23:41:19.438Z",
+      "lastSync": "2026-10-30T23:41:33.914Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 3937.16,
