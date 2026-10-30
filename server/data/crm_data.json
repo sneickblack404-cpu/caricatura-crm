@@ -114,7 +114,7 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 19.9,
+      "amount": 25,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
@@ -10223,7 +10223,7 @@
       "amount": 162.45,
       "source": "facebook_api",
       "createdAt": "2026-10-30T11:58:25.814Z",
-      "updatedAt": "2026-10-30T23:58:43.830Z"
+      "updatedAt": "2026-10-30T23:58:58.829Z"
     }
   ],
   "expenses": [
@@ -10267,7 +10267,7 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-10-30T23:58:43.830Z",
+      "lastSync": "2026-10-30T23:58:58.828Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 3937.16,
