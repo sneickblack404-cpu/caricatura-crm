@@ -9,11 +9,11 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 10,
+      "amount": 24.9,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
-      "createdAt": "2026-10-31T18:31:18.221Z"
+      "createdAt": "2026-10-31T18:31:18.000Z"
     },
     {
       "id": "sale-mvwqlyd2-r89t8",
