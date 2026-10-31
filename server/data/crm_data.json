@@ -1,6 +1,51 @@
 {
   "sales": [
     {
+      "id": "sale-mvwqln8g-kqbqj",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 9.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:30:59.717Z"
+    },
+    {
+      "id": "sale-mvwqlka9-jht9q",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:30:55.895Z"
+    },
+    {
+      "id": "sale-mvwqleyk-2xq6u",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:30:48.952Z"
+    },
+    {
       "id": "sale-mvvooj8b-o7wkr",
       "notes": "",
       "amount": 10,
@@ -10310,18 +10355,18 @@
     {
       "id": "spend-mvux4xzq-396sl",
       "date": "2026-10-30",
-      "amount": 181.58,
+      "amount": 189.56,
       "source": "facebook_api",
       "createdAt": "2026-10-30T11:58:25.814Z",
-      "updatedAt": "2026-10-31T01:51:13.337Z"
+      "updatedAt": "2026-10-31T18:30:54.032Z"
     },
     {
       "id": "spend-mvwfdy08-zcz1n",
       "date": "2026-10-31",
-      "amount": 84.89,
+      "amount": 85.18,
       "source": "facebook_api",
       "createdAt": "2026-10-31T13:17:05.000Z",
-      "updatedAt": "2026-10-31T18:30:33.794Z"
+      "updatedAt": "2026-10-31T18:30:51.719Z"
     }
   ],
   "expenses": [
@@ -10365,13 +10410,13 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-10-31T18:30:33.794Z",
+      "lastSync": "2026-10-31T18:30:55.716Z",
       "accountId": "2247424592846418",
       "connected": true,
-      "lastSpend": 4427.99,
-      "todaySpend": 84.89,
+      "lastSpend": 4438,
+      "todaySpend": 85.18,
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
-      "yesterdaySpend": 149.33,
+      "yesterdaySpend": 189.56,
       "dailySpendManual": 60
     },
     "gatewayFees": {
