@@ -24,11 +24,11 @@
       "customerName": "Cliente Pix",
       "customerPhone": "",
       "profession": "Caminhoneiro",
-      "amount": 24.9,
+      "amount": 37.9,
       "paymentMethod": "pix",
       "notes": "",
       "status": "pago",
-      "createdAt": "2026-10-31T18:31:14.131Z"
+      "createdAt": "2026-10-31T18:31:14.000Z"
     },
     {
       "id": "sale-mvwqlqrk-yx006",
@@ -10408,10 +10408,10 @@
     {
       "id": "spend-mvwfdy08-zcz1n",
       "date": "2026-10-31",
-      "amount": 85.18,
+      "amount": 84.89,
       "source": "facebook_api",
       "createdAt": "2026-10-31T13:17:05.000Z",
-      "updatedAt": "2026-10-31T18:31:37.880Z"
+      "updatedAt": "2026-10-31T18:32:12.123Z"
     }
   ],
   "expenses": [
@@ -10455,11 +10455,11 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-10-31T18:31:55.592Z",
+      "lastSync": "2026-10-31T18:32:12.122Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 4523.18,
-      "todaySpend": 85.18,
+      "todaySpend": 84.89,
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "yesterdaySpend": 189.56,
       "dailySpendManual": 60
