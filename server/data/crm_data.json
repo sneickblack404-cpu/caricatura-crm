@@ -10438,10 +10438,10 @@
     {
       "id": "spend-mvwfdy08-zcz1n",
       "date": "2026-10-31",
-      "amount": 89.29,
+      "amount": 89.88,
       "source": "facebook_api",
       "createdAt": "2026-10-31T13:17:05.000Z",
-      "updatedAt": "2026-10-31T19:07:35.688Z"
+      "updatedAt": "2026-10-31T19:08:36.063Z"
     }
   ],
   "expenses": [
@@ -10485,11 +10485,11 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-10-31T19:07:35.688Z",
+      "lastSync": "2026-10-31T19:08:36.063Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 4523.18,
-      "todaySpend": 89.29,
+      "todaySpend": 89.88,
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "yesterdaySpend": 189.56,
       "dailySpendManual": 60
