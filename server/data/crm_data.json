@@ -10836,7 +10836,7 @@
       "amount": 180.38,
       "source": "facebook_api",
       "createdAt": "2026-11-01T03:06:14.723Z",
-      "updatedAt": "2026-11-01T21:24:19.992Z"
+      "updatedAt": "2026-11-01T21:24:35.476Z"
     },
     {
       "id": "spend-mvx90evo-piaf7",
@@ -11083,7 +11083,7 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-01T21:24:19.992Z",
+      "lastSync": "2026-11-01T21:24:35.476Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 0,
