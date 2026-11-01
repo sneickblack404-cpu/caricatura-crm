@@ -734,6 +734,71 @@ async function fetchMetaAdSpend(db, period = 'hoje', startDate, endDate, forceRe
   }
 }
 
+// Sincroniza os gastos diários da Meta API (dia a dia) para o mês especificado
+async function syncMetaDailySpendsForMonth(db, targetMonth) {
+  const fbConfig = db.settings?.facebookAds || {};
+  if (fbConfig.mode !== 'api' || !fbConfig.accessToken || !fbConfig.accountId) {
+    return;
+  }
+
+  const cacheKey = `meta_daily_spends_${targetMonth}`;
+  const cached = metaApiCache.get(cacheKey);
+  if (cached && (Date.now() - cached.timestamp < 120000)) { // 2 minutos de cache
+    return;
+  }
+
+  const [yearStr, monthStr] = targetMonth.split('-');
+  const year = parseInt(yearStr, 10);
+  const monthNum = parseInt(monthStr, 10);
+  const daysInMonth = new Date(year, monthNum, 0).getDate();
+  const startDate = `${targetMonth}-01`;
+  const endDate = `${targetMonth}-${String(daysInMonth).padStart(2, '0')}`;
+  const actId = normalizeActId(fbConfig.accountId);
+
+  const url = `https://graph.facebook.com/v21.0/${actId}/insights?time_range=${encodeURIComponent(JSON.stringify({ since: startDate, until: endDate }))}&time_increment=1&fields=spend&access_token=${fbConfig.accessToken}&limit=100`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.data && Array.isArray(data.data)) {
+      if (!db.adSpends) db.adSpends = [];
+      let updatedAny = false;
+
+      data.data.forEach(item => {
+        const dateStr = item.date_start;
+        const spendAmt = parseFloat(item.spend) || 0;
+        const existingIdx = db.adSpends.findIndex(s => s.date === dateStr);
+        if (existingIdx !== -1) {
+          if (db.adSpends[existingIdx].amount !== spendAmt) {
+            db.adSpends[existingIdx].amount = spendAmt;
+            db.adSpends[existingIdx].source = 'facebook_api';
+            db.adSpends[existingIdx].updatedAt = new Date().toISOString();
+            updatedAny = true;
+          }
+        } else {
+          db.adSpends.push({
+            id: generateId('spend'),
+            date: dateStr,
+            amount: spendAmt,
+            source: 'facebook_api',
+            createdAt: new Date().toISOString()
+          });
+          updatedAny = true;
+        }
+      });
+
+      metaApiCache.set(cacheKey, { timestamp: Date.now() });
+
+      if (updatedAny) {
+        saveDb(db);
+        console.log(`[Meta Ads Sync] Sincronizados ${data.data.length} dias de gastos diários da Meta para ${targetMonth}.`);
+      }
+    }
+  } catch (err) {
+    console.error('[Meta Ads Sync] Erro ao sincronizar diários do mês:', err.message);
+  }
+}
+
 app.get('/api/facebook/config', (req, res) => {
   const db = getDb();
   const fb = db.settings.facebookAds || {};
@@ -848,6 +913,8 @@ app.post('/api/facebook/sync', async (req, res) => {
   const db = getDb();
   try {
     metaApiCache.clear();
+    const currentMonth = getBrazilDateStr(new Date()).substring(0, 7);
+    await syncMetaDailySpendsForMonth(db, currentMonth);
     const result = await fetchMetaAdSpend(db, 'hoje', null, null, true);
     res.json({ success: true, ...result });
   } catch (err) {
@@ -886,12 +953,15 @@ app.post('/api/facebook/spend', (req, res) => {
 });
 
 // 8.1. Calendário Mensal de Vendas & Lucro Líquido (Dia a Dia)
-app.get('/api/metrics/calendar', (req, res) => {
+app.get('/api/metrics/calendar', async (req, res) => {
   const db = getDb();
   const { month } = req.query;
 
   // Se não passar month, pega o mês atual em horário de Brasília (ex: '2026-10')
   const targetMonth = month && /^\d{4}-\d{2}$/.test(month) ? month : getBrazilDateStr(new Date()).substring(0, 7);
+
+  // Sincroniza gastos reais diários da Meta API (dia a dia) para o mês
+  await syncMetaDailySpendsForMonth(db, targetMonth);
   const [yearStr, monthStr] = targetMonth.split('-');
   const year = parseInt(yearStr, 10);
   const monthNum = parseInt(monthStr, 10);

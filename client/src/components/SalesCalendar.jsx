@@ -24,6 +24,14 @@ const MONTH_NAMES = [
 
 const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
+function FacebookIcon({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+  );
+}
+
 function getCurrentBrazilMonthStr() {
   const now = new Date();
   const year = now.getFullYear();
@@ -160,22 +168,37 @@ export default function SalesCalendar({ onSelectDayForFilter }) {
       </div>
 
       {/* 2. Banner de Métricas Resumo do Mês */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         {/* Card 1: Faturamento Bruto Geral */}
         <div className="bg-[#151720] border border-[#272938] rounded-2xl p-4 shadow-sm flex flex-col justify-between">
           <div className="flex items-center gap-1.5 text-brand text-xs font-semibold uppercase tracking-wider mb-1">
             <DollarSign className="w-3.5 h-3.5 text-brand" />
-            <span>Vendido no Geral (Mês)</span>
+            <span>Vendido no Geral</span>
           </div>
           <div className="text-xl sm:text-2xl font-black text-white tracking-tight">
             {formatCurrency(summary.totalGross)}
           </div>
           <div className="text-[11px] text-gray-400 mt-2 pt-1.5 border-t border-[#20222f]">
-            {summary.totalSales} vendas realizadas no total
+            {summary.totalSales} vendas no mês
           </div>
         </div>
 
-        {/* Card 2: Lucro Líquido Real */}
+        {/* Card 2: Tráfego Meta Ads (Mês) */}
+        <div className="bg-[#151720] border border-[#1877F2]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-[#1877F2]/20">
+          <div className="flex items-center gap-1.5 text-[#93c5fd] text-xs font-semibold uppercase tracking-wider mb-1">
+            <FacebookIcon className="w-3.5 h-3.5 fill-[#1877F2]" />
+            <span>Tráfego (Meta Ads)</span>
+          </div>
+          <div className="text-xl sm:text-2xl font-black text-[#60a5fa] tracking-tight">
+            -{formatCurrency(summary.totalAds)}
+          </div>
+          <div className="text-[11px] text-gray-400 mt-2 pt-1.5 border-t border-[#20222f] flex items-center justify-between">
+            <span>Soma dos dias</span>
+            <span className="text-blue-300 font-bold">Meta Real</span>
+          </div>
+        </div>
+
+        {/* Card 3: Lucro Líquido Real */}
         <div className="bg-[#151720] border border-emerald-500/30 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-emerald-500/15 bg-gradient-to-br from-[#151720] to-[#12221b]/40">
           <div className="flex items-center gap-1.5 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">
             <TrendingUp className="w-3.5 h-3.5" />
@@ -189,32 +212,32 @@ export default function SalesCalendar({ onSelectDayForFilter }) {
           <div className="text-[11px] text-gray-400 mt-2 pt-1.5 border-t border-[#20222f] flex items-center justify-between">
             <span>{summary.profitableDays} dias no verde</span>
             {summary.lossDays > 0 && (
-              <span className="text-rose-400">{summary.lossDays} dias no prejuízo</span>
+              <span className="text-rose-400">{summary.lossDays} no prejuízo</span>
             )}
           </div>
         </div>
 
-        {/* Card 3: Médias Diárias */}
+        {/* Card 4: Médias Diárias */}
         <div className="bg-[#151720] border border-[#272938] rounded-2xl p-4 shadow-sm flex flex-col justify-between">
           <div className="flex items-center gap-1.5 text-gray-400 text-xs font-semibold uppercase tracking-wider mb-1">
             <ArrowUpRight className="w-3.5 h-3.5 text-sky-400" />
             <span>Médias / Dia Vendido</span>
           </div>
           <div className="space-y-0.5">
-            <div className="text-sm font-bold text-gray-200">
+            <div className="text-xs sm:text-sm font-bold text-gray-200 truncate">
               Vendido: <strong className="text-white font-black">{formatCurrency(summary.dailyGrossAverage || (summary.daysWithSales > 0 ? summary.totalGross / summary.daysWithSales : 0))}</strong>
             </div>
-            <div className="text-sm font-black text-emerald-400">
+            <div className="text-xs sm:text-sm font-black text-emerald-400 truncate">
               Lucro: +{formatCurrency(summary.dailyAverage)}
             </div>
           </div>
           <div className="text-[11px] text-gray-400 mt-2 pt-1.5 border-t border-[#20222f]">
-            Média nos {summary.daysWithSales} dias com vendas
+            Média nos {summary.daysWithSales} dias
           </div>
         </div>
 
-        {/* Card 4: Melhor Dia */}
-        <div className="bg-[#151720] border border-[#f5b800]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-[#f5b800]/20">
+        {/* Card 5: Melhor Dia */}
+        <div className="bg-[#151720] border border-[#f5b800]/40 rounded-2xl p-4 shadow-sm flex flex-col justify-between ring-1 ring-[#f5b800]/20 col-span-2 sm:col-span-1">
           <div className="flex items-center gap-1.5 text-brand text-xs font-semibold uppercase tracking-wider mb-1">
             <Trophy className="w-3.5 h-3.5 text-brand" />
             <span>Melhor Dia do Mês</span>
@@ -222,18 +245,18 @@ export default function SalesCalendar({ onSelectDayForFilter }) {
           <div className="space-y-0.5">
             <div className="text-base sm:text-lg font-black text-emerald-400">
               {summary.bestDay?.netProfit > 0 
-                ? `Lucro: +${formatCurrency(summary.bestDay.netProfit)}`
+                ? `+${formatCurrency(summary.bestDay.netProfit)}`
                 : '—'}
             </div>
             <div className="text-xs text-gray-300 font-semibold truncate">
-              Vendeu: {formatCurrency(summary.bestDay?.grossAmount || 0)} ({summary.bestDay?.salesCount || 0}v)
+              Vendeu {formatCurrency(summary.bestDay?.grossAmount || 0)} ({summary.bestDay?.salesCount || 0}v)
             </div>
           </div>
           <div className="text-[11px] text-gray-400 mt-2 pt-1.5 border-t border-[#20222f]">
             {summary.bestDay?.day ? (
               <span>Dia {summary.bestDay.day} do mês</span>
             ) : (
-              <span>Nenhuma venda ainda</span>
+              <span>Nenhuma venda</span>
             )}
           </div>
         </div>
