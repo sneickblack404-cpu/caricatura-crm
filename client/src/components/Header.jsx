@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, Plus, Phone, Palette, Menu, Sparkles } from 'lucide-react';
+import { getBrazilTodayStr } from '../api';
 
 const ACCENT_COLORS = [
   { id: 'amarelo', name: 'Amarelo', hex: '#f5b800' },
@@ -307,7 +308,7 @@ export default function Header({
             <button
               type="button"
               onClick={() => {
-                const val = customStartDate || new Date().toISOString().split('T')[0];
+                const val = customStartDate || getBrazilTodayStr();
                 if (onSetCustomDates) {
                   onSetCustomDates(val, val);
                 } else {
@@ -324,10 +325,8 @@ export default function Header({
             <button
               type="button"
               onClick={() => {
-                const now = new Date();
-                const yest = new Date(now);
-                yest.setDate(now.getDate() - 1);
-                const yestStr = yest.toISOString().split('T')[0];
+                const yestDate = new Date(Date.now() - 24 * 60 * 60 * 1000);
+                const yestStr = getBrazilTodayStr(yestDate);
                 if (onSetCustomDates) {
                   onSetCustomDates(yestStr, yestStr);
                 } else {
@@ -343,7 +342,7 @@ export default function Header({
             <button
               type="button"
               onClick={() => {
-                const todayStr = new Date().toISOString().split('T')[0];
+                const todayStr = getBrazilTodayStr();
                 if (onSetCustomDates) {
                   onSetCustomDates(todayStr, todayStr);
                 } else {

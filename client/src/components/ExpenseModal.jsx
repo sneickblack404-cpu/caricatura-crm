@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Check, DollarSign, Calendar, Cpu, Smartphone, Laptop, UserCheck, HelpCircle } from 'lucide-react';
-import { api } from '../api';
+import { api, getBrazilTodayStr } from '../api';
 
 const CATEGORIES = [
   { id: 'ia', label: '🤖 IA', desc: 'Inteligência Artificial' },
@@ -12,7 +12,7 @@ const CATEGORIES = [
 export default function ExpenseModal({ isOpen, onClose, onExpenseSaved, expenseToEdit = null, users = [] }) {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('ia');
-  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(getBrazilTodayStr());
   const [selectedAttendant, setSelectedAttendant] = useState('');
   const [otherDescription, setOtherDescription] = useState('');
   const [notes, setNotes] = useState('');
@@ -36,7 +36,7 @@ export default function ExpenseModal({ isOpen, onClose, onExpenseSaved, expenseT
       let cat = expenseToEdit.category || 'ia';
       if (cat === 'software') cat = 'ferramenta';
       setCategory(cat);
-      setDate(expenseToEdit.date || new Date().toISOString().split('T')[0]);
+      setDate(expenseToEdit.date || getBrazilTodayStr());
       setNotes(expenseToEdit.notes || '');
 
       if (cat === 'pagamento_atendente') {
@@ -48,7 +48,7 @@ export default function ExpenseModal({ isOpen, onClose, onExpenseSaved, expenseT
     } else {
       setAmount('');
       setCategory('ia');
-      setDate(new Date().toISOString().split('T')[0]);
+      setDate(getBrazilTodayStr());
       setSelectedAttendant(users && users[0] ? users[0].name : 'David Marques');
       setOtherDescription('');
       setNotes('');
@@ -92,7 +92,7 @@ export default function ExpenseModal({ isOpen, onClose, onExpenseSaved, expenseT
         title: generatedTitle,
         amount: numericAmount,
         category,
-        date: date || new Date().toISOString().split('T')[0],
+        date: date || getBrazilTodayStr(),
         notes: notes.trim()
       };
 

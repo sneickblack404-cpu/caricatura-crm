@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Check, DollarSign, Calendar, Smartphone, Edit3 } from 'lucide-react';
-import { api } from '../api';
+import { api, getBrazilTodayStr } from '../api';
 
 const DEFAULT_LINES = [
   { id: 'wpp-1', name: '+55 27 99245-6099' },
@@ -9,20 +9,11 @@ const DEFAULT_LINES = [
 ];
 
 function getTodayStr() {
-  const d = new Date();
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  return getBrazilTodayStr();
 }
 
 function getYesterdayStr() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  return getBrazilTodayStr(new Date(Date.now() - 24 * 60 * 60 * 1000));
 }
 
 export default function EditSaleModal({
@@ -61,17 +52,9 @@ export default function EditSaleModal({
       setWhatsappId(sale.whatsappId || availableLines[0]?.id || 'wpp-1');
       setAmount(sale.amount !== undefined ? String(sale.amount) : '');
 
-      // Extrair data da venda
+      // Extrair data da venda em horário de Brasília
       if (sale.createdAt) {
-        try {
-          const d = new Date(sale.createdAt);
-          const y = d.getFullYear();
-          const m = String(d.getMonth() + 1).padStart(2, '0');
-          const day = String(d.getDate()).padStart(2, '0');
-          setSaleDate(`${y}-${m}-${day}`);
-        } catch {
-          setSaleDate(todayStr);
-        }
+        setSaleDate(getBrazilTodayStr(sale.createdAt) || todayStr);
       } else {
         setSaleDate(todayStr);
       }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CalendarClock, Plus, MessageCircle, Check, Trash2, AlertCircle, X, CheckCircle2, Clock } from 'lucide-react';
-import { api, formatPhone } from '../api';
+import { api, formatPhone, getBrazilTodayStr } from '../api';
 
 export default function FollowupsView({ followups = [], onReload, users = [], whatsapps = [] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function FollowupsView({ followups = [], onReload, users = [], wh
         notes: notes.trim(),
         attendantId: attendantId || users[0]?.id || 'user-gustavo',
         status: 'pendente',
-        dueDate: new Date().toISOString().split('T')[0]
+        dueDate: getBrazilTodayStr()
       });
 
       setCustomerName('');

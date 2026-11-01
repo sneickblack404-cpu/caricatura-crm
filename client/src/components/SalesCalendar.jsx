@@ -15,7 +15,7 @@ import {
   Percent,
   Receipt
 } from 'lucide-react';
-import { api, formatCurrency, formatPhone } from '../api';
+import { api, formatCurrency, formatPhone, getBrazilTodayStr } from '../api';
 
 const MONTH_NAMES = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -33,10 +33,7 @@ function FacebookIcon({ className }) {
 }
 
 function getCurrentBrazilMonthStr() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  return `${year}-${month}`;
+  return getBrazilTodayStr().substring(0, 7);
 }
 
 export default function SalesCalendar({ onSelectDayForFilter }) {

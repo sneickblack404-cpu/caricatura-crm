@@ -27,7 +27,7 @@ import {
   Wallet,
   Calendar as CalendarIcon
 } from 'lucide-react';
-import { formatCurrency, api } from '../api';
+import { formatCurrency, api, getBrazilTodayStr } from '../api';
 import FacebookAdsModal from '../components/FacebookAdsModal';
 import ExpenseModal from '../components/ExpenseModal';
 import SalesCalendar from '../components/SalesCalendar';
@@ -318,7 +318,7 @@ export default function AdminMetricsView({
                 <button
                   type="button"
                   onClick={() => {
-                    const val = customStartDate || new Date().toISOString().split('T')[0];
+                    const val = customStartDate || getBrazilTodayStr();
                     if (onSetCustomDates) {
                       onSetCustomDates(val, val);
                     } else {

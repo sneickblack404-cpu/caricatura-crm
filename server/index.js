@@ -427,7 +427,7 @@ app.post('/api/expenses', (req, res) => {
     title: finalTitle,
     amount: Math.max(0, Number(amount) || 0),
     category: category || 'outro',
-    date: date || new Date().toISOString().split('T')[0],
+    date: date || getBrazilDateStr(new Date()),
     notes: notes || '',
     createdAt: new Date().toISOString()
   };
@@ -937,7 +937,7 @@ app.post('/api/facebook/sync', async (req, res) => {
 app.post('/api/facebook/spend', (req, res) => {
   const db = getDb();
   const { amount, date } = req.body;
-  const targetDate = date || new Date().toISOString().split('T')[0];
+  const targetDate = date || getBrazilDateStr(new Date());
   const numericAmount = Math.max(0, Number(amount) || 0);
 
   if (!db.adSpends) db.adSpends = [];

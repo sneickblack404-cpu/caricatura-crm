@@ -13,7 +13,7 @@ import SalesListView from './views/SalesListView';
 import WhatsappsView from './views/WhatsappsView';
 import TeamView from './views/TeamView';
 import FollowupsView from './views/FollowupsView';
-import { api } from './api';
+import { api, getBrazilTodayStr } from './api';
 
 export default function App() {
   // Autenticação com sessão no localStorage
@@ -52,7 +52,7 @@ export default function App() {
 
   const [currentTab, setCurrentTab] = useState('dashboard');
   const [period, setPeriod] = useState('hoje');
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = getBrazilTodayStr();
   const [customStartDate, setCustomStartDate] = useState(todayStr);
   const [customEndDate, setCustomEndDate] = useState(todayStr);
   const [whatsappFilter, setWhatsappFilter] = useState('all');

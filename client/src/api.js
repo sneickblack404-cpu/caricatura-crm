@@ -255,6 +255,12 @@ export const api = {
   }
 };
 
+export function getBrazilTodayStr(d = new Date()) {
+  const dateObj = typeof d === 'string' || typeof d === 'number' ? new Date(d) : d;
+  if (isNaN(dateObj.getTime())) return '';
+  return new Intl.DateTimeFormat('fr-CA', { timeZone: 'America/Sao_Paulo' }).format(dateObj);
+}
+
 export function formatCurrency(value) {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
