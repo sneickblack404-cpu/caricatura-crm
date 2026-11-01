@@ -2,213 +2,213 @@
   "sales": [
     {
       "id": "sale-mvx4lz8v-80n3g",
-      "notes": "",
-      "amount": 24.9,
-      "status": "pago",
-      "createdAt": "2026-11-01T01:03:09.882Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-11-01T01:03:09.882Z"
     },
     {
       "id": "sale-mvx3fii4-2dk7q",
-      "notes": "",
-      "amount": 24.9,
-      "status": "pago",
-      "createdAt": "2026-11-01T00:30:08.697Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-guilherme",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Guilherme",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-11-01T00:30:08.697Z"
     },
     {
       "id": "sale-mvx2ky2g-k1le7",
-      "notes": "",
-      "amount": 25,
-      "status": "pago",
-      "createdAt": "2026-11-01T00:06:22.541Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-guilherme",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Guilherme",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 25,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-11-01T00:06:22.541Z"
     },
     {
       "id": "sale-mvx22uw5-r9sm5",
-      "notes": "",
-      "amount": 9,
-      "status": "pago",
-      "createdAt": "2026-10-31T23:52:17.983Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-guilherme",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Guilherme",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T23:52:17.983Z"
     },
     {
       "id": "sale-mvww5yys-k2ize",
-      "notes": "",
-      "amount": 24.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T21:06:46.105Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T21:06:46.105Z"
     },
     {
       "id": "sale-mvww5vu1-pv2zh",
-      "notes": "",
-      "amount": 24.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T21:06:42.052Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T21:06:42.052Z"
     },
     {
       "id": "sale-mvwqnjod-ffs6g",
-      "notes": "",
-      "amount": 75,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:32:28.418Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 75,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:32:28.418Z"
     },
     {
       "id": "sale-mvwqnfrt-o7mhc",
-      "notes": "",
-      "amount": 10,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:32:23.361Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 10,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:32:23.361Z"
     },
     {
       "id": "sale-mvwqm1ik-b6kr5",
-      "notes": "",
-      "amount": 24.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:31:18.000Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:31:18.000Z"
     },
     {
       "id": "sale-mvwqlyd2-r89t8",
-      "notes": "",
-      "amount": 37.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:31:14.000Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 37.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:31:14.000Z"
     },
     {
       "id": "sale-mvwqlqrk-yx006",
-      "notes": "",
-      "amount": 19.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:31:04.288Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:31:04.288Z"
     },
     {
       "id": "sale-mvwqln8g-kqbqj",
-      "notes": "",
-      "amount": 9.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:30:59.717Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 9.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:30:59.717Z"
     },
     {
       "id": "sale-mvwqlka9-jht9q",
-      "notes": "",
-      "amount": 19.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:30:55.895Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:30:55.895Z"
     },
     {
       "id": "sale-mvwqleyk-2xq6u",
-      "notes": "",
-      "amount": 19.9,
-      "status": "pago",
-      "createdAt": "2026-10-31T18:30:48.952Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-gustavo",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 19.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-31T18:30:48.952Z"
     },
     {
       "id": "sale-mvvooj8b-o7wkr",
@@ -302,18 +302,18 @@
     },
     {
       "id": "sale-mvx22gqd-hte57",
-      "notes": "",
-      "amount": 9.9,
-      "status": "pago",
-      "createdAt": "2026-10-30T23:52:00.000Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
       "attendantId": "user-guilherme",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
       "attendantName": "Guilherme",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
       "customerPhone": "",
-      "paymentMethod": "pix"
+      "profession": "Caminhoneiro",
+      "amount": 9.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-10-30T23:52:00.000Z"
     },
     {
       "id": "sale-mvvm9t6u-vlc7k",
@@ -10488,50 +10488,49 @@
     {
       "id": "spend-2026-10-08",
       "date": "2026-10-08",
-      "amount": 151.4,
+      "amount": 149.33,
       "source": "facebook_api",
       "createdAt": "2026-10-08T04:25:33.095Z",
-      "updatedAt": "2026-11-01T01:29:37.976Z"
+      "updatedAt": "2026-10-09T03:02:00.542Z"
     },
     {
       "id": "spend-2026-10-07",
       "date": "2026-10-07",
-      "amount": 132.58,
+      "amount": 132.57,
       "source": "facebook_api",
       "createdAt": "2026-10-08T19:05:39.352Z",
-      "updatedAt": "2026-11-01T01:29:37.976Z"
+      "updatedAt": "2026-10-08T22:28:54.415Z"
     },
     {
       "id": "spend-mv0dovvc-wf266",
       "date": "2026-10-09",
-      "amount": 111.49,
+      "amount": 0,
       "source": "facebook_api",
       "createdAt": "2026-10-09T03:00:58.584Z",
-      "updatedAt": "2026-11-01T01:29:37.976Z"
+      "updatedAt": "2026-10-09T03:06:41.526Z"
     },
     {
       "id": "spend-mvg08slr-209am",
       "date": "2026-10-19",
-      "amount": 114.63,
+      "amount": 109.21,
       "source": "facebook_api",
       "createdAt": "2026-10-20T01:28:51.663Z",
-      "updatedAt": "2026-11-01T01:29:37.976Z"
+      "updatedAt": "2026-10-20T01:30:58.380Z"
     },
     {
       "id": "spend-mvsgqd0x-ssohm",
       "date": "2026-10-28",
-      "amount": 206.47,
+      "amount": 81.15,
       "source": "facebook_api",
-      "createdAt": "2026-10-28T18:43:39.249Z",
-      "updatedAt": "2026-11-01T01:29:37.976Z"
+      "createdAt": "2026-10-28T18:43:39.249Z"
     },
     {
       "id": "spend-mvtzyk3u-ujqtj",
       "date": "2026-10-29",
-      "amount": 185.65,
+      "amount": 181.35,
       "source": "facebook_api",
       "createdAt": "2026-10-29T20:29:40.554Z",
-      "updatedAt": "2026-11-01T01:29:37.976Z"
+      "updatedAt": "2026-10-30T02:33:52.752Z"
     },
     {
       "id": "spend-mvux4xzq-396sl",
@@ -10547,168 +10546,7 @@
       "amount": 152.82,
       "source": "facebook_api",
       "createdAt": "2026-10-31T13:17:05.000Z",
-      "updatedAt": "2026-11-01T01:29:11.693Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-9kt8j",
-      "date": "2026-10-01",
-      "amount": 244.31,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-606ql",
-      "date": "2026-10-02",
-      "amount": 80.95,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-2g9q4",
-      "date": "2026-10-03",
-      "amount": 82.55,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-z6073",
-      "date": "2026-10-04",
-      "amount": 15.12,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-wt82m",
-      "date": "2026-10-05",
-      "amount": 12.11,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-l0bhu",
-      "date": "2026-10-06",
-      "amount": 207.96,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-48ow9",
-      "date": "2026-10-10",
-      "amount": 122.8,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-crbnd",
-      "date": "2026-10-11",
-      "amount": 123.15,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-pt03c",
-      "date": "2026-10-12",
-      "amount": 114.96,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-x049b",
-      "date": "2026-10-13",
-      "amount": 73.42,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-wyjdx",
-      "date": "2026-10-14",
-      "amount": 116.54,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-n23lw",
-      "date": "2026-10-15",
-      "amount": 208.73,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-crccg",
-      "date": "2026-10-16",
-      "amount": 113.46,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-ws9zg",
-      "date": "2026-10-17",
-      "amount": 90.53,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-q0o55",
-      "date": "2026-10-18",
-      "amount": 109.42,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-qgjlj",
-      "date": "2026-10-20",
-      "amount": 235.27,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-j8cc4",
-      "date": "2026-10-21",
-      "amount": 205.59,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-5pmpl",
-      "date": "2026-10-22",
-      "amount": 188.32,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-izaj0",
-      "date": "2026-10-23",
-      "amount": 166.11,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-myead",
-      "date": "2026-10-24",
-      "amount": 179.59,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-b0z9k",
-      "date": "2026-10-25",
-      "amount": 261.76,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-8g369",
-      "date": "2026-10-26",
-      "amount": 226.3,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
-    },
-    {
-      "id": "spend-mvx5k0c8-x2otd",
-      "date": "2026-10-27",
-      "amount": 167.27,
-      "source": "facebook_api",
-      "createdAt": "2026-11-01T01:29:37.976Z"
+      "updatedAt": "2026-11-01T01:29:41.567Z"
     }
   ],
   "expenses": [
@@ -10752,7 +10590,7 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-01T01:29:11.693Z",
+      "lastSync": "2026-11-01T01:29:41.567Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 4589.23,
