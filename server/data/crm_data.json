@@ -2,18 +2,18 @@
   "sales": [
     {
       "id": "sale-mvx9lzgu-zaj6f",
-      "attendantId": "user-gustavo",
-      "attendantName": "Gustavo Henrick",
-      "whatsappId": "wpp-2",
-      "whatsappName": "+55 27 99256-4791",
-      "customerName": "Cliente Pix",
-      "customerPhone": "",
-      "profession": "Caminhoneiro",
-      "amount": 29,
-      "paymentMethod": "pix",
       "notes": "",
+      "amount": 29,
       "status": "pago",
-      "createdAt": "2026-11-01T03:23:08.235Z"
+      "createdAt": "2026-11-01T03:23:08.235Z",
+      "profession": "Caminhoneiro",
+      "whatsappId": "wpp-2",
+      "attendantId": "user-gustavo",
+      "customerName": "Cliente Pix",
+      "whatsappName": "+55 27 99256-4791",
+      "attendantName": "Gustavo Henrick",
+      "customerPhone": "",
+      "paymentMethod": "pix"
     },
     {
       "id": "sale-mvx4lz8v-80n3g",
@@ -10728,10 +10728,10 @@
     {
       "id": "spend-mvx9094z-9tkk6",
       "date": "2026-11-01",
-      "amount": 0.32,
+      "amount": 16.68,
       "source": "facebook_api",
       "createdAt": "2026-11-01T03:06:14.723Z",
-      "updatedAt": "2026-11-01T03:28:12.604Z"
+      "updatedAt": "2026-11-01T11:53:37.450Z"
     },
     {
       "id": "spend-mvx90evo-piaf7",
@@ -10978,11 +10978,11 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-01T03:28:12.604Z",
+      "lastSync": "2026-11-01T11:53:37.450Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 0,
-      "todaySpend": 0.32,
+      "todaySpend": 16.68,
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "yesterdaySpend": 159.15,
       "dailySpendManual": 60
