@@ -10480,10 +10480,10 @@
     {
       "id": "spend-mun40ssk-x1qgl",
       "date": "2026-09-29",
-      "amount": 58.01,
-      "source": "meta_api",
+      "amount": 64.54,
+      "source": "facebook_api",
       "createdAt": "2026-09-29T20:09:18.020Z",
-      "updatedAt": "2026-09-29T21:44:19.898Z"
+      "updatedAt": "2026-11-01T01:32:50.409Z"
     },
     {
       "id": "spend-2026-10-08",
@@ -10709,6 +10709,209 @@
       "amount": 167.27,
       "source": "facebook_api",
       "createdAt": "2026-11-01T01:29:37.976Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-0wg6n",
+      "date": "2026-09-01",
+      "amount": 71.16,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-tgnum",
+      "date": "2026-09-02",
+      "amount": 57.22,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-772wh",
+      "date": "2026-09-03",
+      "amount": 21.56,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-49kt3",
+      "date": "2026-09-04",
+      "amount": 22.8,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-9me0e",
+      "date": "2026-09-05",
+      "amount": 66.82,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-zont5",
+      "date": "2026-09-06",
+      "amount": 67.88,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-7sjid",
+      "date": "2026-09-07",
+      "amount": 62.57,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-00da3",
+      "date": "2026-09-08",
+      "amount": 47.33,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-8mbce",
+      "date": "2026-09-09",
+      "amount": 50.78,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-xh809",
+      "date": "2026-09-10",
+      "amount": 44.74,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-j1tw5",
+      "date": "2026-09-11",
+      "amount": 29.48,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-r5774",
+      "date": "2026-09-12",
+      "amount": 46.47,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-svpia",
+      "date": "2026-09-13",
+      "amount": 49.56,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-jsmyl",
+      "date": "2026-09-14",
+      "amount": 59.39,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-suza0",
+      "date": "2026-09-15",
+      "amount": 138.16,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-hetvi",
+      "date": "2026-09-16",
+      "amount": 116.28,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-avj9p",
+      "date": "2026-09-17",
+      "amount": 165.16,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-972xg",
+      "date": "2026-09-18",
+      "amount": 128.1,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-041gp",
+      "date": "2026-09-19",
+      "amount": 95.9,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-x7mjt",
+      "date": "2026-09-20",
+      "amount": 36.67,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-hpjsu",
+      "date": "2026-09-21",
+      "amount": 124.79,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-lz2q5",
+      "date": "2026-09-22",
+      "amount": 131.38,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-xvk5v",
+      "date": "2026-09-23",
+      "amount": 100.08,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-kih28",
+      "date": "2026-09-24",
+      "amount": 109.7,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-tuhic",
+      "date": "2026-09-25",
+      "amount": 87.53,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-b75ew",
+      "date": "2026-09-26",
+      "amount": 108.76,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-1dwfu",
+      "date": "2026-09-27",
+      "amount": 123.62,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-6912m",
+      "date": "2026-09-28",
+      "amount": 120.56,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
+    },
+    {
+      "id": "spend-mvx5o4tl-dur6h",
+      "date": "2026-09-30",
+      "amount": 120.69,
+      "source": "facebook_api",
+      "createdAt": "2026-11-01T01:32:50.409Z"
     }
   ],
   "expenses": [
