@@ -73,9 +73,10 @@ function filterByPeriod(items, period, startDateStr, endDateStr, dateField = 'cr
         return itemBrazilDateStr.startsWith(currentYearMonth);
       }
       case 'mes_passado': {
-        const now = new Date();
-        const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1, 15);
-        const lastMonthStr = getBrazilDateStr(lastMonthDate).substring(0, 7);
+        const [y, m] = todayStr.split('-').map(Number);
+        const lmYear = m === 1 ? y - 1 : y;
+        const lmMonth = m === 1 ? 12 : m - 1;
+        const lastMonthStr = `${lmYear}-${String(lmMonth).padStart(2, '0')}`;
         return itemBrazilDateStr.startsWith(lastMonthStr);
       }
       case '3_meses': {
@@ -525,10 +526,20 @@ function getMetaPeriodParams(period, startDate, endDate) {
       return { date_preset: 'last_14d' };
     case '30d':
       return { date_preset: 'last_30d' };
-    case 'este_mes':
-      return { date_preset: 'this_month' };
-    case 'mes_passado':
-      return { date_preset: 'last_month' };
+    case 'este_mes': {
+      const currentYearMonth = todayStr.substring(0, 7);
+      const [y, m] = currentYearMonth.split('-').map(Number);
+      const daysInM = new Date(y, m, 0).getDate();
+      return { time_range: JSON.stringify({ since: `${currentYearMonth}-01`, until: `${currentYearMonth}-${String(daysInM).padStart(2, '0')}` }) };
+    }
+    case 'mes_passado': {
+      const [y, m] = todayStr.split('-').map(Number);
+      const lmYear = m === 1 ? y - 1 : y;
+      const lmMonth = m === 1 ? 12 : m - 1;
+      const lastMonthStr = `${lmYear}-${String(lmMonth).padStart(2, '0')}`;
+      const daysInLm = new Date(lmYear, lmMonth, 0).getDate();
+      return { time_range: JSON.stringify({ since: `${lastMonthStr}-01`, until: `${lastMonthStr}-${String(daysInLm).padStart(2, '0')}` }) };
+    }
     case '3_meses':
       return { date_preset: 'last_90d' };
     case 'ano':
