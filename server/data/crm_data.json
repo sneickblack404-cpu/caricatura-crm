@@ -32,18 +32,18 @@
     },
     {
       "id": "sale-mw29v158-cermd",
-      "attendantId": "user-gustavo",
-      "attendantName": "Gustavo Henrick",
-      "whatsappId": "wpp-2",
-      "whatsappName": "+55 27 99256-4791",
-      "customerName": "Cliente Pix",
-      "customerPhone": "",
-      "profession": "Caminhoneiro",
-      "amount": 339.2,
-      "paymentMethod": "pix",
       "notes": "",
+      "amount": 339.2,
       "status": "pago",
-      "createdAt": "2026-11-02T15:28:49.000Z"
+      "createdAt": "2026-11-02T15:28:49.000Z",
+      "profession": "Caminhoneiro",
+      "whatsappId": "wpp-2",
+      "attendantId": "user-gustavo",
+      "customerName": "Cliente Pix",
+      "whatsappName": "+55 27 99256-4791",
+      "attendantName": "Gustavo Henrick",
+      "customerPhone": "",
+      "paymentMethod": "pix"
     },
     {
       "id": "sale-mvynjius-st5h3",
@@ -11127,18 +11127,18 @@
     {
       "id": "spend-mw1i67rt-tehb8",
       "date": "2026-11-03",
-      "amount": 204.64,
+      "amount": 205.12,
       "source": "facebook_api",
       "createdAt": "2026-11-04T02:33:54.137Z",
-      "updatedAt": "2026-11-04T15:29:06.953Z"
+      "updatedAt": "2026-11-04T17:20:12.562Z"
     },
     {
       "id": "spend-mw20mcqv-3olnp",
       "date": "2026-11-04",
-      "amount": 63.89,
+      "amount": 78.59,
       "source": "facebook_api",
       "createdAt": "2026-11-04T11:10:20.167Z",
-      "updatedAt": "2026-11-04T15:53:24.761Z"
+      "updatedAt": "2026-11-04T17:20:08.811Z"
     }
   ],
   "expenses": [
@@ -11182,13 +11182,13 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-04T15:53:24.761Z",
+      "lastSync": "2026-11-04T17:20:12.561Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 777.67,
-      "todaySpend": 63.89,
+      "todaySpend": 78.59,
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
-      "yesterdaySpend": 204.64,
+      "yesterdaySpend": 205.12,
       "dailySpendManual": 60
     },
     "gatewayFees": {
