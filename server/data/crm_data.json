@@ -11307,18 +11307,18 @@
     {
       "id": "spend-mw1i67rt-tehb8",
       "date": "2026-11-03",
-      "amount": 205.12,
+      "amount": 205.14,
       "source": "facebook_api",
       "createdAt": "2026-11-04T02:33:54.137Z",
-      "updatedAt": "2026-11-04T17:20:38.922Z"
+      "updatedAt": "2026-11-04T17:30:11.124Z"
     },
     {
       "id": "spend-mw20mcqv-3olnp",
       "date": "2026-11-04",
-      "amount": 79.7,
+      "amount": 80.07,
       "source": "facebook_api",
       "createdAt": "2026-11-04T11:10:20.167Z",
-      "updatedAt": "2026-11-04T17:30:06.133Z"
+      "updatedAt": "2026-11-04T17:30:11.124Z"
     }
   ],
   "expenses": [
