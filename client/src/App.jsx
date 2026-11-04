@@ -170,9 +170,14 @@ export default function App() {
         if (customEndDate) params.endDate = customEndDate;
       }
 
+      const salesParams = {
+        period: 'all',
+        whatsappId: whatsappFilter
+      };
+
       const [metricsData, salesData, followupsData] = await Promise.all([
         api.getMetrics(params),
-        api.getSales(params),
+        api.getSales(salesParams),
         api.getFollowups()
       ]);
 

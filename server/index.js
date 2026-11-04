@@ -218,7 +218,7 @@ app.put('/api/whatsapps/:id', (req, res) => {
 // 5. Vendas
 app.get('/api/sales', (req, res) => {
   const db = getDb();
-  const { attendantId, whatsappId, period = 'hoje', startDate, endDate } = req.query;
+  const { attendantId, whatsappId, period = 'all', startDate, endDate } = req.query;
 
   let filtered = filterByPeriod(db.sales, period, startDate, endDate);
 
@@ -327,7 +327,7 @@ app.put('/api/sales/:id', (req, res) => {
   const cleanPhone = customerPhone !== undefined ? (customerPhone || '').replace(/\D/g, '') : existing.customerPhone;
   const numericAmount = amount !== undefined ? Math.max(0, Number(amount) || 0) : existing.amount;
 
-  db.sales[index] = {
+  const updatedSale = {
     ...existing,
     attendantId: attendantId || existing.attendantId,
     attendantName,
@@ -343,9 +343,10 @@ app.put('/api/sales/:id', (req, res) => {
     createdAt: createdAt || existing.createdAt
   };
 
+  db.sales[index] = updatedSale;
   db.sales.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   saveDb(db);
-  res.json(db.sales[index]);
+  res.json(updatedSale);
 });
 
 // 6. Follow-ups

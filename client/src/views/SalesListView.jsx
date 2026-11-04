@@ -7,7 +7,7 @@ import {
   Edit3,
   Plus
 } from 'lucide-react';
-import { api, formatCurrency, formatPhone } from '../api';
+import { api, formatCurrency, formatPhone, getBrazilTodayStr } from '../api';
 import EditSaleModal from '../components/EditSaleModal';
 
 export default function SalesListView({ 
@@ -19,6 +19,7 @@ export default function SalesListView({
   currentUser 
 }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedPeriod, setSelectedPeriod] = useState('all');
   const [selectedAttendant, setSelectedAttendant] = useState('all');
   const [selectedWhatsapp, setSelectedWhatsapp] = useState('all');
   const [selectedPayment, setSelectedPayment] = useState('all');
@@ -30,6 +31,23 @@ export default function SalesListView({
     if (selectedAttendant !== 'all' && s.attendantId !== selectedAttendant) return false;
     if (selectedWhatsapp !== 'all' && s.whatsappId !== selectedWhatsapp) return false;
     if (selectedPayment !== 'all' && s.paymentMethod !== selectedPayment) return false;
+
+    if (selectedPeriod !== 'all') {
+      const saleBrazilDate = getBrazilTodayStr(s.createdAt);
+      const todayStr = getBrazilTodayStr();
+      const yesterdayStr = getBrazilTodayStr(new Date(Date.now() - 24 * 60 * 60 * 1000));
+      const currentMonth = todayStr.substring(0, 7);
+
+      const [y, m] = todayStr.split('-').map(Number);
+      const lmYear = m === 1 ? y - 1 : y;
+      const lmMonth = m === 1 ? 12 : m - 1;
+      const lastMonth = `${lmYear}-${String(lmMonth).padStart(2, '0')}`;
+
+      if (selectedPeriod === 'hoje' && saleBrazilDate !== todayStr) return false;
+      if (selectedPeriod === 'ontem' && saleBrazilDate !== yesterdayStr) return false;
+      if (selectedPeriod === 'este_mes' && !saleBrazilDate.startsWith(currentMonth)) return false;
+      if (selectedPeriod === 'mes_passado' && !saleBrazilDate.startsWith(lastMonth)) return false;
+    }
 
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
@@ -100,7 +118,7 @@ export default function SalesListView({
       </div>
 
       {/* Barra de Filtros e Busca */}
-      <div className="bg-[#151720] border border-[#272938] rounded-2xl p-3.5 sm:p-4 shadow-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+      <div className="bg-[#151720] border border-[#272938] rounded-2xl p-3.5 sm:p-4 shadow-md grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3">
         {/* Busca por texto */}
         <div className="relative sm:col-span-2 lg:col-span-1">
           <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -111,6 +129,21 @@ export default function SalesListView({
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full bg-[#181a24] border border-[#2c2f42] rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#f5b800]"
           />
+        </div>
+
+        {/* Filtro Período */}
+        <div>
+          <select
+            value={selectedPeriod}
+            onChange={(e) => setSelectedPeriod(e.target.value)}
+            className="w-full bg-[#181a24] border border-[#2c2f42] rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-[#f5b800]"
+          >
+            <option value="all">Todo o Histórico (Geral)</option>
+            <option value="este_mes">Este Mês</option>
+            <option value="hoje">Hoje</option>
+            <option value="ontem">Ontem</option>
+            <option value="mes_passado">Mês Passado</option>
+          </select>
         </div>
 
         {/* Filtro Atendente */}

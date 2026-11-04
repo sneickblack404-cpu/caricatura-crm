@@ -25,9 +25,11 @@ export default function SaleModal({
   whatsapps = [], 
   currentUser 
 }) {
-  const todayStr = getTodayStr();
-  const yesterdayStr = getYesterdayStr();
-  const [saleDate, setSaleDate] = useState(todayStr);
+  const [saleDate, setSaleDate] = useState(() => getTodayStr());
+  const [dateMode, setDateMode] = useState('hoje'); // 'hoje' | 'ontem' | 'custom'
+
+  const currentTodayStr = getTodayStr();
+  const currentYesterdayStr = getYesterdayStr();
 
   const availableLines = React.useMemo(() => {
     let list = (whatsapps && whatsapps.length > 0) ? [...whatsapps] : [...DEFAULT_LINES];
@@ -44,6 +46,17 @@ export default function SaleModal({
   const [amount, setAmount] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  // Sempre que o modal é aberto, atualiza a data dinamicamente para o momento presente
+  useEffect(() => {
+    if (isOpen) {
+      const freshToday = getTodayStr();
+      setSaleDate(freshToday);
+      setDateMode('hoje');
+      setAmount('');
+      setError('');
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (currentUser?.id) {
@@ -75,7 +88,10 @@ export default function SaleModal({
       const chosenLine = availableLines.find(w => w.id === whatsappId) || availableLines[0];
 
       let createdAtIso = new Date().toISOString();
-      if (saleDate && saleDate !== todayStr) {
+      if (dateMode === 'ontem') {
+        const past = new Date(Date.now() - 24 * 60 * 60 * 1000);
+        createdAtIso = past.toISOString();
+      } else if (dateMode === 'custom' && saleDate !== currentTodayStr) {
         const [y, m, d] = saleDate.split('-').map(Number);
         const now = new Date();
         const past = new Date(y, m - 1, d, now.getHours(), now.getMinutes(), now.getSeconds());
@@ -108,7 +124,8 @@ export default function SaleModal({
 
       // Limpar campos
       setAmount('');
-      setSaleDate(todayStr);
+      setSaleDate(getTodayStr());
+      setDateMode('hoje');
 
       onSaleCreated();
       onClose();
@@ -212,15 +229,15 @@ export default function SaleModal({
                 Data da Venda
               </label>
               <span className={`text-[11px] font-bold ${
-                saleDate === todayStr 
+                dateMode === 'hoje'
                   ? 'text-emerald-400' 
-                  : saleDate === yesterdayStr 
+                  : dateMode === 'ontem'
                     ? 'text-amber-400' 
                     : 'text-blue-400'
               }`}>
-                {saleDate === todayStr 
+                {dateMode === 'hoje' 
                   ? '🟢 Hoje' 
-                  : saleDate === yesterdayStr 
+                  : dateMode === 'ontem'
                     ? '🟡 Ontem' 
                     : `📅 ${saleDate.split('-').reverse().join('/')}`}
               </span>
@@ -229,9 +246,12 @@ export default function SaleModal({
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={() => setSaleDate(todayStr)}
+                onClick={() => {
+                  setDateMode('hoje');
+                  setSaleDate(currentTodayStr);
+                }}
                 className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${
-                  saleDate === todayStr
+                  dateMode === 'hoje'
                     ? 'bg-[#10B981] text-black shadow-md'
                     : 'bg-[#1f212d] hover:bg-[#2b2e40] text-gray-300 border border-[#2c2f42]'
                 }`}
@@ -241,9 +261,12 @@ export default function SaleModal({
 
               <button
                 type="button"
-                onClick={() => setSaleDate(yesterdayStr)}
+                onClick={() => {
+                  setDateMode('ontem');
+                  setSaleDate(currentYesterdayStr);
+                }}
                 className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${
-                  saleDate === yesterdayStr
+                  dateMode === 'ontem'
                     ? 'bg-[#f5b800] text-black shadow-md'
                     : 'bg-[#1f212d] hover:bg-[#2b2e40] text-gray-300 border border-[#2c2f42]'
                 }`}
@@ -255,8 +278,11 @@ export default function SaleModal({
                 <input
                   type="date"
                   value={saleDate}
-                  max={todayStr}
-                  onChange={(e) => setSaleDate(e.target.value)}
+                  max={currentTodayStr}
+                  onChange={(e) => {
+                    setDateMode('custom');
+                    setSaleDate(e.target.value);
+                  }}
                   className="w-full bg-[#1f212d] border border-[#2c2f42] rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#f5b800] text-center font-mono cursor-pointer"
                 />
               </div>
