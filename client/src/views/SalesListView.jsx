@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShoppingBag, 
   Search, 
   Phone, 
   Trash2, 
   Edit3,
-  Plus
+  Plus,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { api, formatCurrency, formatPhone, getBrazilTodayStr } from '../api';
 import EditSaleModal from '../components/EditSaleModal';
@@ -16,15 +18,21 @@ export default function SalesListView({
   whatsapps = [], 
   onOpenSaleModal, 
   onReload, 
-  currentUser 
+  currentUser,
+  period = 'all',
+  setPeriod,
+  customStartDate,
+  customEndDate,
+  periodLabel = 'Todo o Histórico'
 }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPeriod, setSelectedPeriod] = useState('all');
   const [selectedAttendant, setSelectedAttendant] = useState('all');
   const [selectedWhatsapp, setSelectedWhatsapp] = useState('all');
   const [selectedPayment, setSelectedPayment] = useState('all');
   const [deletingId, setDeletingId] = useState(null);
   const [editingSale, setEditingSale] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 30;
 
   // Filtragem
   const filteredSales = sales.filter((s) => {
@@ -32,7 +40,8 @@ export default function SalesListView({
     if (selectedWhatsapp !== 'all' && s.whatsappId !== selectedWhatsapp) return false;
     if (selectedPayment !== 'all' && s.paymentMethod !== selectedPayment) return false;
 
-    if (selectedPeriod !== 'all') {
+    const activePeriod = period || 'all';
+    if (activePeriod !== 'all') {
       const saleBrazilDate = getBrazilTodayStr(s.createdAt);
       const todayStr = getBrazilTodayStr();
       const yesterdayStr = getBrazilTodayStr(new Date(Date.now() - 24 * 60 * 60 * 1000));
@@ -42,11 +51,21 @@ export default function SalesListView({
       const lmYear = m === 1 ? y - 1 : y;
       const lmMonth = m === 1 ? 12 : m - 1;
       const lastMonth = `${lmYear}-${String(lmMonth).padStart(2, '0')}`;
+      const itemTime = new Date(s.createdAt).getTime();
 
-      if (selectedPeriod === 'hoje' && saleBrazilDate !== todayStr) return false;
-      if (selectedPeriod === 'ontem' && saleBrazilDate !== yesterdayStr) return false;
-      if (selectedPeriod === 'este_mes' && !saleBrazilDate.startsWith(currentMonth)) return false;
-      if (selectedPeriod === 'mes_passado' && !saleBrazilDate.startsWith(lastMonth)) return false;
+      if (activePeriod === 'hoje' && saleBrazilDate !== todayStr) return false;
+      if (activePeriod === 'ontem' && saleBrazilDate !== yesterdayStr) return false;
+      if (activePeriod === '7d' && itemTime < (Date.now() - 7 * 24 * 60 * 60 * 1000)) return false;
+      if (activePeriod === '15d' && itemTime < (Date.now() - 15 * 24 * 60 * 60 * 1000)) return false;
+      if (activePeriod === '30d' && itemTime < (Date.now() - 30 * 24 * 60 * 60 * 1000)) return false;
+      if (activePeriod === 'este_mes' && !saleBrazilDate.startsWith(currentMonth)) return false;
+      if (activePeriod === 'mes_passado' && !saleBrazilDate.startsWith(lastMonth)) return false;
+      if (activePeriod === '3_meses' && itemTime < (Date.now() - 90 * 24 * 60 * 60 * 1000)) return false;
+      if (activePeriod === 'ano' && !saleBrazilDate.startsWith(todayStr.substring(0, 4))) return false;
+      if (activePeriod === 'personalizado') {
+        if (customStartDate && saleBrazilDate < customStartDate) return false;
+        if (customEndDate && saleBrazilDate > customEndDate) return false;
+      }
     }
 
     if (searchTerm) {
@@ -61,7 +80,14 @@ export default function SalesListView({
     return true;
   });
 
+  // Resetar página quando os filtros mudam
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [period, selectedAttendant, selectedWhatsapp, selectedPayment, searchTerm, customStartDate, customEndDate]);
+
   const totalFiltered = filteredSales.reduce((acc, s) => acc + (Number(s.amount) || 0), 0);
+  const totalPages = Math.max(1, Math.ceil(filteredSales.length / ITEMS_PER_PAGE));
+  const paginatedSales = filteredSales.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Tem certeza que deseja excluir este registro de venda?')) return;
@@ -98,13 +124,15 @@ export default function SalesListView({
         <div>
           <div className="flex items-center gap-2 mb-1">
             <ShoppingBag className="w-4 h-4 text-[#f5b800]" />
-            <span className="text-xs font-bold text-[#f5b800] uppercase tracking-wider">Histórico Geral</span>
+            <span className="text-xs font-bold text-[#f5b800] uppercase tracking-wider">
+              {period === 'all' ? 'Histórico Geral' : `Filtrado por: ${periodLabel}`}
+            </span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-            Todas as Vendas de Caricaturas
+            {period === 'all' ? 'Todas as Vendas de Caricaturas' : `Vendas (${periodLabel})`}
           </h2>
           <p className="text-xs sm:text-sm text-gray-400 mt-1">
-            <strong>{filteredSales.length} vendas</strong> | Total: <strong className="text-[#f5b800]">{formatCurrency(totalFiltered)}</strong>
+            <strong>{filteredSales.length} vendas</strong> | Faturado: <strong className="text-[#f5b800]">{formatCurrency(totalFiltered)}</strong>
           </p>
         </div>
 
@@ -131,18 +159,21 @@ export default function SalesListView({
           />
         </div>
 
-        {/* Filtro Período */}
+        {/* Filtro Período (Sincronizado com os botões do Header) */}
         <div>
           <select
-            value={selectedPeriod}
-            onChange={(e) => setSelectedPeriod(e.target.value)}
+            value={period || 'all'}
+            onChange={(e) => setPeriod && setPeriod(e.target.value)}
             className="w-full bg-[#181a24] border border-[#2c2f42] rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-[#f5b800]"
           >
-            <option value="all">Todo o Histórico (Geral)</option>
-            <option value="este_mes">Este Mês</option>
+            <option value="all">Todo o Histórico (708 vendas)</option>
             <option value="hoje">Hoje</option>
             <option value="ontem">Ontem</option>
-            <option value="mes_passado">Mês Passado</option>
+            <option value="7d">Últimos 7 dias</option>
+            <option value="15d">Últimos 15 dias</option>
+            <option value="30d">Últimos 30 dias</option>
+            <option value="este_mes">Este Mês (Novembro)</option>
+            <option value="mes_passado">Mês Passado (Outubro)</option>
           </select>
         </div>
 
@@ -194,20 +225,20 @@ export default function SalesListView({
       <div className="bg-[#151720] border border-[#272938] rounded-2xl shadow-lg overflow-hidden">
         {filteredSales.length === 0 ? (
           <div className="py-12 sm:py-16 text-center text-gray-500 text-sm">
-            Nenhuma venda corresponde aos filtros selecionados.
+            Nenhuma venda corresponde ao período e filtros selecionados.
           </div>
         ) : (
           <>
             {/* 1. VISÃO EM CARDS NO CELULAR (< md) */}
             <div className="md:hidden divide-y divide-[#212330]">
-              {filteredSales.map((sale) => {
+              {paginatedSales.map((sale) => {
                 const date = new Date(sale.createdAt);
-                const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+                const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
                 const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
                 return (
                   <div key={sale.id} className="p-3.5 space-y-2.5 hover:bg-[#181a24]/60 transition">
-                    {/* Linha 1: Data + Forma de Pagamento + Valor Grande */}
+                    {/* Linha 1: Data Completa + Forma de Pagamento + Valor Grande */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-semibold text-gray-300">
@@ -307,9 +338,9 @@ export default function SalesListView({
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#212330]">
-                  {filteredSales.map((sale) => {
+                  {paginatedSales.map((sale) => {
                     const date = new Date(sale.createdAt);
-                    const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+                    const dateStr = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
                     const timeStr = date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
                     return (
@@ -320,7 +351,7 @@ export default function SalesListView({
                         </td>
 
                         <td className="py-3.5 px-4">
-                          <div className="font-bold text-white text-sm">{sale.customerPhone ? formatPhone(sale.customerPhone) : 'Cliente'}</div>
+                          <div className="font-bold text-white text-sm">{sale.customerPhone ? formatPhone(sale.customerPhone) : (sale.customerName || 'Cliente')}</div>
                           {sale.customerPhone && (
                             <a
                               href={`https://wa.me/55${sale.customerPhone}`}
@@ -395,6 +426,39 @@ export default function SalesListView({
                 </tbody>
               </table>
             </div>
+
+            {/* Paginação Suave */}
+            {totalPages > 1 && (
+              <div className="p-3.5 bg-[#181a24] border-t border-[#252837] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
+                <div>
+                  Mostrando página <strong>{currentPage}</strong> de <strong>{totalPages}</strong> ({filteredSales.length} vendas filtradas)
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#20222f] hover:bg-[#2b2e40] text-gray-300 disabled:opacity-40 disabled:pointer-events-none transition"
+                  >
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                    <span>Anterior</span>
+                  </button>
+
+                  <div className="px-2 font-bold text-white">
+                    {currentPage} / {totalPages}
+                  </div>
+
+                  <button
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#20222f] hover:bg-[#2b2e40] text-gray-300 disabled:opacity-40 disabled:pointer-events-none transition"
+                  >
+                    <span>Próxima</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>

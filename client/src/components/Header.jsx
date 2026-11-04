@@ -32,6 +32,7 @@ export default function Header({
   const isCeo = currentUser?.role === 'admin' || currentUser?.username === 'gustavo';
 
   const periodOptions = [
+    { id: 'all', label: 'Tudo' },
     { id: 'hoje', label: 'Hoje' },
     { id: 'ontem', label: 'Ontem' },
     { id: '7d', label: '7 dias' },

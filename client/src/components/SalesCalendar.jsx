@@ -138,7 +138,28 @@ export default function SalesCalendar({ onSelectDayForFilter }) {
         </div>
 
         {/* Botões de Navegação de Mês */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            onClick={() => setTargetMonth('2026-10')}
+            className={`px-3 py-1.5 text-xs font-bold rounded-xl transition border ${
+              targetMonth === '2026-10'
+                ? 'bg-[#f5b800] text-black border-[#f5b800] shadow-md'
+                : 'bg-[#181a24] text-gray-300 hover:text-white border-[#272938]'
+            }`}
+          >
+            Outubro (439v)
+          </button>
+          <button
+            onClick={() => setTargetMonth('2026-11')}
+            className={`px-3 py-1.5 text-xs font-bold rounded-xl transition border ${
+              targetMonth === '2026-11'
+                ? 'bg-emerald-500 text-black border-emerald-500 shadow-md'
+                : 'bg-[#181a24] text-gray-300 hover:text-white border-[#272938]'
+            }`}
+          >
+            Novembro (Mês Atual)
+          </button>
+
           <div className="flex items-center bg-[#181a24] border border-[#272938] rounded-xl p-1">
             <button
               onClick={handlePrevMonth}
@@ -151,7 +172,7 @@ export default function SalesCalendar({ onSelectDayForFilter }) {
               onClick={handleCurrentMonth}
               className="px-3 py-1 text-xs font-bold text-gray-300 hover:text-white hover:bg-[#222432] rounded-lg transition"
             >
-              Mês Atual
+              Hoje
             </button>
             <button
               onClick={handleNextMonth}

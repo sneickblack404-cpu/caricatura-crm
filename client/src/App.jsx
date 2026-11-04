@@ -97,6 +97,7 @@ export default function App() {
 
   // Período formatado
   const periodLabels = {
+    all: 'Todo o Histórico',
     hoje: 'Hoje',
     ontem: 'Ontem',
     '7d': '7 dias',
@@ -360,6 +361,14 @@ export default function App() {
                   onOpenSaleModal={() => setIsSaleModalOpen(true)}
                   onReload={refreshData}
                   currentUser={currentUser}
+                  period={period}
+                  setPeriod={setPeriod}
+                  customStartDate={customStartDate}
+                  setCustomStartDate={setCustomStartDate}
+                  customEndDate={customEndDate}
+                  setCustomEndDate={setCustomEndDate}
+                  onSetCustomDates={handleSetCustomDates}
+                  periodLabel={getPeriodLabel()}
                 />
               )}
 
