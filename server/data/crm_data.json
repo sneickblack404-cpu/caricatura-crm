@@ -1,6 +1,21 @@
 {
   "sales": [
     {
+      "id": "sale-mw220pcb-toiv1",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-1",
+      "whatsappName": "+55 27 99245-6099",
+      "customerName": "Teste Diagnostic",
+      "customerPhone": "27999999999",
+      "profession": "Caminhoneiro",
+      "amount": 25,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-11-04T11:49:29.291Z"
+    },
+    {
       "id": "sale-mw1i6jp1-ttsia",
       "notes": "",
       "amount": 19.9,
