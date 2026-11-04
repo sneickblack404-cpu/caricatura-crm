@@ -91,21 +91,6 @@
       "paymentMethod": "pix"
     },
     {
-      "id": "sale-mvynjius-st5h3",
-      "notes": "",
-      "amount": 24.9,
-      "status": "pago",
-      "createdAt": "2026-11-02T02:40:54.041Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
-      "attendantId": "user-guilherme",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
-      "attendantName": "Guilherme",
-      "customerPhone": "",
-      "paymentMethod": "pix"
-    },
-    {
       "id": "sale-mvyc4pwf-zk29a",
       "notes": "",
       "amount": 24.9,
