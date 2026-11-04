@@ -2,18 +2,18 @@
   "sales": [
     {
       "id": "sale-mw1i6jp1-ttsia",
-      "attendantId": "user-guilherme",
-      "attendantName": "Guilherme",
-      "whatsappId": "wpp-2",
-      "whatsappName": "+55 27 99256-4791",
-      "customerName": "Cliente Pix",
-      "customerPhone": "",
-      "profession": "Caminhoneiro",
-      "amount": 19.9,
-      "paymentMethod": "pix",
       "notes": "",
+      "amount": 19.9,
       "status": "pago",
-      "createdAt": "2026-11-04T02:34:09.093Z"
+      "createdAt": "2026-11-04T02:34:09.093Z",
+      "profession": "Caminhoneiro",
+      "whatsappId": "wpp-2",
+      "attendantId": "user-guilherme",
+      "customerName": "Cliente Pix",
+      "whatsappName": "+55 27 99256-4791",
+      "attendantName": "Guilherme",
+      "customerPhone": "",
+      "paymentMethod": "pix"
     },
     {
       "id": "sale-mvynjius-st5h3",
@@ -32,18 +32,18 @@
     },
     {
       "id": "sale-mw1i6c7h-imyxy",
-      "attendantId": "user-guilherme",
-      "attendantName": "Guilherme",
-      "whatsappId": "wpp-2",
-      "whatsappName": "+55 27 99256-4791",
-      "customerName": "Cliente Pix",
-      "customerPhone": "",
-      "profession": "Caminhoneiro",
-      "amount": 19.9,
-      "paymentMethod": "pix",
       "notes": "",
+      "amount": 19.9,
       "status": "pago",
-      "createdAt": "2026-11-02T02:33:59.000Z"
+      "createdAt": "2026-11-02T02:33:59.000Z",
+      "profession": "Caminhoneiro",
+      "whatsappId": "wpp-2",
+      "attendantId": "user-guilherme",
+      "customerName": "Cliente Pix",
+      "whatsappName": "+55 27 99256-4791",
+      "attendantName": "Guilherme",
+      "customerPhone": "",
+      "paymentMethod": "pix"
     },
     {
       "id": "sale-mvyn7zh2-n4rx3",
@@ -11116,6 +11116,13 @@
       "source": "facebook_api",
       "createdAt": "2026-11-04T02:33:54.137Z",
       "updatedAt": "2026-11-04T02:36:20.278Z"
+    },
+    {
+      "id": "spend-mw20mcqv-3olnp",
+      "date": "2026-11-04",
+      "amount": 14.37,
+      "source": "facebook_api",
+      "createdAt": "2026-11-04T11:10:20.167Z"
     }
   ],
   "expenses": [
@@ -11159,11 +11166,11 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-04T02:36:20.278Z",
+      "lastSync": "2026-11-04T11:10:20.167Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 0,
-      "todaySpend": 195.05,
+      "todaySpend": 14.37,
       "accessToken": "EAAYQ8b4neSYBSkjKgF4H5K96hMUf6ZAFeQjyEPkKiXb2DSaY2fBAxY9dAcjBovrAW9nNXO9Vb3FLXjWRijQYZBZBygHgIM8g1IsZC3UT5NQWRak1HnFYmZCjomhqHkwz7poH26eqwtGxkPilsWvZAUkSgUBwLxj0O950rSp2y2B5ijQktUHOhv6cDwZA7wR6SMy",
       "yesterdaySpend": 286.59,
       "dailySpendManual": 60
