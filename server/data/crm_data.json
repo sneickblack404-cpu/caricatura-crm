@@ -11378,7 +11378,7 @@
       "amount": 93.91,
       "source": "facebook_api",
       "createdAt": "2026-11-04T11:10:20.167Z",
-      "updatedAt": "2026-11-04T19:20:21.078Z"
+      "updatedAt": "2026-11-04T19:21:21.012Z"
     }
   ],
   "expenses": [
@@ -11422,7 +11422,7 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-04T19:20:21.078Z",
+      "lastSync": "2026-11-04T19:21:21.011Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 777.67,
