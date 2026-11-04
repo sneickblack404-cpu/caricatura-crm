@@ -61,21 +61,6 @@
       "paymentMethod": "pix"
     },
     {
-      "id": "sale-mw1i6c7h-imyxy",
-      "notes": "",
-      "amount": 19.9,
-      "status": "pago",
-      "createdAt": "2026-11-04T02:33:59.885Z",
-      "profession": "Caminhoneiro",
-      "whatsappId": "wpp-2",
-      "attendantId": "user-guilherme",
-      "customerName": "Cliente Pix",
-      "whatsappName": "+55 27 99256-4791",
-      "attendantName": "Guilherme",
-      "customerPhone": "",
-      "paymentMethod": "pix"
-    },
-    {
       "id": "sale-mw29v158-cermd",
       "notes": "",
       "amount": 339.2,
@@ -11272,7 +11257,7 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-04T17:27:47.689Z",
+      "lastSync": "2026-11-04T17:28:00.135Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 777.67,
