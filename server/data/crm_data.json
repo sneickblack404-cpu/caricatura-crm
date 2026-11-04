@@ -10908,10 +10908,10 @@
     {
       "id": "spend-mvx9094z-9tkk6",
       "date": "2026-11-01",
-      "amount": 267.72,
+      "amount": 267.75,
       "source": "facebook_api",
       "createdAt": "2026-11-01T03:06:14.723Z",
-      "updatedAt": "2026-11-03T00:16:19.174Z"
+      "updatedAt": "2026-11-04T11:38:48.706Z"
     },
     {
       "id": "spend-mvx90evo-piaf7",
@@ -11127,18 +11127,18 @@
     {
       "id": "spend-mw1i67rt-tehb8",
       "date": "2026-11-03",
-      "amount": 204.17,
+      "amount": 204.18,
       "source": "facebook_api",
       "createdAt": "2026-11-04T02:33:54.137Z",
-      "updatedAt": "2026-11-04T11:38:33.805Z"
+      "updatedAt": "2026-11-04T11:38:48.706Z"
     },
     {
       "id": "spend-mw20mcqv-3olnp",
       "date": "2026-11-04",
-      "amount": 17.99,
+      "amount": 18.37,
       "source": "facebook_api",
       "createdAt": "2026-11-04T11:10:20.167Z",
-      "updatedAt": "2026-11-04T11:38:41.926Z"
+      "updatedAt": "2026-11-04T11:38:48.706Z"
     }
   ],
   "expenses": [
