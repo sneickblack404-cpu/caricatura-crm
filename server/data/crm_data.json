@@ -1,6 +1,21 @@
 {
   "sales": [
     {
+      "id": "sale-mw5g72fg-s3nnc",
+      "attendantId": "user-gustavo",
+      "attendantName": "Gustavo Henrick",
+      "whatsappId": "wpp-2",
+      "whatsappName": "+55 27 99256-4791",
+      "customerName": "Cliente Pix",
+      "customerPhone": "",
+      "profession": "Caminhoneiro",
+      "amount": 24.9,
+      "paymentMethod": "pix",
+      "notes": "",
+      "status": "pago",
+      "createdAt": "2026-11-06T20:49:12.055Z"
+    },
+    {
       "id": "sale-mw5g6vl8-8g1wf",
       "attendantId": "user-gustavo",
       "attendantName": "Gustavo Henrick",
@@ -12039,7 +12054,7 @@
       "amount": 128.45,
       "source": "facebook_api",
       "createdAt": "2026-11-06T12:36:41.452Z",
-      "updatedAt": "2026-11-06T20:49:22.778Z"
+      "updatedAt": "2026-11-06T20:49:39.193Z"
     }
   ],
   "expenses": [
@@ -12092,7 +12107,7 @@
   "settings": {
     "facebookAds": {
       "mode": "api",
-      "lastSync": "2026-11-06T20:49:22.777Z",
+      "lastSync": "2026-11-06T20:49:39.193Z",
       "accountId": "2247424592846418",
       "connected": true,
       "lastSpend": 777.67,
