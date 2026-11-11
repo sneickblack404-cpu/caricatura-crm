@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import compression from 'compression';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -24,6 +25,7 @@ app.use(cors({
   ]
 }));
 
+app.use(compression());
 app.use(express.json());
 
 // Servir frontend compilado se existir

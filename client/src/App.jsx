@@ -208,12 +208,14 @@ export default function App() {
   useEffect(() => {
     refreshData();
 
-    // Sincronização em segundo plano suave a cada 15 segundos
+    // Sincronização inteligente a cada 90 segundos APENAS se a aba estiver visível e ativa
     const interval = setInterval(() => {
-      refreshData();
-    }, 15000);
+      if (document.visibilityState === 'visible') {
+        refreshData();
+      }
+    }, 90000);
 
-    // Atualiza apenas quando o usuário volta de outra aba/app (sem disparar em cliques na tela)
+    // Atualiza imediatamente quando o usuário volta para a aba
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         refreshData();
